@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/crearEncuestaTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREAR ENCUESTA"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/crearEncMaterialbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Materia:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.162" />
+
+    <EditText
+        android:id="@+id/crearPreguntatxt"
+        android:layout_width="216dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toEndOf="@+id/crearEncMaterialbl"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.141" />
+
+    <TextView
+        android:id="@+id/encuestaTitlelbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titulo de la encuesta:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235" />
+
+    <TextView
+        android:id="@+id/fechalbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="fecha de creacion:"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="217dp" />
+
+    <TextView
+        android:id="@+id/fechalbl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="fecha de inicio:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fechalbl" />
+
+    <TextView
+        android:id="@+id/fechalbl3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="fecha de fin:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fechalbl2" />
+
+    <TextView
+        android:id="@+id/limitelbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limite de intentos?"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="386dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="222dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="154dp" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="220dp"
+        android:layout_height="33dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <EditText
+        android:id="@+id/editTextDate2"
+        android:layout_width="220dp"
+        android:layout_height="33dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <EditText
+        android:id="@+id/editTextDate3"
+        android:layout_width="220dp"
+        android:layout_height="33dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="324dp" />
+
+    <Switch
+        android:id="@+id/intentosSw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Si"
+        tools:layout_editor_absoluteX="178dp"
+        tools:layout_editor_absoluteY="384dp" />
+
+    <EditText
+        android:id="@+id/numIntentos"
+        android:layout_width="69dp"
+        android:layout_height="34dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="273dp"
+        tools:layout_editor_absoluteY="377dp" />
+
+    <Button
+        android:id="@+id/siguientebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

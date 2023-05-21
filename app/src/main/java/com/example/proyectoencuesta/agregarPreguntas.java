@@ -1,4 +1,4 @@
 package com.example.proyectoencuesta;
 
-public class crearCuestionario {
+public class agregarPreguntas {
 }
