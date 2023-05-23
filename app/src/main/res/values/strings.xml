@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">ProyectoEncuesta</string>
+
+    <!--NOMBRE DE VARIABLES DE LA APLICACION-->
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="modificar">Modificar</string>
+    <string name="consultar">Consultar</string>
+    <string name="cancelar">Cancelar</string>
+
+    <string name="docente">Docente</string>
+    <string name="materia">Materia</string>
+    <string name="estudiante">Estudiante</string>
+    <string name="tipousuario">Tipo Usuario</string>
+    <string name="usuario">Usuario</string>
+    <string name="encuesta">Encuesta</string>
+    <string name="tipoencuesta">Tipo Encuesta</string>
+    <string name="pregunta">Pregunta</string>
+    <string name="tiporespuesta">Tipo Respuesta</string>
+    <string name="opres">Opción Respuesta</string>
+    <string name="resus">Respuesta Usuario</string>
+    <string name="area">Area Evaluativa</string>
+
+    <string name="id">ID:</string>
+    <string name="ndocente">Nombre Docente:</string>
+    <string name="ntipou">Nombre Tipo Usuario:</string>
+    <string name="nmateria">Nombre Materia:</string>
+    <string name="ciclo">Ciclo:</string>
+    <string name="anio">Año:</string>
+    <string name="nest">Nombre Estudiante:</string>
+    <string name="carnet">Carnet:</string>
+    <string name="user">Usuario:</string>
+    <string name="contra">Contraseña:</string>
+    <string name="fechar">Fecha Registro:</string>
+    <string name="ntipoen">Nombre Tipo Encuesta:</string>
+    <string name="nencuesta">Nombre Encuesta:</string>
+    <string name="estado">Estado:</string>
+    <string name="nump">Nùmero de Preguntas:</string>
+    <string name="limite">Limite de Intentos:</string>
+    <string name="finicio">Fecha Inicio:</string>
+    <string name="ffin">Fecha Fin:</string>
+    <string name="narea">Nombre Area:</string>
+    <string name="onum">Orden Númerico:</string>
+    <string name="pregu">Pregunta:</string>
+    <string name="oblig">Obligatorio:</string>
+    <string name="tpreg">Tipo Pregunta:</string>
+    <string name="fres">Fecha Respuesta:</string>
+    <string name="dispo">Dispositivo:</string>
+    <string name="anon">Anonimo:</string>
+    <string name="tresp">Tipo Respuesta:</string>
+    <string name="ntippreg">Nombre Tipo Respuesta:</string>
+    <string name="ntipres">Nombre Tipo Respuesta:</string>
+    <string name="tres">Respuesta:</string>
+    <string name="coret">Es correcta:</string>
+    <string name="intento">Intento:</string>
 </resources>
