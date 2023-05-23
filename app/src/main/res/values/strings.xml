@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoEncuesta</string>
+    <string name="app_name">Encuestas Educativas</string>
 
     <!--NOMBRE DE VARIABLES DE LA APLICACION-->
     <string name="guardar">Guardar</string>
@@ -7,6 +7,7 @@
     <string name="modificar">Modificar</string>
     <string name="consultar">Consultar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="ingresar">Ingresar</string>
 
     <string name="docente">Docente</string>
     <string name="materia">Materia</string>
