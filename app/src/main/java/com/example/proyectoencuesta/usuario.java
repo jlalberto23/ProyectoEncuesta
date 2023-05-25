@@ -3,15 +3,16 @@ package com.example.proyectoencuesta;
 public class usuario {
 
     private int codigUsuario, codigoTipoUsuario;
-    private int nombreTipoUsuario, nombreUsuario,contrasenia, usuario, fecha_registro;
+    private String nombreUsuario,contrasenia, usuario, fecha_registro, carnet;
 
-    public usuario(int codigUsuario, int codigoTipoUsuario, int nombreUsuario, int contrasenia, int usuario, int fecha_registro) {
+    public usuario(int codigUsuario, int codigoTipoUsuario, String nombreUsuario, String contrasenia, String usuario, String fecha_registro, String carnet) {
         this.codigUsuario = codigUsuario;
         this.codigoTipoUsuario = codigoTipoUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
         this.usuario = usuario;
         this.fecha_registro = fecha_registro;
+        this.carnet = carnet;
     }
 
     public usuario() {
@@ -33,43 +34,43 @@ public class usuario {
         this.codigoTipoUsuario = codigoTipoUsuario;
     }
 
-    public int getNombreTipoUsuario() {
-        return nombreTipoUsuario;
-    }
-
-    public void setNombreTipoUsuario(int nombreTipoUsuario) {
-        this.nombreTipoUsuario = nombreTipoUsuario;
-    }
-
-    public int getNombreUsuario() {
+    public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-    public void setNombreUsuario(int nombreUsuario) {
+    public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public int getContrasenia() {
+    public String getContrasenia() {
         return contrasenia;
     }
 
-    public void setContrasenia(int contrasenia) {
+    public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
-    public int getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(int usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    public int getFecha_registro() {
+    public String getFecha_registro() {
         return fecha_registro;
     }
 
-    public void setFecha_registro(int fecha_registro) {
+    public void setFecha_registro(String fecha_registro) {
         this.fecha_registro = fecha_registro;
+    }
+
+    public String getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
     }
 }
