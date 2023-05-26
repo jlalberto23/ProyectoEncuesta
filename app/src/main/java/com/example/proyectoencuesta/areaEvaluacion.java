@@ -55,7 +55,7 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
         this.nombreArea = nombreArea;
     }
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "encuestaDB";
+    private static final String DATABASE_NAME = "SurveyUesDB";
 
     private static final String area_evaluativa = "areaEvaluacion";
     private static final String id_area_evaluativa = "idAreaEvaluativa";
