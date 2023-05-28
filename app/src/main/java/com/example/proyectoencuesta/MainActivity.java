@@ -33,22 +33,24 @@ public class MainActivity extends Activity {
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            try{
-                switch (v.getId()){
+            try {
+                switch (v.getId()) {
                     case R.id.btnIngresar:
                         cn.abrir();
-                        if(cn.login(usuario.getText().toString(),contra.getText().toString())) {
-                            if(u.getCodigoTipoUsuario()==1){
-                                Intent intent = new Intent(MainActivity.this,vistaDocente.class);
-                                MainActivity.this.startActivity(intent);
+                        if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
+                            int codigoTipoUsuario = u.getCodigoTipoUsuario();
+
+                            if (codigoTipoUsuario == 1) {
+                                Intent intent = new Intent(MainActivity.this, vistaDocente.class);
+                                startActivity(intent);
+                            } else if (codigoTipoUsuario == 2) {
+                                Intent intent = new Intent(MainActivity.this, vistaEstudiante.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Tipo de usuario desconocido", Toast.LENGTH_SHORT).show();
                             }
-                            else if (u.getCodigoTipoUsuario()==2){
-                                Intent intent = new Intent(MainActivity.this,vistaEstudiante.class);
-                                MainActivity.this.startActivity(intent);
-                            };
-                        }
-                        else{
-                            Toast.makeText(v.getContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case R.id.btnCancelar:
@@ -56,10 +58,9 @@ public class MainActivity extends Activity {
                         contra.setText("");
                         break;
                 }
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
     };
-
 }
