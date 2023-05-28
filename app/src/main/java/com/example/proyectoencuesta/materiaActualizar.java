@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class materiaActualizar extends Activity{
 
-    conexion helper;
+    conexionDB helper;
     EditText nombreMateria;
     EditText codigoMateria;
     EditText ciclo;
@@ -17,7 +17,7 @@ public class materiaActualizar extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actualizar_materia);
-        // helper = new conexion(this);
+         helper = new conexionDB(this);
 
 
         nombreMateria = (EditText) findViewById(R.id.nomMateriatxt);

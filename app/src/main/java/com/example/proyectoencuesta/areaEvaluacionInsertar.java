@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 
 public class areaEvaluacionInsertar extends Activity {
-    conexion helper;
+    conexionDB helper;
     EditText idAreaEvaluativa;
     EditText idEncuesta;
     EditText ordenNumerico;

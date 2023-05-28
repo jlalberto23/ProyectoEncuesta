@@ -8,7 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class usuarioConsultar extends Activity {
-    conexion helper;
+    conexionDB helper;
     Spinner tipoUsuarioList;
     EditText crearNomtxt;
     EditText contrasena2;
@@ -19,7 +19,7 @@ public class usuarioConsultar extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultar_usuario);
-        // helper = new conexion(this);
+        // helper = new conexionDB(this);
 
         tipoUsuarioList = (Spinner) findViewById(R.id.tipoUsuarioList);
         crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);

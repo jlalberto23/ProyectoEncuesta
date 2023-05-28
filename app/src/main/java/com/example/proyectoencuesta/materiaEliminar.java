@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.EditText;
 
 public class materiaEliminar extends Activity {
-    conexion helper;
+    conexionDB helper;
     EditText codigoMateria;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eliminar_materia);
-        // helper = new conexion(this);
+         helper = new conexionDB(this);
 
         codigoMateria = (EditText) findViewById(R.id.codMateriatxt);
     }

@@ -8,13 +8,13 @@ import android.widget.EditText;
 
 public class usuarioEliminar extends Activity{
     EditText carnettxt;
-    conexion helper;
+    conexionDB helper;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eliminar_usuario);
-        // helper = new conexion(this);
+        // helper = new conexionDB(this);
 
         carnettxt = (EditText) findViewById(R.id.carnettxt);
     }
