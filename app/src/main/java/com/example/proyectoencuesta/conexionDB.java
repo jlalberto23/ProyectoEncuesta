@@ -127,7 +127,7 @@ public class conexionDB {
         return regInsertados;
     }
 
-        public String insertar(usuario usuario){
+    public String insertar(usuario usuario){
 
             String regInsertados="Registro Insertado #= ";
             long contador=0;
