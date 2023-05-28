@@ -139,7 +139,7 @@ public class conexionDB {
         {*/
         ContentValues usuA = new ContentValues();
         usuA.put("id_usuario", usuario.getCodigUsuario());
-        usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
+        //usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
         usuA.put("nombre_usuario", usuario.getNombreUsuario());
         usuA.put("usuario", usuario.getUsuario());
         usuA.put("contrasenia", usuario.getContrasenia());
@@ -338,7 +338,7 @@ public class conexionDB {
         usuario usuario = new usuario();
         for(int i=0;i<5;i++){
             usuario.setCodigUsuario(VUsuario_id[i]);
-            usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
+           // usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
             usuario.setNombreUsuario(VUsuario_nombre[i]);
             usuario.setUsuario(VUsuario_usuario[i]);
             usuario.setContrasenia(VUsuario_contra[i]);
@@ -398,4 +398,41 @@ public class conexionDB {
         cerrar();
         return "Guardo Correctamente";
     }
+
+    /* public usuario consultarUsuario(String carnet) {
+
+
+        String[] id = {carnet};
+        Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            usuario user = new usuario();
+            user.setCarnet(cursor.getString(0));
+            user.setNombreUsuario(cursor.getString(1));
+            user.setUsuario(cursor.getString(2));
+            user.setContrasenia(cursor.getString(3));
+            user.setFecha_registro(cursor.getString(4));
+
+            return user;
+        }else{
+            return null;
+        }
+
+
+    public materia consultarMateria(String codigoMateria) {
+        String[] id = {codigoMateria};
+        Cursor cursor = db.query("alumno", camposMateria, "codito_materia = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            materia mate = new materia();
+            mate.setCodigoMateria(cursor.getString(0));
+            mate.setNombreMateria(cursor.getString(1));
+            mate.setCiclo(cursor.getString(2));
+            mate.setAnio(cursor.getString(3));
+
+            return mate;
+        }else{
+            return null;
+        }
+    }
+
+    */
 }
