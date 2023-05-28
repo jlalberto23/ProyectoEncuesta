@@ -38,12 +38,10 @@ public class MainActivity extends Activity {
                     case R.id.btnIngresar:
                         cn.abrir();
                         if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
-                            int codigoTipoUsuario = u.getCodigoTipoUsuario();
-
-                            if (codigoTipoUsuario == 1) {
+                            if (u.getCodigoTipoUsuario() == 1) {
                                 Intent intent = new Intent(MainActivity.this, vistaDocente.class);
                                 startActivity(intent);
-                            } else if (codigoTipoUsuario == 2) {
+                            } else if (u.getCodigoTipoUsuario() == 2) {
                                 Intent intent = new Intent(MainActivity.this, vistaEstudiante.class);
                                 startActivity(intent);
                             } else {
