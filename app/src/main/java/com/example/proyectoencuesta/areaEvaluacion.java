@@ -4,12 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class  areaEvaluacion extends SQLiteOpenHelper {
+public class  areaEvaluacion {
     private int idAreaEvaluativa, idEncuesta, ordenNumerico;
     private String nombreArea;
 
@@ -19,10 +18,10 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
         this.ordenNumerico = ordenNumerico;
         this.nombreArea = nombreArea;
     }
-
+    */
    public areaEvaluacion() {
    }
-  */
+
     public int getIdAreaEvaluativa() {
         return idAreaEvaluativa;
     }
@@ -64,10 +63,10 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
     private static final String nombre_area = "nombreArea";
 
     public  areaEvaluacion(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
+    //@Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_AREA_EVALUACION_TABLE = "CREATE TABLE " + area_evaluativa +
                 "(" +
@@ -79,7 +78,7 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
         db.execSQL(CREATE_AREA_EVALUACION_TABLE);
     }
 
-    @Override
+    //@Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + area_evaluativa);
         onCreate(db);
@@ -97,6 +96,11 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
 
         db.insert(area_evaluativa, null, values);
         db.close();
+    }
+
+    private SQLiteDatabase getWritableDatabase() {
+
+        return null;
     }
 
     // Método para obtener todas las áreas evaluativas
