@@ -59,10 +59,14 @@ public class conexionDB {
 
     /*********LOGIN***********/
     public boolean login(String usuario, String contra){
+        usuario u = new usuario();
         boolean resp = false;
-        Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE usuario = '"+usuario+"' AND contrasenia = '"+contra+"'",null);
+        Cursor cursor = db.rawQuery("SELECT id_tipo_usuario FROM usuario WHERE usuario = '"+usuario+"' AND contrasenia = '"+contra+"'",null);
         if(cursor.moveToFirst())
+        {
+            u.setCodigoTipoUsuario(cursor.getInt(0));
             resp = true;
+        }
         return resp;
     }
     /************************/
