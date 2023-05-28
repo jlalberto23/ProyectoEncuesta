@@ -2,67 +2,6 @@ package com.example.proyectoencuesta;
 
 public class areaEvaluacion {
 
-<<<<<<< Updated upstream
-import java.util.ArrayList;
-import java.util.List;
-
-public class  areaEvaluacion{
-    private int idAreaEvaluativa, idEncuesta, ordenNumerico;
-    private String nombreArea;
-
-   public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
-=======
-    private int idAreaEvaluativa, idEncuesta, ordenNumerico;
-    private String nombreArea;
-
-    public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
->>>>>>> Stashed changes
-        this.idAreaEvaluativa = idAreaEvaluativa;
-        this.idEncuesta = idEncuesta;
-        this.ordenNumerico = ordenNumerico;
-        this.nombreArea = nombreArea;
-    }
-
-<<<<<<< Updated upstream
-   public areaEvaluacion() {
-   }
-=======
-    public areaEvaluacion() {
-    }
->>>>>>> Stashed changes
-
-    public int getIdAreaEvaluativa() {
-        return idAreaEvaluativa;
-    }
-
-    public void setIdAreaEvaluativa(int idAreaEvaluativa) {
-        this.idAreaEvaluativa = idAreaEvaluativa;
-    }
-
-    public int getIdEncuesta() {
-        return idEncuesta;
-    }
-
-    public void setIdEncuesta(int idEncuesta) {
-        this.idEncuesta = idEncuesta;
-    }
-
-    public int getOrdenNumerico() {
-        return ordenNumerico;
-    }
-
-    public void setOrdenNumerico(int ordenNumerico) {
-        this.ordenNumerico = ordenNumerico;
-    }
-
-    public String getNombreArea() {
-        return nombreArea;
-    }
-
-    public void setNombreArea(String nombreArea) {
-<<<<<<< Updated upstream
-        this.nombreArea = nombreArea;
-    }
     /*private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "SurveyUesDB";
 
@@ -157,7 +96,5 @@ public class  areaEvaluacion{
                 new String[]{String.valueOf(idAreaEvaluativa)});
         db.close();
     }*/
-=======
+
     }
->>>>>>> Stashed changes
-}
