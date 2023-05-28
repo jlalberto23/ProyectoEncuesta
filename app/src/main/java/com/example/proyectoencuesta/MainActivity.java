@@ -36,8 +36,8 @@ public class MainActivity extends Activity {
                     case R.id.btnIngresar:
                         cn.abrir();
                         if(cn.login(usuario.getText().toString(),contra.getText().toString())) {
-                            Intent intent = new Intent(MainActivity.this,MainActivity.class);
-                            //pantallaBienvenida.this.startActivity(intent);
+                            Intent intent = new Intent(MainActivity.this,menu.class);
+                            MainActivity.this.startActivity(intent);
                         }
                         else {
                             Toast.makeText(v.getContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_LONG).show();
