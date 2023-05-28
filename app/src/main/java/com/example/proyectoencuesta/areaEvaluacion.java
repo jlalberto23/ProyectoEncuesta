@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  areaEvaluacion extends SQLiteOpenHelper {
+public class  areaEvaluacion{
     private int idAreaEvaluativa, idEncuesta, ordenNumerico;
     private String nombreArea;
 
-   /* public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
+   public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
         this.idAreaEvaluativa = idAreaEvaluativa;
         this.idEncuesta = idEncuesta;
         this.ordenNumerico = ordenNumerico;
@@ -22,7 +22,7 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
 
    public areaEvaluacion() {
    }
-  */
+
     public int getIdAreaEvaluativa() {
         return idAreaEvaluativa;
     }
@@ -54,7 +54,7 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
     public void setNombreArea(String nombreArea) {
         this.nombreArea = nombreArea;
     }
-    private static final int DATABASE_VERSION = 1;
+    /*private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "SurveyUesDB";
 
     private static final String area_evaluativa = "areaEvaluacion";
@@ -147,5 +147,5 @@ public class  areaEvaluacion extends SQLiteOpenHelper {
         db.delete(area_evaluativa, id_area_evaluativa + " = ?",
                 new String[]{String.valueOf(idAreaEvaluativa)});
         db.close();
-    }
+    }*/
 }
