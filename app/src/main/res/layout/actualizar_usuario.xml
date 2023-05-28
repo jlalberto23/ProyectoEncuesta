@@ -6,16 +6,26 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/limpiarbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LIMPIAR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toEndOf="@+id/consultarCuentabtn"
+        tools:layout_editor_absoluteY="579dp" />
+
+    <Button
         android:id="@+id/consultarCuentabtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear"
+        android:text="Actualizar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contrasena2"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <EditText
         android:id="@+id/contrasena2"
@@ -139,14 +149,5 @@
         android:inputType="date"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="431dp" />
-
-    <Button
-        android:id="@+id/limpiarbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LIMPIAR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/consultarCuentabtn"
-        tools:layout_editor_absoluteY="579dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

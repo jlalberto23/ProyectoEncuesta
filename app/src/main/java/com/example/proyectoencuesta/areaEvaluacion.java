@@ -1,11 +1,8 @@
 package com.example.proyectoencuesta;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+public class areaEvaluacion {
 
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +11,25 @@ public class  areaEvaluacion{
     private String nombreArea;
 
    public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
+=======
+    private int idAreaEvaluativa, idEncuesta, ordenNumerico;
+    private String nombreArea;
+
+    public areaEvaluacion(int idAreaEvaluativa, int idEncuesta, int ordenNumerico, String nombreArea) {
+>>>>>>> Stashed changes
         this.idAreaEvaluativa = idAreaEvaluativa;
         this.idEncuesta = idEncuesta;
         this.ordenNumerico = ordenNumerico;
         this.nombreArea = nombreArea;
     }
 
+<<<<<<< Updated upstream
    public areaEvaluacion() {
    }
+=======
+    public areaEvaluacion() {
+    }
+>>>>>>> Stashed changes
 
     public int getIdAreaEvaluativa() {
         return idAreaEvaluativa;
@@ -52,6 +60,7 @@ public class  areaEvaluacion{
     }
 
     public void setNombreArea(String nombreArea) {
+<<<<<<< Updated upstream
         this.nombreArea = nombreArea;
     }
     /*private static final int DATABASE_VERSION = 1;
@@ -148,4 +157,7 @@ public class  areaEvaluacion{
                 new String[]{String.valueOf(idAreaEvaluativa)});
         db.close();
     }*/
+=======
+    }
+>>>>>>> Stashed changes
 }

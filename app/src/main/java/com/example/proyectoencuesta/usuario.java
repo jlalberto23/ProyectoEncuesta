@@ -1,11 +1,14 @@
 package com.example.proyectoencuesta;
 
+import android.widget.Spinner;
+
 public class usuario {
 
-    private int codigUsuario, codigoTipoUsuario;
+    private int codigUsuario;
+    private Spinner codigoTipoUsuario;
     private String nombreUsuario,contrasenia, usuario, fecha_registro, carnet;
 
-    public usuario(int codigUsuario, int codigoTipoUsuario, String nombreUsuario, String contrasenia, String usuario, String fecha_registro, String carnet) {
+    public usuario(int codigUsuario, Spinner codigoTipoUsuario, String nombreUsuario, String contrasenia, String usuario, String fecha_registro, String carnet) {
         this.codigUsuario = codigUsuario;
         this.codigoTipoUsuario = codigoTipoUsuario;
         this.nombreUsuario = nombreUsuario;
@@ -26,12 +29,13 @@ public class usuario {
         this.codigUsuario = codigUsuario;
     }
 
-    public int getCodigoTipoUsuario() {
+    public Spinner getCodigoTipoUsuario() {
         return codigoTipoUsuario;
     }
 
-    public void setCodigoTipoUsuario(int codigoTipoUsuario) {
+    public void setCodigoTipoUsuario(Spinner codigoTipoUsuario) {
         this.codigoTipoUsuario = codigoTipoUsuario;
+
     }
 
     public String getNombreUsuario() {

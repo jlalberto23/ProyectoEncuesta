@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="52dp">
+
+    <Button
+        android:id="@+id/consultarCuentabtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="208dp"
+        android:text="@string/eliminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/carnettxt"
+        android:layout_width="204dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toEndOf="@+id/carnetlbl"
+        tools:layout_editor_absoluteY="158dp" />
+
+    <TextView
+        android:id="@+id/carnetlbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:text="Carnet:"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="166dp" />
+
+    <Button
+        android:id="@+id/limpiarbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LIMPIAR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toEndOf="@+id/consultarCuentabtn"
+        tools:layout_editor_absoluteY="475dp" />
+
+    <TextView
+        android:id="@+id/consultarUserlbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ELIMINAR USUARIO"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="44dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,7 +90,7 @@
         android:id="@+id/conMatTitletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREAR MATERIA"
+        android:text="ACTUALIZAR MATERIA"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +114,7 @@
         android:id="@+id/conMatbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="crear materia"
+        android:text="ACTUALIZAR"
         tools:layout_editor_absoluteX="62dp"
         tools:layout_editor_absoluteY="453dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

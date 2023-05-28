@@ -26,15 +26,6 @@
         app:layout_constraintStart_toEndOf="@+id/anolbl"
         tools:layout_editor_absoluteY="257dp" />
 
-    <TextView
-        android:id="@+id/anolbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Año:"
-        app:layout_constraintTop_toBottomOf="@+id/codMattxt"
-        tools:layout_editor_absoluteX="34dp" />
-
     <EditText
         android:id="@+id/ciclotxt"
         android:layout_width="wrap_content"
@@ -49,55 +40,10 @@
         android:id="@+id/ciclolbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:text="Ciclo"
         app:layout_constraintTop_toBottomOf="@+id/anolbl"
-        tools:layout_editor_absoluteX="34dp" />
-
-    <EditText
-        android:id="@+id/codMateriatxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.676"
-        app:layout_constraintStart_toEndOf="@+id/codMattxt"
-        tools:layout_editor_absoluteY="183dp" />
-
-    <TextView
-        android:id="@+id/crearMattxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre de la materia:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
-
-    <TextView
-        android:id="@+id/codMattxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Codigo de la materia:"
-        app:layout_constraintTop_toBottomOf="@+id/crearMattxt"
-        tools:layout_editor_absoluteX="34dp" />
-
-    <TextView
-        android:id="@+id/conMatTitletxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CREAR MATERIA"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
+        tools:layout_editor_absoluteX="31dp" />
 
     <EditText
         android:id="@+id/nomMateriatxt"
@@ -106,15 +52,71 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toEndOf="@+id/crearMattxt"
-        tools:layout_editor_absoluteY="106dp" />
+        tools:layout_editor_absoluteY="188dp" />
+
+    <TextView
+        android:id="@+id/crearMattxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la materia:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286" />
+
+    <TextView
+        android:id="@+id/anolbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Año:"
+        app:layout_constraintTop_toBottomOf="@+id/crearMattxt"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <TextView
+        android:id="@+id/codMattxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="Codigo de la materia:"
+        app:layout_constraintBottom_toTopOf="@+id/crearMattxt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <EditText
+        android:id="@+id/codMateriatxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toEndOf="@+id/codMattxt"
+        tools:layout_editor_absoluteY="117dp" />
+
+    <TextView
+        android:id="@+id/conMatTitletxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONSULTAR MATERIA"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
 
     <Button
         android:id="@+id/conMatbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="crear materia"
+        android:text="CONSULTAR"
         tools:layout_editor_absoluteX="62dp"
         tools:layout_editor_absoluteY="453dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
