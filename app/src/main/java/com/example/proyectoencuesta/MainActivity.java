@@ -14,11 +14,13 @@ public class MainActivity extends Activity {
     EditText usuario, contra;
 
     conexionDB cn;
+    usuario u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cn = new conexionDB(this);
+        u = new usuario();
         setContentView(R.layout.activity_main);
         ingresar = findViewById(R.id.btnIngresar);
         cancelar = findViewById(R.id.btnCancelar);
@@ -36,10 +38,20 @@ public class MainActivity extends Activity {
                     case R.id.btnIngresar:
                         cn.abrir();
                         if(cn.login(usuario.getText().toString(),contra.getText().toString())) {
-                            Intent intent = new Intent(MainActivity.this,menu.class);
+                            if(u.getCodigoTipoUsuario()==1){Intent intent = new Intent(MainActivity.this,menu.class);
+                                MainActivity.this.startActivity(intent);}
+
+                            Intent intent = new Intent(MainActivity.this,vistaDocente.class);
                             MainActivity.this.startActivity(intent);
+
+                        else if (u.getCodigoTipoUsuario()==2){Intent intent = new Intent(MainActivity.this,menu.class);
+                            MainActivity.this.startActivity(intent);}
+                        Intent intent = new Intent(MainActivity.this,vistaEstudiante.class);
+                        MainActivity.this.startActivity(intent);
                         }
-                        else {
+
+
+                        else{
                             Toast.makeText(v.getContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_LONG).show();
                         }
                         break;
