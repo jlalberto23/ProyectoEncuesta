@@ -12,11 +12,8 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
     Button ingresar, cancelar;
     EditText usuario, contra;
-<<<<<<< HEAD
+
     conexionDB cn;
-=======
-    conexionDB BDhelper;
->>>>>>> 852a22207195f38a9ad894fd5485bee61404f65b
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +24,8 @@ public class MainActivity extends Activity {
         cancelar = findViewById(R.id.btnCancelar);
         usuario = findViewById(R.id.txtUsuario);
         contra = findViewById(R.id.txtContraseña);
-<<<<<<< HEAD
         ingresar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
-=======
-
-        BDhelper = new conexionDB(this);
-
-        BDhelper.abrir();
-        String tost=BDhelper.llenarDatos();
-        BDhelper.cerrar();
-        Toast.makeText(this, tost, Toast.LENGTH_SHORT).show();
->>>>>>> 852a22207195f38a9ad894fd5485bee61404f65b
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
