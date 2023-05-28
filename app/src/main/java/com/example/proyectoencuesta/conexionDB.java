@@ -298,9 +298,9 @@ public class conexionDB {
         final String[] VMateria_cic = {"I2023", "II2023", "I2023"};
         final String[] VMateria_ani = {"2023", "2023", "2023"};
 
-        final int[] VMateUsuario_id =    {1, 2, 3, 4, 5};
-        final int[] VMateUsuario_mate =    {1, 1, 3, 2, 2};
-        final int[] VMateUsuario_usua =    {2, 1, 3, 1, 4};
+        final int[] VMateUsuario_id = {1, 2, 3, 4, 5};
+        final int[] VMateUsuario_mate = {1, 1, 3, 2, 2};
+        final int[] VMateUsuario_usua = {2, 1, 3, 1, 4};
 
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
@@ -337,7 +337,7 @@ public class conexionDB {
         usuario usuario = new usuario();
         for(int i=0;i<5;i++){
             usuario.setCodigUsuario(VUsuario_id[i]);
-           // usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
+            usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
             usuario.setNombreUsuario(VUsuario_nombre[i]);
             usuario.setUsuario(VUsuario_usuario[i]);
             usuario.setContrasenia(VUsuario_contra[i]);
@@ -358,7 +358,6 @@ public class conexionDB {
             encu.setLimiteIntentos(VEncuesta_limite[i]);
             encu.setFechaInicio(VEncuesta_fechaini[i]);
             encu.setFechaFin(VEncuesta_fechafin[i]);
-
             insertar(encu);
         }
 
@@ -370,7 +369,6 @@ public class conexionDB {
             pregu.setTextoPregunta(VPregunta_texto[i]);
             pregu.setEsObligatoria(VPregunta_es_obligatoria[i]);
             pregu.setOrdenPregunta(VPregunta_orden_preg[i]);
-
             insertar(pregu);
         }
 
@@ -381,7 +379,6 @@ public class conexionDB {
             mate.setCodigoMateria(VMateria_cod[i]);
             mate.setCiclo(VMateria_cic[i]);
             mate.setAnio(VMateria_ani[i]);
-
             insertar(mate);
         }
 
@@ -390,7 +387,6 @@ public class conexionDB {
             mateUsu.setIdMateriaUsuario(VMateUsuario_id[i]);
             mateUsu.setIdMateria(VMateUsuario_mate[i]);
             mateUsu.setIdUsuario(VMateUsuario_usua[i]);
-
             insertar(mateUsu);
         }
 
