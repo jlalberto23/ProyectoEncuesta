@@ -18,7 +18,7 @@ public class usuarioInsertar extends Activity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crear_usuario);
-       // helper = new conexionDB(this);
+       helper = new conexionDB(this);
 
         tipoUsuarioList = (Spinner) findViewById(R.id.tipoUsuarioList);
         crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
@@ -47,10 +47,10 @@ public class usuarioInsertar extends Activity{
         //user.setCodigoTipoUsuario(tipoUsuario);
 
 
-   //     helper.abrir();
-     //   regInsertados=helper.insertar(user);
-       // helper.cerrar();
-        //Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
+        helper.abrir();
+        regInsertados=helper.insertar(user);
+        helper.cerrar();
+        Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
     }
     public void limpiarTexto(View v) {
         carnettxt.setText("");

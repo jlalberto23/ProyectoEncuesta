@@ -127,30 +127,30 @@ public class conexionDB {
         return regInsertados;
     }
 
-    public String insertar(usuario usuario){
+        public String insertar(usuario usuario){
 
-        String regInsertados="Registro Insertado #= ";
-        long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
+            String regInsertados="Registro Insertado #= ";
+            long contador=0;
+            /*if (verificarIntegridad(alumno,5)) {
+                regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
+            }
+            else
+            {*/
+            ContentValues usuA = new ContentValues();
+            usuA.put("id_usuario", usuario.getCodigUsuario());
+           // usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
+            usuA.put("nombre_usuario", usuario.getNombreUsuario());
+            usuA.put("usuario", usuario.getUsuario());
+            usuA.put("contrasenia", usuario.getContrasenia());
+            usuA.put("carnet", usuario.getCarnet());
+            usuA.put("fecha_registro", usuario.getFecha_registro());
+
+            contador=db.insert("usuario", null, usuA);
+            regInsertados=regInsertados+contador;
+            //}
+
+            return regInsertados;
         }
-        else
-        {*/
-        ContentValues usuA = new ContentValues();
-        usuA.put("id_usuario", usuario.getCodigUsuario());
-        //usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
-        usuA.put("nombre_usuario", usuario.getNombreUsuario());
-        usuA.put("usuario", usuario.getUsuario());
-        usuA.put("contrasenia", usuario.getContrasenia());
-        usuA.put("carnet", usuario.getCarnet());
-        usuA.put("fecha_registro", usuario.getFecha_registro());
-
-        contador=db.insert("usuario", null, usuA);
-        regInsertados=regInsertados+contador;
-        //}
-
-        return regInsertados;
-    }
 
     public String insertar(encuesta encuesta){
 
