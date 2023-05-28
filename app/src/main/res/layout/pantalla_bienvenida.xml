@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.119" />
 
     <Button
-        android:id="@+id/crearCuenta2btn"
+        android:id="@+id/btnCrearC"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Crear Cuenta"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.364" />
 
     <Button
-        android:id="@+id/sinCuentabtn"
+        android:id="@+id/btnIngresarSC"
         android:layout_width="150dp"
         android:layout_height="80dp"
         android:text="Ingresar sin Cuenta"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.622" />
 
     <Button
-        android:id="@+id/login2btn"
+        android:id="@+id/btnLogin"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Login"

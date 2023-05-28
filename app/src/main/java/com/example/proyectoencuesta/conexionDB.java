@@ -41,21 +41,10 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_respuesta char(256) );");
                 db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_usuario  char(256) );");
                 db.execSQL("CREATE TABLE usuario (id_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
-
-            }catch(SQLException e){
-
-                e.printStackTrace();
-            }
-
+            }catch(SQLException e){ e.printStackTrace(); }
         }
-
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // TODO Auto-generated method stub
-
-        }
-
-
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
     }
 
     public void abrir() throws SQLException{
@@ -66,6 +55,17 @@ public class conexionDB {
     public void cerrar(){
         DBHelper.close();
     }
+
+
+    /*********LOGIN***********/
+    public boolean login(String usuario, String contra){
+        boolean resp = false;
+        Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE usuario = '"+usuario+"' AND contrasenia = '"+contra+"'",null);
+        if(cursor.moveToFirst())
+            resp = true;
+        return resp;
+    }
+    /************************/
 
     public String insertar(tipoEncuesta tipoEncuesta){
 
