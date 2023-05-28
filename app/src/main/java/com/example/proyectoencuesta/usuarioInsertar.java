@@ -44,7 +44,7 @@ public class usuarioInsertar extends Activity{
         user.setUsuario(usuario);
         user.setContrasenia(contrasena);
         user.setFecha_registro(fecha);
-        user.setCodigoTipoUsuario(tipoUsuario);
+        //user.setCodigoTipoUsuario(tipoUsuario);
 
 
    //     helper.abrir();

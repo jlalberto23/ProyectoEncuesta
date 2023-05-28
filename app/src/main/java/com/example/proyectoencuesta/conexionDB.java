@@ -40,8 +40,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_respuesta char(256) );");
                 db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_usuario  char(256) );");
-                db.execSQL("CREATE TABLE usuario (id_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, id_tipo_usuario      integer, nombre_usuario       char(100), usuario             char(100), contrasenia             char(100), carnet               char(100), fecha_registro       TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
-
+                db.execSQL("CREATE TABLE usuario (id_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
 
             }catch(SQLException e){
 
