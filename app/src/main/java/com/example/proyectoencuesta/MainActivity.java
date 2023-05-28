@@ -38,19 +38,15 @@ public class MainActivity extends Activity {
                     case R.id.btnIngresar:
                         cn.abrir();
                         if(cn.login(usuario.getText().toString(),contra.getText().toString())) {
-                            if(u.getCodigoTipoUsuario()==1){Intent intent = new Intent(MainActivity.this,menu.class);
-                                MainActivity.this.startActivity(intent);}
-
-                            Intent intent = new Intent(MainActivity.this,vistaDocente.class);
-                            MainActivity.this.startActivity(intent);
-
-                        else if (u.getCodigoTipoUsuario()==2){Intent intent = new Intent(MainActivity.this,menu.class);
-                            MainActivity.this.startActivity(intent);}
-                        Intent intent = new Intent(MainActivity.this,vistaEstudiante.class);
-                        MainActivity.this.startActivity(intent);
+                            if(u.getCodigoTipoUsuario()==1){
+                                Intent intent = new Intent(MainActivity.this,vistaDocente.class);
+                                MainActivity.this.startActivity(intent);
+                            }
+                            else if (u.getCodigoTipoUsuario()==2){
+                                Intent intent = new Intent(MainActivity.this,vistaEstudiante.class);
+                                MainActivity.this.startActivity(intent);
+                            };
                         }
-
-
                         else{
                             Toast.makeText(v.getContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_LONG).show();
                         }
