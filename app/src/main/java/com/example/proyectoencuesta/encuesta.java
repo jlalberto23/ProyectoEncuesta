@@ -62,7 +62,7 @@ public class encuesta {
         this.limiteIntentos = limiteIntentos;
     }
 
-    public boolean isEstadoEncuesta() {
+    public boolean getEstadoEncuesta() {
         return estadoEncuesta;
     }
 
