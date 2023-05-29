@@ -8,6 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
+
 public class vistaDocente extends ListActivity {
 
     String[] menu={"Crear usuario","Consultar Usuarios", "Actualizar usuario","Eliminar Usuarios","Crear Materias","Consultar Materias", "Actualizar Materias","Eliminar Materias","Crear Encuestas","Consultar Encuestas", "Actualizar Encuestas","Eliminar Encuestas"};

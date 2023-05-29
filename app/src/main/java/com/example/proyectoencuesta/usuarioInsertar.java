@@ -1,10 +1,14 @@
 package com.example.proyectoencuesta;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class usuarioInsertar extends Activity{
     conexionDB helper;
@@ -26,6 +30,12 @@ public class usuarioInsertar extends Activity{
         userCreartxt = (EditText) findViewById(R.id.userCreartxt);
         fechaReg = (EditText) findViewById(R.id.fechaReg);
         carnettxt = (EditText) findViewById(R.id.carnettxt);
+
+    }
+
+    private void obtenerdatos(){
+        helper.abrir();
+
     }
 
     public void insertarUsuario(View v) {
@@ -60,4 +70,6 @@ public class usuarioInsertar extends Activity{
         fechaReg.setText("");
 
     }
+
+
 }
