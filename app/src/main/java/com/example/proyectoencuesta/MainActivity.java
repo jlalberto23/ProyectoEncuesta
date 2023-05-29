@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
                                 Intent intent = new Intent(MainActivity.this, vistaEstudiante.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(MainActivity.this, String.valueOf(cn.getIdTipoU()), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Su usuario no tiene acceso al sistema", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();

@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+
 public class conexionDB {
 
+    private static final String[] camposTipoUsuario = new String[]{"id_tipo_usuario","nombre_tipo_usuario"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
     private int idTipoU;
     private final Context context;
@@ -80,6 +84,7 @@ public class conexionDB {
         return resp;
     }
     /************************/
+
 
     public String insertar(tipoEncuesta tipoEncuesta){
 
