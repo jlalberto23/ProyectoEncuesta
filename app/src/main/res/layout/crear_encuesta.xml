@@ -80,10 +80,10 @@
         android:id="@+id/lblFechaI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:text="@string/finicio"
         app:layout_constraintEnd_toStartOf="@+id/txtFechaIn"
-        app:layout_constraintHorizontal_bias="0.308"
+        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblLimiteIn" />
 
@@ -95,7 +95,7 @@
         android:layout_marginTop="40dp"
         android:text="@string/ffin"
         app:layout_constraintEnd_toStartOf="@+id/txtFechaFin"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblFechaI" />
 
@@ -108,7 +108,7 @@
         android:text="@string/guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCancelar"
-        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
 
@@ -128,33 +128,39 @@
         android:id="@+id/txtNombreEncuesta"
         android:layout_width="187dp"
         android:layout_height="35dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteY="198dp" />
+        app:layout_constraintStart_toStartOf="@+id/txtFechaC"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloE"
+        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/txtFechaC"
         android:layout_width="185dp"
         android:layout_height="29dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="44dp"
         android:ems="10"
         android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/lblFechaC"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteY="259dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreEncuesta"
+        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/txtFechaIn"
         android:layout_width="198dp"
         android:layout_height="37dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtFechaFin"
         app:layout_constraintTop_toBottomOf="@+id/txtLimInt"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -163,11 +169,13 @@
         android:layout_width="202dp"
         android:layout_height="30dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFechaIn"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Switch
@@ -178,6 +186,7 @@
         android:layout_marginEnd="140dp"
         android:text="Activo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtFechaC"
         app:layout_constraintTop_toBottomOf="@+id/txtFechaC"
         tools:ignore="HardcodedText,TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
@@ -190,6 +199,7 @@
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtLimInt"
         app:layout_constraintTop_toBottomOf="@+id/swEstado"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -202,6 +212,7 @@
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtFechaIn"
         app:layout_constraintTop_toBottomOf="@+id/txtNumPre"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
