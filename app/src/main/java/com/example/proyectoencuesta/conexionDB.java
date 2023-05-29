@@ -290,6 +290,31 @@ public class conexionDB {
         return regInsertados;
     }
 
+    public String insertar(respuestaUsuario respuestaUsuario){
+
+        String regInsertados="Registro Insertado #= ";
+        long contador=0;
+        /*if (verificarIntegridad(alumno,5)) {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
+        }
+        else
+        {*/
+        ContentValues respUsu = new ContentValues();
+        respUsu.put("id_respuesta_usuarios", respuestaUsuario.getIdRespuestaUsuario());
+        respUsu.put("id_opcion_respuesta", respuestaUsuario.getIdOpcionRespuesta());
+        respUsu.put("id_usuario", respuestaUsuario.getIdUsuario());
+        respUsu.put("numero_intento", respuestaUsuario.getNumeroIntento());
+        respUsu.put("fecha_respondida", respuestaUsuario.getFechaRespondido());
+        respUsu.put("dispositivo", respuestaUsuario.getDispositivo());
+        respUsu.put("es_usuario_anonimo", respuestaUsuario.isEsAnonima());
+
+        contador=db.insert("respuesta_usuario", null, respUsu);
+        regInsertados=regInsertados+contador;
+        //}
+
+        return regInsertados;
+    }
+
     public String llenarDatos(){
 
         final int[] VTipoEncuesta_id = {1,2};
@@ -348,6 +373,13 @@ public class conexionDB {
         final boolean[] VOpcionResp_escorrecta = {true, false, false, true, false, false, true, false, true, false, false, false};
         final String[] VOpcionResp_texto = {"Falso", "Verdadero", "Falso", "Verdadero", "Almacenar datos en tablas y relaciones.", "Proporcionar una estructura flexible para almacenar datos.", "Garantizar la integridad y consistencia de los datos.", "Permitir consultas complejas mediante el lenguaje SQL.", "Botones, campos de texto.", "Actividad principal", "Fragmento", "Vista"};
 
+        final int[] VRespuestaUsu_id = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+        final int[] VRespuestaUsu_opcresp = {1, 2, 5, 9, 10, 11, 12, 2, 1, 6, 9, 12, 11, 10};
+        final int[] VRespuestaUsu_usuario = {2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3};
+        final int[] VRespuestaUsu_intento = {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2};
+        final String[] VRespuestaUsu_fecha = {"2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10"};
+        final String[] VRespuestaUsu_dispositivo = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+        final boolean[] VRespuestaUsu_isanonimo = {false, false, false, false, false, false, false, false, false, false, false, false, false, false};
 
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
@@ -360,6 +392,7 @@ public class conexionDB {
         db.execSQL("DELETE FROM materia");
         db.execSQL("DELETE FROM materia_usuario");
         db.execSQL("DELETE FROM opcion_respuesta");
+        db.execSQL("DELETE FROM respuesta_usuario");
 
         tipoEncuesta tipoEnc = new tipoEncuesta();
         for(int i=0;i<2;i++){
@@ -445,6 +478,18 @@ public class conexionDB {
             opcResp.setTextoRespuesta(VOpcionResp_texto[i]);
             opcResp.setEsLaCorrecta(VOpcionResp_escorrecta[i]);
             insertar(opcResp);
+        }
+
+        respuestaUsuario respUsu = new respuestaUsuario();
+        for(int i=0;i<14;i++){
+            respUsu.setIdRespuestaUsuario(VRespuestaUsu_id[i]);
+            respUsu.setIdOpcionRespuesta(VRespuestaUsu_opcresp[i]);
+            respUsu.setIdUsuario(VRespuestaUsu_usuario[i]);
+            respUsu.setNumeroIntento(VRespuestaUsu_intento[i]);
+            respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
+            respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
+            respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
+            insertar(respUsu);
         }
 
         cerrar();
