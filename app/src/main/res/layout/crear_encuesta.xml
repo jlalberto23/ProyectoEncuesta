@@ -6,145 +6,203 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/crearEncuestaTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CREAR ENCUESTA"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/lblTituloE"
+        android:layout_width="171dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/encuesta"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
+        tools:ignore="TextSizeCheck" />
 
     <TextView
-        android:id="@+id/encuestaTitlelbl"
+        android:id="@+id/lblNombreE"
+        android:layout_width="119dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/nencuesta"
+        app:layout_constraintEnd_toStartOf="@+id/txtNombreEncuesta"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloE"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/lblFechaC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titulo de la encuesta:"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/fechac"
+        app:layout_constraintEnd_toStartOf="@+id/txtFechaC"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreE" />
+
+    <TextView
+        android:id="@+id/lblEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/estado"
+        app:layout_constraintEnd_toStartOf="@+id/swEstado"
+        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblFechaC" />
+
+    <TextView
+        android:id="@+id/lblNumP"
+        android:layout_width="93dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/nump"
+        app:layout_constraintEnd_toStartOf="@+id/txtNumPre"
+        app:layout_constraintHorizontal_bias="0.382"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEstado"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/lblLimiteIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/limite"
+        app:layout_constraintEnd_toStartOf="@+id/txtLimInt"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNumP" />
+
+    <TextView
+        android:id="@+id/lblFechaI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/finicio"
+        app:layout_constraintEnd_toStartOf="@+id/txtFechaIn"
+        app:layout_constraintHorizontal_bias="0.308"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblLimiteIn" />
+
+    <TextView
+        android:id="@+id/lblFechaF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/ffin"
+        app:layout_constraintEnd_toStartOf="@+id/txtFechaFin"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblFechaI" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:background="@color/naranja"
+        android:text="@string/guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnCancelar"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="44dp"
+        android:background="@color/naranja"
+        android:text="@string/cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235" />
+        tools:ignore="TextContrastCheck" />
 
-    <TextView
-        android:id="@+id/fechalbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fecha de creacion:"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="217dp" />
+    <EditText
+        android:id="@+id/txtNombreEncuesta"
+        android:layout_width="187dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteY="198dp" />
 
-    <TextView
-        android:id="@+id/fechalbl2"
+    <EditText
+        android:id="@+id/txtFechaC"
+        android:layout_width="185dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteY="259dp" />
+
+    <EditText
+        android:id="@+id/txtFechaIn"
+        android:layout_width="198dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLimInt"
+        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txtFechaFin"
+        android:layout_width="202dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaIn"
+        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Switch
+        android:id="@+id/swEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="fecha de inicio:"
+        android:layout_marginEnd="140dp"
+        android:text="Activo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechalbl" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaC"
+        tools:ignore="HardcodedText,TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
-    <TextView
-        android:id="@+id/fechalbl3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="fecha de fin:"
+    <EditText
+        android:id="@+id/txtNumPre"
+        android:layout_width="116dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="108dp"
+        android:ems="10"
+        android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechalbl2" />
-
-    <TextView
-        android:id="@+id/limitelbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Limite de intentos?"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="386dp" />
+        app:layout_constraintTop_toBottomOf="@+id/swEstado"
+        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="222dp"
-        android:layout_height="39dp"
+        android:id="@+id/txtLimInt"
+        android:layout_width="105dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="120dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="154dp" />
-
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="220dp"
-        android:layout_height="33dp"
-        android:ems="10"
-        android:inputType="date"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="210dp" />
-
-    <EditText
-        android:id="@+id/editTextDate2"
-        android:layout_width="220dp"
-        android:layout_height="33dp"
-        android:ems="10"
-        android:inputType="date"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="268dp" />
-
-    <EditText
-        android:id="@+id/editTextDate3"
-        android:layout_width="220dp"
-        android:layout_height="33dp"
-        android:ems="10"
-        android:inputType="date"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="324dp" />
-
-    <Switch
-        android:id="@+id/intentosSw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Si"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="384dp" />
-
-    <EditText
-        android:id="@+id/numIntentos"
-        android:layout_width="69dp"
-        android:layout_height="34dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="377dp" />
-
-    <Button
-        android:id="@+id/siguientebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Siguiente"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.754" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="232dp"
-        android:layout_height="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.832"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="110dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNumPre"
+        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
