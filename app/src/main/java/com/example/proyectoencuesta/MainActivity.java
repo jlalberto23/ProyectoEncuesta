@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 =======
                                 Toast.makeText(MainActivity.this, String.valueOf(cn.getIdTipoU()), Toast.LENGTH_SHORT).show();
                             }*/
-                            Intent intent = new Intent(MainActivity.this, vistaDocente.class);
+                            Intent intent = new Intent(MainActivity.this, menuDocente.class);
                             MainActivity.this.startActivity(intent);
 
                         } else {
