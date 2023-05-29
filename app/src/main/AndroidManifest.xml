@@ -51,7 +51,7 @@
             android:name=".usuarioInsertar"
             android:exported="false" />
         <activity
-            android:name=".crearEncuesta"
+            android:name=".pantallaBienvenida"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
