@@ -308,7 +308,7 @@ public class conexionDB {
         respUsu.put("dispositivo", respuestaUsuario.getDispositivo());
         respUsu.put("es_usuario_anonimo", respuestaUsuario.isEsAnonima());
 
-        contador=db.insert("respuesta_usuario", null, respUsu);
+        contador=db.insert("respuesta_usuarios", null, respUsu);
         regInsertados=regInsertados+contador;
         //}
 
@@ -392,7 +392,7 @@ public class conexionDB {
         db.execSQL("DELETE FROM materia");
         db.execSQL("DELETE FROM materia_usuario");
         db.execSQL("DELETE FROM opcion_respuesta");
-        db.execSQL("DELETE FROM respuesta_usuario");
+        db.execSQL("DELETE FROM respuesta_usuarios");
 
         tipoEncuesta tipoEnc = new tipoEncuesta();
         for(int i=0;i<2;i++){
