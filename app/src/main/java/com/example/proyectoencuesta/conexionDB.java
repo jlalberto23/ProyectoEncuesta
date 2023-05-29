@@ -43,19 +43,19 @@ public class conexionDB {
         @Override
         public void onCreate(SQLiteDatabase db) {
             try{
-                db.execSQL("CREATE TABLE area_evaluativa (id_area_evaluativa PRIMARY KEY AUTOINCREMENT NOT NULL, id_encuesta          integer, nombre_area          char(256), orden_numerico       integer, foreign key (id_encuesta) references encuesta (id_encuesta) );");
-                db.execSQL("CREATE TABLE encuesta (id_encuesta PRIMARY KEY AUTOINCREMENT NOT NULL, id_usuario  integer, id_tipo_encuesta     integer              not null, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
-                db.execSQL("CREATE TABLE materia (id_materia PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
-                db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
-                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta PRIMARY KEY AUTOINCREMENT NOT NULL, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
-                db.execSQL("CREATE TABLE pregunta (id_pregunta PRIMARY KEY AUTOINCREMENT NOT NULL, id_encuesta          integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer, foreign key (id_encuesta) references encuesta (id_encuesta), foreign key (id_tipo_pregunta) references tipo_pregunta (id_tipo_pregunta) );");
+                db.execSQL("CREATE TABLE area_evaluativa (id_area_evaluativa INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT , id_encuesta integer, nombre_area char(256), orden_numerico integer);");
+                db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer              not null, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
+                db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
+                db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
+                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
+                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer, foreign key (id_encuesta) references encuesta (id_encuesta), foreign key (id_tipo_pregunta) references tipo_pregunta (id_tipo_pregunta) );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa), foreign key (id_pregunta) references pregunta (id_pregunta), foreign key (id_area_evaluativa) references area_evaluativa (id_area_evaluativa) );");
-                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios PRIMARY KEY AUTOINCREMENT NOT NULL, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_opcion_respuesta) references opcion_respuesta (id_opcion_respuesta) );");
-                db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_encuesta char(100) );");
-                db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_pregunta char(100) );");
-                db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_respuesta char(256) );");
-                db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, nombre_tipo_usuario  char(256) );");
-                db.execSQL("CREATE TABLE usuario (id_usuario PRIMARY KEY AUTOINCREMENT NOT NULL, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
+                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_opcion_respuesta) references opcion_respuesta (id_opcion_respuesta) );");
+                db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
+                db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
+                db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
+                db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_usuario  char(256) );");
+                db.execSQL("CREATE TABLE usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
             }catch(SQLException e){ e.printStackTrace(); }
         }
         @Override
@@ -268,6 +268,28 @@ public class conexionDB {
         return regInsertados;
     }
 
+    public String insertar(opcionRespuesta opcRespuesta){
+
+        String regInsertados="Registro Insertado #= ";
+        long contador=0;
+        /*if (verificarIntegridad(alumno,5)) {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
+        }
+        else
+        {*/
+        ContentValues opcresp = new ContentValues();
+        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
+        opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
+        opcresp.put("texto_respuesta", opcRespuesta.getTextoRespuesta());
+        opcresp.put("es_la_correcta", opcRespuesta.isEsLaCorrecta());
+
+        contador=db.insert("opcion_respuesta", null, opcresp);
+        regInsertados=regInsertados+contador;
+        //}
+
+        return regInsertados;
+    }
+
     public String llenarDatos(){
 
         final int[] VTipoEncuesta_id = {1,2};
@@ -321,6 +343,12 @@ public class conexionDB {
         final int[] VMateUsuario_mate = {1, 1, 3, 2, 2};
         final int[] VMateUsuario_usua = {2, 1, 3, 1, 4};
 
+        final int[] VOpcionResp_id = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        final int[] VOpcionResp_pregunta = {1, 1, 1, 1, 2, 2, 2, 2, 3, 5, 5, 5};
+        final boolean[] VOpcionResp_escorrecta = {true, false, false, true, false, false, true, false, true, false, false, false};
+        final String[] VOpcionResp_texto = {"Falso", "Verdadero", "Falso", "Verdadero", "Almacenar datos en tablas y relaciones.", "Proporcionar una estructura flexible para almacenar datos.", "Garantizar la integridad y consistencia de los datos.", "Permitir consultas complejas mediante el lenguaje SQL.", "Botones, campos de texto.", "Actividad principal", "Fragmento", "Vista"};
+
+
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
         db.execSQL("DELETE FROM tipo_pregunta");
@@ -331,6 +359,7 @@ public class conexionDB {
         db.execSQL("DELETE FROM pregunta");
         db.execSQL("DELETE FROM materia");
         db.execSQL("DELETE FROM materia_usuario");
+        db.execSQL("DELETE FROM opcion_respuesta");
 
         tipoEncuesta tipoEnc = new tipoEncuesta();
         for(int i=0;i<2;i++){
@@ -407,6 +436,15 @@ public class conexionDB {
             mateUsu.setIdMateria(VMateUsuario_mate[i]);
             mateUsu.setIdUsuario(VMateUsuario_usua[i]);
             insertar(mateUsu);
+        }
+
+        opcionRespuesta opcResp = new opcionRespuesta();
+        for(int i=0;i<12;i++){
+            opcResp.setIdOpcionRespuesta(VOpcionResp_id[i]);
+            opcResp.setIdPregunta(VOpcionResp_pregunta[i]);
+            opcResp.setTextoRespuesta(VOpcionResp_texto[i]);
+            opcResp.setEsLaCorrecta(VOpcionResp_escorrecta[i]);
+            insertar(opcResp);
         }
 
         cerrar();
