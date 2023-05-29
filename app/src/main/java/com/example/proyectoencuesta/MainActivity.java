@@ -40,10 +40,10 @@ public class MainActivity extends Activity {
                         if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
                             int codigoTipoUsuario = u.getCodigoTipoUsuario();
 
-                            if (codigoTipoUsuario == 1) {
+                            if (codigoTipoUsuario == 0) {
                                 Intent intent = new Intent(MainActivity.this, vistaDocente.class);
                                 startActivity(intent);
-                            } else if (codigoTipoUsuario == 0) {
+                            } else if (codigoTipoUsuario == 2) {
                                 Intent intent = new Intent(MainActivity.this, vistaEstudiante.class);
                                 startActivity(intent);
                             } else {

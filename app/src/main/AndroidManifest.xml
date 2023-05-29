@@ -18,6 +18,39 @@
             android:name=".vistaEstudiante"
             android:exported="false" />
         <activity
+            android:name=".encuestaLista"
+            android:exported="false" />
+        <activity
+            android:name=".materiaActualizar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaConsultar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaEliminar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaInsertar"
+            android:exported="false" />
+        <activity
+            android:name=".preguntaResCorta"
+            android:exported="false" />
+        <activity
+            android:name=".preguntasVyF"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioActualizar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioConsultar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioEliminar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioInsertar"
+            android:exported="false" />
+        <activity
             android:name=".pantallaBienvenida"
             android:exported="true">
             <intent-filter>
