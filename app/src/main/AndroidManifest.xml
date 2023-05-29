@@ -12,7 +12,7 @@
         android:theme="@style/Theme.ProyectoEncuesta"
         tools:targetApi="31">
         <activity
-            android:name=".menu"
+            android:name=".menuDocente"
             android:exported="false" />
         <activity
             android:name=".pantallaBienvenida"
