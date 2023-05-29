@@ -9,50 +9,62 @@
         android:id="@+id/limpiarbtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
         android:text="LIMPIAR"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/conMatbtn"
-        tools:layout_editor_absoluteY="453dp" />
+        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
 
     <EditText
         android:id="@+id/aniotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/anolbl"
-        tools:layout_editor_absoluteY="257dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
 
     <TextView
         android:id="@+id/anolbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:text="Año:"
-        app:layout_constraintTop_toBottomOf="@+id/codMattxt"
-        tools:layout_editor_absoluteX="34dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
 
     <EditText
         android:id="@+id/ciclotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/ciclolbl"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ciclolbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:text="Ciclo"
-        app:layout_constraintTop_toBottomOf="@+id/anolbl"
-        tools:layout_editor_absoluteX="34dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501" />
 
     <EditText
         android:id="@+id/codMateriatxt"
@@ -60,10 +72,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.676"
-        app:layout_constraintStart_toEndOf="@+id/codMattxt"
-        tools:layout_editor_absoluteY="183dp" />
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279" />
 
     <TextView
         android:id="@+id/crearMattxt"
@@ -72,22 +86,25 @@
         android:text="Nombre de la materia:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintVertical_bias="0.174" />
 
     <TextView
         android:id="@+id/codMattxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:text="Codigo de la materia:"
-        app:layout_constraintTop_toBottomOf="@+id/crearMattxt"
-        tools:layout_editor_absoluteX="34dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293" />
 
     <TextView
-        android:id="@+id/conMatTitletxt"
+        android:id="@+id/eliEncTitletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ACTUALIZAR MATERIA"
@@ -105,16 +122,22 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toEndOf="@+id/crearMattxt"
-        tools:layout_editor_absoluteY="106dp" />
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16" />
 
     <Button
         android:id="@+id/conMatbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ACTUALIZAR"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="453dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
 </androidx.constraintlayout.widget.ConstraintLayout>

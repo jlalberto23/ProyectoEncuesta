@@ -9,12 +9,13 @@
         android:id="@+id/limpiarbtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
         android:text="LIMPIAR"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/conMatbtn"
-        tools:layout_editor_absoluteY="453dp" />
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825" />
 
     <EditText
         android:id="@+id/codMateriatxt"
@@ -22,22 +23,27 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
-        app:layout_constraintStart_toEndOf="@+id/codMattxt"
-        tools:layout_editor_absoluteY="226dp" />
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
 
     <TextView
         android:id="@+id/codMattxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="248dp"
         android:text="Codigo de la materia:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="29dp" />
+        app:layout_constraintVertical_bias="0.244" />
 
     <TextView
-        android:id="@+id/conMatTitletxt"
+        android:id="@+id/eliEncTitletxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ELIMINAR MATERIA"
@@ -54,6 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ELIMINAR"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="453dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825" />
 </androidx.constraintlayout.widget.ConstraintLayout>
