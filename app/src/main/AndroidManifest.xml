@@ -12,7 +12,43 @@
         android:theme="@style/Theme.ProyectoEncuesta"
         tools:targetApi="31">
         <activity
-            android:name=".menuDocente"
+            android:name=".vistaDocente"
+            android:exported="false" />
+        <activity
+            android:name=".vistaEstudiante"
+            android:exported="false" />
+        <activity
+            android:name=".encuestaLista"
+            android:exported="false" />
+        <activity
+            android:name=".materiaActualizar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaConsultar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaEliminar"
+            android:exported="false" />
+        <activity
+            android:name=".materiaInsertar"
+            android:exported="false" />
+        <activity
+            android:name=".preguntaResCorta"
+            android:exported="false" />
+        <activity
+            android:name=".preguntasVyF"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioActualizar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioConsultar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioEliminar"
+            android:exported="false" />
+        <activity
+            android:name=".usuarioInsertar"
             android:exported="false" />
         <activity
             android:name=".crearEncuesta"
@@ -25,6 +61,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+
             android:exported="false" />
     </application>
 

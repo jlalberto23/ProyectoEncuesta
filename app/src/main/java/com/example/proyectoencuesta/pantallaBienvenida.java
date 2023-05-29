@@ -15,8 +15,10 @@ public class pantallaBienvenida extends Activity {
         super.onCreate(savedInstanceState);
         //Base de datos
         cn = new conexionDB(this);//Enviamos el contexto
+        //cn.abrir();
         cn.llenarDatos();//Llenamos datos
         setContentView(R.layout.pantalla_bienvenida);
+        cn.cerrar();
         //INICIALIZANDO LAS VARIABLES LOCALES
         ingresar = findViewById(R.id.btnLogin);
         crear = findViewById(R.id.btnCrearC);
