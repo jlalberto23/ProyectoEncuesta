@@ -8,9 +8,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 public class conexionDB {
 
+    private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
+    private int idTipoU;
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
+
+    public int getIdTipoU() {
+        return idTipoU;
+    }
+
+    public void setIdTipoU(int idTipoU) {
+        this.idTipoU = idTipoU;
+    }
+
     public conexionDB(Context ctx){
         this.context = ctx;
         DBHelper = new DatabaseHelper(context);
@@ -58,14 +69,13 @@ public class conexionDB {
 
 
     /*********LOGIN***********/
-    public boolean login(String usuario, String contra){
-        usuario u = new usuario();
+    public boolean login(String u, String c){
         boolean resp = false;
-        Cursor cursor = db.rawQuery("SELECT id_tipo_usuario FROM usuario WHERE usuario = '"+usuario+"' AND contrasenia = '"+contra+"'",null);
-        if(cursor.moveToFirst())
-        {
-            u.setCodigoTipoUsuario(cursor.getInt(0));
+        String[] id = {u, c};
+        Cursor cursor = db.query("usuario", camposUsuario, "usuario = ? AND contrasenia = ?", id, null, null, null);
+        if(cursor.moveToFirst()) {
             resp = true;
+            setIdTipoU(cursor.getInt(1));
         }
         return resp;
     }

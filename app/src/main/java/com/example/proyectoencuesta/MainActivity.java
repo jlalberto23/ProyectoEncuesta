@@ -38,14 +38,14 @@ public class MainActivity extends Activity {
                     case R.id.btnIngresar:
                         cn.abrir();
                         if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
-                            if (u.getCodigoTipoUsuario() == 1) {
+                            if (cn.getIdTipoU() == 1) {
                                 Intent intent = new Intent(MainActivity.this, vistaDocente.class);
                                 startActivity(intent);
-                            } else if (u.getCodigoTipoUsuario() == 2) {
+                            } else if (cn.getIdTipoU() == 2) {
                                 Intent intent = new Intent(MainActivity.this, vistaEstudiante.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(MainActivity.this, "Tipo de usuario desconocido", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, String.valueOf(cn.getIdTipoU()), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
