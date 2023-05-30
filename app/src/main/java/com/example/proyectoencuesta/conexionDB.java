@@ -543,5 +543,36 @@ public class conexionDB {
         }
     }*/
 
+    public String actualizar(usuario usuario){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+            String[] id = {usuario.getUsuario()};
+            ContentValues cv = new ContentValues();
+            cv.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
+            cv.put("nombre_usuario", usuario.getNombreUsuario());
+            cv.put("usuario", usuario.getUsuario());
+            cv.put("contrasenia", usuario.getContrasenia());
+            cv.put("carnet", usuario.getCarnet());
+            db.update("usuario", cv, "usuario = ?", id);
+            return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String eliminar(usuario usuario){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("usuario", "id_usuario='"+usuario.getCodigUsuario()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
 
 }
