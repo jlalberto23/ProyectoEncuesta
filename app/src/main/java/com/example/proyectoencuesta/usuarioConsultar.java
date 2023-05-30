@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class usuarioConsultar extends Activity {
     conexionDB helper;
-    RadioGroup tipoUsuarioList;
     RadioButton docentebtn;
     RadioButton estudiantebtn;
     EditText crearNomtxt;
@@ -23,16 +22,14 @@ public class usuarioConsultar extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultar_usuario);
-         helper = new conexionDB(this);
-
-        RadioGroup tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
-        RadioButton docentebtn = findViewById(R.id.docentebtn);
-        RadioButton estudiantebtn = findViewById(R.id.estudiantebtn);
-        crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
-        contrasena2 = (EditText) findViewById(R.id.contrasena2);
-        userCreartxt = (EditText) findViewById(R.id.userCreartxt);
-        fechaReg = (EditText) findViewById(R.id.fechaReg);
-        carnettxt = (EditText) findViewById(R.id.carnettxt);
+        helper = new conexionDB(this);
+        docentebtn = findViewById(R.id.docentebtn);
+        estudiantebtn = findViewById(R.id.estudiantebtn);
+        crearNomtxt = findViewById(R.id.crearNomtxt);
+        contrasena2 = findViewById(R.id.contrasena2);
+        userCreartxt = findViewById(R.id.userCreartxt);
+        fechaReg = findViewById(R.id.fechaReg);
+        carnettxt = findViewById(R.id.carnettxt);
     }
     public void consultarUsuario(View v) {
         helper.abrir();
