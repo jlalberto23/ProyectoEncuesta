@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class usuarioEliminar extends Activity{
     EditText carnettxt;
-    Button modificar, cancelar;
+    Button eliminar, cancelar;
     conexionDB helper;
 
     @Override
@@ -19,7 +19,8 @@ public class usuarioEliminar extends Activity{
         setContentView(R.layout.eliminar_usuario);
         helper = new conexionDB(this);
         carnettxt = findViewById(R.id.carnettxt);
-        modificar = findViewById(R.id.crearCuentabtn);
+        eliminar = findViewById(R.id.btnEliminar);
+        cancelar = findViewById(R.id.limpiarbtn);
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
@@ -27,7 +28,10 @@ public class usuarioEliminar extends Activity{
         public void onClick(View v) {
             try{
                 switch (v.getId()){
-                    case R.id.crearCuentabtn:
+                    case R.id.btnEliminar:
+                        break;
+                    case R.id.limpiarbtn:
+                        limpiarTexto();
                         break;
                 }
             }catch (Exception e){
@@ -46,7 +50,7 @@ public class usuarioEliminar extends Activity{
         //Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
     }
 
-    public void limpiarTexto(View v) {
+    public void limpiarTexto() {
         carnettxt.setText("");
 
     }
