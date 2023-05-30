@@ -47,10 +47,6 @@ public class usuarioEliminar extends Activity{
         }
     };
 
-    public void eliminarUsuario(View v){
-
-    }
-
     public void limpiarTexto() {
         carnettxt.setText("");
 

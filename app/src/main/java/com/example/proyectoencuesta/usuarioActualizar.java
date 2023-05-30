@@ -54,8 +54,10 @@ public class usuarioActualizar extends Activity{
                         us.setCarnet(carnettxt.getText().toString());
                         us.setFecha_registro(fechaReg.getText().toString());
                         helper.abrir();
-                        //String estado = helper.
+                        String estado = helper.actualizar(us);
                         helper.cerrar();
+
+                        Toast.makeText(v.getContext(), estado, Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.btnLimpiar:
                         limpiarTexto();
