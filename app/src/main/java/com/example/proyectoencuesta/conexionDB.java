@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class conexionDB {
 
     private static final String[] camposTipoUsuario = new String[]{"id_tipo_usuario","nombre_tipo_usuario"};
+    private static final String[] camposMateria = new String[]{};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
     private int idTipoU;
     private final Context context;
@@ -527,21 +528,20 @@ public class conexionDB {
      }
 
 
-    /*public materia consultarMateria(String codigoMateria) {
+    public materia consultarMateria(String codigoMateria) {
         String[] id = {codigoMateria};
-        Cursor cursor = db.query("alumno", camposMateria, "codito_materia = ?", id, null, null, null);
+        Cursor cursor = db.query("alumno", camposMateria, "codigo_materia = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             materia mate = new materia();
             mate.setCodigoMateria(cursor.getString(0));
             mate.setNombreMateria(cursor.getString(1));
             mate.setCiclo(cursor.getString(2));
             mate.setAnio(cursor.getString(3));
-
-            return materia;
+            return mate;
         }else{
             return null;
         }
-    }*/
+    }
 
     public String actualizar(usuario usuario){
 
