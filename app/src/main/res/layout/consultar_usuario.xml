@@ -32,7 +32,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/consultarCuentabtn"
+        android:id="@+id/crearCuentabtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/consultar"
@@ -75,8 +75,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="237dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.855"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348" />
 
     <EditText
         android:id="@+id/carnettxt"
@@ -120,8 +124,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuario:"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="251dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348" />
 
     <TextView
         android:id="@+id/contralbl"

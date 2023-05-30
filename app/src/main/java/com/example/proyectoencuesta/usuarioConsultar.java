@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class usuarioConsultar extends Activity {
     conexionDB helper;
-    Spinner tipoUsuarioList;
+    RadioGroup tipoUsuarioList;
+    RadioButton docentebtn;
+    RadioButton estudiantebtn;
     EditText crearNomtxt;
     EditText contrasena2;
     EditText userCreartxt;
@@ -19,25 +23,27 @@ public class usuarioConsultar extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultar_usuario);
-        // helper = new conexionDB(this);
+         helper = new conexionDB(this);
 
-        tipoUsuarioList = (Spinner) findViewById(R.id.tipoUsuarioList);
+        RadioGroup tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
+        RadioButton docentebtn = findViewById(R.id.docentebtn);
+        RadioButton estudiantebtn = findViewById(R.id.estudiantebtn);
         crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
         contrasena2 = (EditText) findViewById(R.id.contrasena2);
         userCreartxt = (EditText) findViewById(R.id.userCreartxt);
         fechaReg = (EditText) findViewById(R.id.fechaReg);
         carnettxt = (EditText) findViewById(R.id.carnettxt);
     }
-    /*public void consultarUsuario(View v) {
-        //helper.abrir();
+    public void consultarUsuario(View v) {
+        helper.abrir();
         usuario user = helper.consultarUsuario(carnettxt.getText().toString());
-        //helper.cerrar();
+        helper.cerrar();
 
         if(user == null)
             Toast.makeText(this, "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
         else{
-            int posicion = obtenerPosicionEnSpinner(tipoUsuarioList, user.getCodigoTipoUsuario());
-            tipoUsuarioList.setSelection(posicion);
+
+            //tipoUsuarioList.setOnCheckedChangeListener();
             crearNomtxt.setText(user.getNombreUsuario());
             contrasena2.setText(user.getContrasenia());
             userCreartxt.setText(user.getUsuario());
@@ -45,7 +51,7 @@ public class usuarioConsultar extends Activity {
             carnettxt.setText(user.getCarnet());
 
         }
-    }*/
+    }
 
     private int obtenerPosicionEnSpinner(Spinner tipoUsuarioList, Spinner codigoTipoUsuario) {
         return 0;

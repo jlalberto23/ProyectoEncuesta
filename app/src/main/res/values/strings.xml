@@ -55,5 +55,5 @@
     <string name="tres">Respuesta:</string>
     <string name="coret">Es correcta:</string>
     <string name="intento">Intento:</string>
-
+    <string name="tipoEn">Tipo Encuesta:</string>
 </resources>

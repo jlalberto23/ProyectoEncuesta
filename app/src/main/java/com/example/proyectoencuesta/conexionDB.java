@@ -496,7 +496,7 @@ public class conexionDB {
         return "Guardo Correctamente";
     }
 
-    /* public usuario consultarUsuario(String carnet) {
+     public usuario consultarUsuario(String carnet) {
 
 
         String[] id = {carnet};
@@ -513,9 +513,10 @@ public class conexionDB {
         }else{
             return null;
         }
+     }
 
 
-    public materia consultarMateria(String codigoMateria) {
+    /*public materia consultarMateria(String codigoMateria) {
         String[] id = {codigoMateria};
         Cursor cursor = db.query("alumno", camposMateria, "codito_materia = ?", id, null, null, null);
         if(cursor.moveToFirst()){
@@ -525,11 +526,11 @@ public class conexionDB {
             mate.setCiclo(cursor.getString(2));
             mate.setAnio(cursor.getString(3));
 
-            return mate;
+            return materia;
         }else{
             return null;
         }
-    }
+    }*/
 
-    */
+
 }

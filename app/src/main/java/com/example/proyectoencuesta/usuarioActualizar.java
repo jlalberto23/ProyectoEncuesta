@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -11,7 +13,9 @@ import android.widget.Toast;
 public class usuarioActualizar extends Activity{
 
     conexionDB helper;
-    Spinner tipoUsuarioList;
+    RadioGroup tipoUsuarioList;
+    RadioButton docentebtn;
+    RadioButton estudiantebtn;
     EditText crearNomtxt;
     EditText contrasena2;
     EditText userCreartxt;
@@ -23,7 +27,9 @@ public class usuarioActualizar extends Activity{
         setContentView(R.layout.actualizar_usuario);
         // helper = new conexionDB(this);
 
-        tipoUsuarioList = (Spinner) findViewById(R.id.tipoUsuarioList);
+        RadioGroup tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
+        RadioButton docentebtn = findViewById(R.id.docentebtn);
+        RadioButton estudiantebtn = findViewById(R.id.estudiantebtn);
         crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
         contrasena2 = (EditText) findViewById(R.id.contrasena2);
         userCreartxt = (EditText) findViewById(R.id.userCreartxt);
@@ -37,15 +43,21 @@ public class usuarioActualizar extends Activity{
         String usuario=userCreartxt.getText().toString();
         String contrasena=contrasena2.getText().toString();
         String fecha = fechaReg.getText().toString();
-        Spinner tipoUsuario = (Spinner) findViewById(R.id.tipoUsuarioList);
-        String tipoUsuarioSeleccionado = tipoUsuario.getSelectedItem().toString();
+        int tipoUsuarioSeleccionado;
+        if (docentebtn.isChecked()) {
+            tipoUsuarioSeleccionado = 1; // Docente
+        } else if (estudiantebtn.isChecked()) {
+            tipoUsuarioSeleccionado = 2; // Estudiante
+        } else {
+            tipoUsuarioSeleccionado = 0; // Ninguno seleccionado (trata este caso según tus necesidades)
+        }
 
 
 
-        //helper.abrir();
+        helper.abrir();
         //String estado = helper.actualizar(usuario);
-        //helper.cerrar();
-        //Toast.makeText(this, estado, Toast.LENGTH_SHORT).show();
+        helper.cerrar();
+       // Toast.makeText(this, estado, Toast.LENGTH_SHORT).show();
     }
 
     public void limpiarTexto(View v) {
