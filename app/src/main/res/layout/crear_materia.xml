@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/limpiarbtn3"
+        android:id="@+id/btnCancelarCM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LIMPIAR"
@@ -131,7 +131,7 @@
         app:layout_constraintVertical_bias="0.279" />
 
     <Button
-        android:id="@+id/conMatbtn"
+        android:id="@+id/btnCrearM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="crear materia"

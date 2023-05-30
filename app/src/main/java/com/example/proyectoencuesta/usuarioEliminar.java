@@ -29,6 +29,13 @@ public class usuarioEliminar extends Activity{
             try{
                 switch (v.getId()){
                     case R.id.btnEliminar:
+                        String res;
+                        usuario user=new usuario();
+                        user.setCarnet(carnettxt.getText().toString());
+                        helper.abrir();
+                        res=helper.eliminar(user);
+                        helper.cerrar();
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.limpiarbtn:
                         limpiarTexto();
@@ -41,13 +48,7 @@ public class usuarioEliminar extends Activity{
     };
 
     public void eliminarUsuario(View v){
-        String regEliminadas;
-        usuario user=new usuario();
-        user.setCarnet(carnettxt.getText().toString());
-        helper.abrir();
-        //regEliminadas=helper.eliminar(user);
-        helper.cerrar();
-        //Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
+
     }
 
     public void limpiarTexto() {
