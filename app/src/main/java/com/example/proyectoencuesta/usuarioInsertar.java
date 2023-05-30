@@ -61,7 +61,7 @@ public class usuarioInsertar extends Activity{
                         us.setCarnet(carnettxt.getText().toString());
                         us.setFecha_registro(fechaReg.getText().toString());
                         helper.abrir();
-                        res = helper.insertar(us);
+                        res = helper.insertarU(us);
                         limpiarTexbox();
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
                         break;

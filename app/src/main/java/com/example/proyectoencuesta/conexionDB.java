@@ -509,8 +509,6 @@ public class conexionDB {
     }
 
      public usuario consultarUsuario(String carnet) {
-
-
         String[] id = {carnet};
         Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
         if(cursor.moveToFirst()){
@@ -520,7 +518,6 @@ public class conexionDB {
             user.setUsuario(cursor.getString(2));
             user.setContrasenia(cursor.getString(3));
             user.setFecha_registro(cursor.getString(4));
-
             return user;
         }else{
             return null;
@@ -768,5 +765,33 @@ public class conexionDB {
         return regAfectados;
     }
 
+    public String insertarU(usuario usuario){
 
+        String regInsertados="Registro Insertado #= ";
+        long contador=0;
+
+        ContentValues usuA = new ContentValues();
+        usuA.put("id_usuario", codigoUs());
+        usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
+        usuA.put("nombre_usuario", usuario.getNombreUsuario());
+        usuA.put("usuario", usuario.getUsuario());
+        usuA.put("contrasenia", usuario.getContrasenia());
+        usuA.put("carnet", usuario.getCarnet());
+        usuA.put("fecha_registro", usuario.getFecha_registro());
+
+        contador=db.insert("usuario", null, usuA);
+        regInsertados=regInsertados+contador;
+        //}
+
+        return regInsertados;
+    }
+
+    public int codigoUs() {
+        int resp = 0;
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM usuario", null);
+        if(cursor.moveToFirst()){
+            resp = cursor.getInt(0)+1;
+        }
+        return resp;
+    }
 }
