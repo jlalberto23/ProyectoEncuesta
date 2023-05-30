@@ -14,7 +14,7 @@ public class usuarioConsultar extends Activity {
     conexionDB helper;
     RadioButton docentebtn,estudiantebtn;
     EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt;
-    Button modificar, cancelar;
+    Button consultar, cancelar;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,7 +28,9 @@ public class usuarioConsultar extends Activity {
         fechaReg = findViewById(R.id.fechaReg);
         carnettxt = findViewById(R.id.carnettxt);
         cancelar = findViewById(R.id.btnCancelarC);
-        modificar = findViewById(R.id.btnConsultar);
+        consultar = findViewById(R.id.btnConsultar);
+        consultar.setOnClickListener(onclick);
+        cancelar.setOnClickListener(onclick);
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
