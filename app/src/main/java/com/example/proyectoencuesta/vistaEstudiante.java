@@ -10,8 +10,8 @@ import android.widget.ListView;
 public class vistaEstudiante extends ListActivity {
 
 
-    String[] menu={"Consultar Usuarios", "Actualizar usuario","Consultar Materias", "Actualizar Materias","Consultar Encuestas", "Actualizar Encuestas"};
-    String[] activities={"consultar_usuarios", "actualizar_usuario","consultar_materias", "actualizar_materias","encuesta"};
+    String[] menu={"Crear usuario","Consultar Usuarios","Consultar Materias","Responder Encuesta"};
+    String[] activities={"usuarioInsertar","usuarioConsultar","materiaConsultar", "encuestaLista" };
 
     conexionDB BDhelper;
 
@@ -27,7 +27,7 @@ public class vistaEstudiante extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
 
-        if(position!=3){
+        if(position!=4){
             String nombreValue=activities[position];
             try{
                 Class<?>
