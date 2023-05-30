@@ -4,7 +4,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -12,7 +15,10 @@ import java.util.ArrayList;
 
 public class usuarioInsertar extends Activity{
     conexionDB helper;
-    Spinner tipoUsuarioList;
+    Button crear, limpiar;
+    RadioGroup tipoUsuarioList;
+    RadioButton docentebtn;
+    RadioButton estudiantebtn;
     EditText crearNomtxt;
     EditText contrasena2;
     EditText userCreartxt;
@@ -24,7 +30,11 @@ public class usuarioInsertar extends Activity{
         setContentView(R.layout.crear_usuario);
        helper = new conexionDB(this);
 
-        tipoUsuarioList = (Spinner) findViewById(R.id.tipoUsuarioList);
+        RadioGroup tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
+        RadioButton docentebtn = findViewById(R.id.docentebtn);
+        RadioButton estudiantebtn = findViewById(R.id.estudiantebtn);
+        crear = findViewById(R.id.crearCuentabtn);
+        limpiar = findViewById(R.id.limpiarbtn);
         crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
         contrasena2 = (EditText) findViewById(R.id.contrasena2);
         userCreartxt = (EditText) findViewById(R.id.userCreartxt);
@@ -39,22 +49,28 @@ public class usuarioInsertar extends Activity{
     }
 
     public void insertarUsuario(View v) {
+        String regInsertados;
         String carnet=carnettxt.getText().toString();
         String nombre=crearNomtxt.getText().toString();
         String usuario=userCreartxt.getText().toString();
         String contrasena=contrasena2.getText().toString();
         String fecha = fechaReg.getText().toString();
-        Spinner tipoUsuario = (Spinner) findViewById(R.id.tipoUsuarioList);
-        String tipoUsuarioSeleccionado = tipoUsuario.getSelectedItem().toString();
+        int tipoUsuarioSeleccionado;
+        if (docentebtn.isChecked()) {
+            tipoUsuarioSeleccionado = 1; // Docente
+        } else if (estudiantebtn.isChecked()) {
+            tipoUsuarioSeleccionado = 2; // Estudiante
+        } else {
+            tipoUsuarioSeleccionado = 0; // Ninguno seleccionado (trata este caso según tus necesidades)
+        }
 
-        String regInsertados;
         usuario user=new usuario();
         user.setCarnet(carnet);
         user.setNombreUsuario(nombre);
         user.setUsuario(usuario);
         user.setContrasenia(contrasena);
         user.setFecha_registro(fecha);
-        //user.setCodigoTipoUsuario(tipoUsuario);
+        user.setCodigoTipoUsuario(tipoUsuarioSeleccionado);
 
 
         helper.abrir();
