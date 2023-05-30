@@ -9,11 +9,11 @@
         android:id="@+id/lblTituloE"
         android:layout_width="171dp"
         android:layout_height="54dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="52dp"
         android:text="@string/encuesta"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck" />
@@ -22,12 +22,12 @@
         android:id="@+id/lblNombreE"
         android:layout_width="119dp"
         android:layout_height="21dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="28dp"
         android:text="@string/nencuesta"
         app:layout_constraintEnd_toStartOf="@+id/txtNombreEncuesta"
-        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblTituloE"
+        app:layout_constraintTop_toBottomOf="@+id/lblTipoE"
         tools:ignore="TextSizeCheck" />
 
     <TextView
@@ -128,13 +128,14 @@
         android:id="@+id/txtNombreEncuesta"
         android:layout_width="187dp"
         android:layout_height="35dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtFechaC"
-        app:layout_constraintTop_toBottomOf="@+id/lblTituloE"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
         tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
@@ -182,12 +183,13 @@
         android:id="@+id/swEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="140dp"
         android:text="Activo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
         app:layout_constraintStart_toStartOf="@+id/txtFechaC"
-        app:layout_constraintTop_toBottomOf="@+id/txtFechaC"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreEncuesta"
         tools:ignore="HardcodedText,TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
     <EditText
@@ -215,5 +217,27 @@
         app:layout_constraintStart_toStartOf="@+id/txtFechaIn"
         app:layout_constraintTop_toBottomOf="@+id/txtNumPre"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/lblTipoE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/tipoEn"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloE" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="222dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="@+id/lblTituloE"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
