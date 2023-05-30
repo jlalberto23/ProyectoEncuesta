@@ -30,7 +30,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/limpiarbtn2"
+        android:id="@+id/btnLimpiar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LIMPIAR"

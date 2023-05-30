@@ -62,14 +62,11 @@ public class usuarioInsertar extends Activity{
                         us.setFecha_registro(fechaReg.getText().toString());
                         helper.abrir();
                         res = helper.insertar(us);
+                        limpiarTexbox();
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.limpiarbtn:
-                        crearNomtxt.setText("");
-                        contrasena2.setText("");
-                        userCreartxt.setText("");
-                        fechaReg.setText("");
-                        carnettxt.setText("");
+                        limpiarTexbox();
                         break;
                 }
             }catch (Exception e){
@@ -77,4 +74,12 @@ public class usuarioInsertar extends Activity{
             }
         }
     };
+
+    public void limpiarTexbox(){
+        crearNomtxt.setText("");
+        contrasena2.setText("");
+        userCreartxt.setText("");
+        fechaReg.setText("");
+        carnettxt.setText("");
+    }
 }
