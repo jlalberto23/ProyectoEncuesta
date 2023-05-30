@@ -21,6 +21,8 @@ public class usuarioEliminar extends Activity{
         carnettxt = findViewById(R.id.carnettxt);
         eliminar = findViewById(R.id.btnEliminar);
         cancelar = findViewById(R.id.limpiarbtn);
+        eliminar.setOnClickListener(onclick);
+        cancelar.setOnClickListener(onclick);
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {

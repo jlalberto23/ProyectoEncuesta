@@ -338,11 +338,11 @@ public class conexionDB {
         final int[] VTipoUsuario_id = {1,2,3};
         final String[] VTipoUsuario_nombre = {"Docente","Estudiante","Anonimo"};
 
-        final int[] VUsuario_id =      {1, 2, 3, 4, 5};
-        final int[] VUsuario_tipo =      {1, 1, 2, 2, 3};
-        final String[] VUsuario_nombre = {"Jose Alberto","Carlos Orellana","Heinrich Sanchez","Mario Rodriguez",""};
-        final String[] VUsuario_usuario = {"jalberto","corellana","hsanchez","mrodriguez",""};
-        final String[] VUsuario_contra = {"12345","12345","12345","12345",""};
+        final int[] VUsuario_id =      {1, 2, 3, 4};
+        final int[] VUsuario_tipo =      {1, 1, 2, 2};
+        final String[] VUsuario_nombre = {"Jose Alberto","Carlos Orellana","Heinrich Sanchez","Mario Rodriguez"};
+        final String[] VUsuario_usuario = {"jalberto","corellana","hsanchez","mrodriguez"};
+        final String[] VUsuario_contra = {"12345","12345","12345","12345"};
         final String[] VUsuario_carnet = {"AA17025","OM17034","SA04005","RR10056",""};
         final String[] VUsuario_fecha = {"2023-05-28 10:30:00","2023-05-29 12:30:05","2023-05-30 13:30:50","2023-05-31 15:30:24",""};
 
@@ -428,7 +428,7 @@ public class conexionDB {
         }
 
         usuario usuario = new usuario();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<4;i++){
             usuario.setCodigUsuario(VUsuario_id[i]);
             usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
             usuario.setNombreUsuario(VUsuario_nombre[i]);
