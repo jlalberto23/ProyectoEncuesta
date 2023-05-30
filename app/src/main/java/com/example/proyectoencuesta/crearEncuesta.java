@@ -21,7 +21,7 @@ public class crearEncuesta extends Activity {
         setContentView(R.layout.crear_encuesta);
         guardar = findViewById(R.id.btnGuardar);
         cancelar = findViewById(R.id.btnCancelar);
-        sp = findViewById(R.id.spinner);
+        //sp = findViewById(R.id.spinner);
         nombreE = findViewById(R.id.txtNombreEncuesta);
         fechaC = findViewById(R.id.txtFechaC);
         numP = findViewById(R.id.txtNumPre);
