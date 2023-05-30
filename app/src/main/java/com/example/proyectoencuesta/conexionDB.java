@@ -513,11 +513,12 @@ public class conexionDB {
         Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             usuario user = new usuario();
-            user.setCarnet(cursor.getString(0));
-            user.setNombreUsuario(cursor.getString(1));
-            user.setUsuario(cursor.getString(2));
-            user.setContrasenia(cursor.getString(3));
-            user.setFecha_registro(cursor.getString(4));
+            //user.setCarnet(cursor.getString(0));
+            user.setNombreUsuario(cursor.getString(2));
+            user.setUsuario(cursor.getString(3));
+            user.setContrasenia(cursor.getString(4));
+            user.setFecha_registro(cursor.getString(6));
+
             return user;
         }else{
             return null;
@@ -527,13 +528,14 @@ public class conexionDB {
 
     public materia consultarMateria(String codigoMateria) {
         String[] id = {codigoMateria};
-        Cursor cursor = db.query("alumno", camposMateria, "codigo_materia = ?", id, null, null, null);
+        Cursor cursor = db.query("materia", camposMateria, "codigo_materia = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             materia mate = new materia();
-            mate.setCodigoMateria(cursor.getString(0));
+            //mate.setCodigoMateria(cursor.getString(0));
             mate.setNombreMateria(cursor.getString(1));
-            mate.setCiclo(cursor.getString(2));
-            mate.setAnio(cursor.getString(3));
+            mate.setAnio(cursor.getString(4));
+            mate.setCiclo(cursor.getString(3));
+
             return mate;
         }else{
             return null;
@@ -700,7 +702,8 @@ public class conexionDB {
         /*if (verificarIntegridad(usuario,3)) {
             contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
         }*/
-        contador+=db.delete("usuario", "id_usuario='"+usuario.getCodigUsuario()+"'", null);
+
+        contador+=db.delete("usuario", "carnet='"+usuario.getCarnet()+"'", null);
         regAfectados+=contador;
         return regAfectados;
     }
@@ -712,7 +715,7 @@ public class conexionDB {
         /*if (verificarIntegridad(usuario,3)) {
             contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
         }*/
-        contador+=db.delete("materia", "id_materia='"+materia.getIdMateria()+"'", null);
+        contador+=db.delete("materia", "codigo_materia='"+materia.getCodigoMateria()+"'", null);
         regAfectados+=contador;
         return regAfectados;
     }

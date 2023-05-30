@@ -49,6 +49,7 @@ public class usuarioEliminar extends Activity{
         }
     };
 
+
     public void limpiarTexto() {
         carnettxt.setText("");
 
