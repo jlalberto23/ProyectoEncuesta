@@ -46,9 +46,9 @@ public class usuarioConsultar extends Activity {
                             Toast.makeText(v.getContext(), "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
                         else{
                             if(user.getCodigoTipoUsuario()==1)
-                                docentebtn.setChecked(true);
+                                docentebtn.setSelected(true);
                             else if (user.getCodigoTipoUsuario()==2)
-                                estudiantebtn.setChecked(true);
+                                estudiantebtn.setSelected(true);
                             crearNomtxt.setText(user.getNombreUsuario());
                             contrasena2.setText(user.getContrasenia());
                             userCreartxt.setText(user.getUsuario());
