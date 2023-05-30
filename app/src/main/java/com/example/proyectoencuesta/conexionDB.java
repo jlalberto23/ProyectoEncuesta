@@ -157,7 +157,7 @@ public class conexionDB {
             {*/
             ContentValues usuA = new ContentValues();
             usuA.put("id_usuario", usuario.getCodigUsuario());
-           // usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
+            usuA.put("id_tipo_usuario", usuario.getCodigoTipoUsuario());
             usuA.put("nombre_usuario", usuario.getNombreUsuario());
             usuA.put("usuario", usuario.getUsuario());
             usuA.put("contrasenia", usuario.getContrasenia());
@@ -369,7 +369,7 @@ public class conexionDB {
         final int[] VMateUsuario_usua = {2, 1, 3, 1, 4};
 
         final int[] VOpcionResp_id = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        final int[] VOpcionResp_pregunta = {1, 1, 1, 1, 2, 2, 2, 2, 3, 5, 5, 5};
+        final int[] VOpcionResp_pregunta = {1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 5, 5};
         final boolean[] VOpcionResp_escorrecta = {true, false, false, true, false, false, true, false, true, false, false, false};
         final String[] VOpcionResp_texto = {"Falso", "Verdadero", "Falso", "Verdadero", "Almacenar datos en tablas y relaciones.", "Proporcionar una estructura flexible para almacenar datos.", "Garantizar la integridad y consistencia de los datos.", "Permitir consultas complejas mediante el lenguaje SQL.", "Botones, campos de texto.", "Actividad principal", "Fragmento", "Vista"};
 
