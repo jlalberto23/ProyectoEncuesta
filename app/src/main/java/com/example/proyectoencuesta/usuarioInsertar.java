@@ -16,76 +16,65 @@ import java.util.ArrayList;
 public class usuarioInsertar extends Activity{
     conexionDB helper;
     Button crear, limpiar;
+    int tp = 0;
     RadioGroup tipoUsuarioList;
-    RadioButton docentebtn;
-    RadioButton estudiantebtn;
-    EditText crearNomtxt;
-    EditText contrasena2;
-    EditText userCreartxt;
-    EditText fechaReg;
-    EditText carnettxt;
+    RadioButton docentebtn, estudiantebtn;
+    EditText crearNomtxt, contrasena2, userCreartxt, fechaReg, carnettxt;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crear_usuario);
-       helper = new conexionDB(this);
+        helper = new conexionDB(this);
 
-        RadioGroup tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
-        RadioButton docentebtn = findViewById(R.id.docentebtn);
-        RadioButton estudiantebtn = findViewById(R.id.estudiantebtn);
+        tipoUsuarioList = findViewById(R.id.tipoUsuarioList);
+        docentebtn = findViewById(R.id.docentebtn);
+        estudiantebtn = findViewById(R.id.estudiantebtn);
         crear = findViewById(R.id.crearCuentabtn);
         limpiar = findViewById(R.id.limpiarbtn);
-        crearNomtxt = (EditText) findViewById(R.id.crearNomtxt);
-        contrasena2 = (EditText) findViewById(R.id.contrasena2);
-        userCreartxt = (EditText) findViewById(R.id.userCreartxt);
-        fechaReg = (EditText) findViewById(R.id.fechaReg);
-        carnettxt = (EditText) findViewById(R.id.carnettxt);
-
+        crearNomtxt = findViewById(R.id.crearNomtxt);
+        contrasena2 = findViewById(R.id.contrasena2);
+        userCreartxt =  findViewById(R.id.userCreartxt);
+        fechaReg = findViewById(R.id.fechaReg);
+        carnettxt = findViewById(R.id.carnettxt);
+        crear = findViewById(R.id.crearCuentabtn);
+        limpiar = findViewById(R.id.limpiarbtn);
+        crear.setOnClickListener(onclick);
+        limpiar.setOnClickListener(onclick);
     }
 
-    private void obtenerdatos(){
-        helper.abrir();
-
-    }
-
-    public void insertarUsuario(View v) {
-        String regInsertados;
-        String carnet=carnettxt.getText().toString();
-        String nombre=crearNomtxt.getText().toString();
-        String usuario=userCreartxt.getText().toString();
-        String contrasena=contrasena2.getText().toString();
-        String fecha = fechaReg.getText().toString();
-        int tipoUsuarioSeleccionado;
-        if (docentebtn.isChecked()) {
-            tipoUsuarioSeleccionado = 1; // Docente
-        } else if (estudiantebtn.isChecked()) {
-            tipoUsuarioSeleccionado = 2; // Estudiante
-        } else {
-            tipoUsuarioSeleccionado = 0; // Ninguno seleccionado (trata este caso según tus necesidades)
+    View.OnClickListener onclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+                switch (v.getId()){
+                    case R.id.crearCuentabtn:
+                        if(docentebtn.isChecked())
+                            tp = 1;
+                        else if (estudiantebtn.isChecked())
+                            tp = 2;
+                        String res;
+                        usuario us = new usuario();
+                        us.setUsuario(userCreartxt.getText().toString());
+                        us.setCodigoTipoUsuario(tp);
+                        us.setNombreUsuario(crearNomtxt.getText().toString());
+                        us.setContrasenia(contrasena2.getText().toString());
+                        us.setCarnet(carnettxt.getText().toString());
+                        us.setFecha_registro(fechaReg.getText().toString());
+                        helper.abrir();
+                        res = helper.insertar(us);
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.limpiarbtn:
+                        crearNomtxt.setText("");
+                        contrasena2.setText("");
+                        userCreartxt.setText("");
+                        fechaReg.setText("");
+                        carnettxt.setText("");
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
-
-        usuario user=new usuario();
-        user.setCarnet(carnet);
-        user.setNombreUsuario(nombre);
-        user.setUsuario(usuario);
-        user.setContrasenia(contrasena);
-        user.setFecha_registro(fecha);
-        user.setCodigoTipoUsuario(tipoUsuarioSeleccionado);
-
-
-        helper.abrir();
-        regInsertados=helper.insertar(user);
-        helper.cerrar();
-        Toast.makeText(this, regInsertados, Toast.LENGTH_SHORT).show();
-    }
-    public void limpiarTexto(View v) {
-        carnettxt.setText("");
-        crearNomtxt.setText("");
-        userCreartxt.setText("");
-        contrasena2.setText("");
-        fechaReg.setText("");
-
-    }
-
-
+    };
 }
