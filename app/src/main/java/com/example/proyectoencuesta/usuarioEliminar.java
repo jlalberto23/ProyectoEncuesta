@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class usuarioEliminar extends Activity{
@@ -14,7 +15,7 @@ public class usuarioEliminar extends Activity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eliminar_usuario);
-        // helper = new conexionDB(this);
+         helper = new conexionDB(this);
 
         carnettxt = (EditText) findViewById(R.id.carnettxt);
     }
@@ -22,9 +23,9 @@ public class usuarioEliminar extends Activity{
         String regEliminadas;
         usuario user=new usuario();
         user.setCarnet(carnettxt.getText().toString());
-        //helper.abrir();
+        helper.abrir();
         //regEliminadas=helper.eliminar(user);
-        //helper.cerrar();
+        helper.cerrar();
         //Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
     }
 

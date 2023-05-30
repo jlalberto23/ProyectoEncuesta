@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class vistaDocente extends ListActivity {
 
     String[] menu={"Crear usuario","Consultar Usuarios", "Actualizar usuario","Eliminar Usuarios","Crear Materias","Consultar Materias", "Actualizar Materias","Eliminar Materias","Crear Encuestas", "Eliminar Encuestas","Responder Encuesta"};
-    String[] activities={"usuarioInsertar","usuarioConsultar", "usuarioActualizar","usuarioEliminar","materiaInsertar","materiaConsultar", "materiaActualizar","materiaEliminar","crearEncuesta","eliminarEncuesta","encuestaLista" };
+    String[] activities={"usuarioInsertar","usuarioConsultar", "usuarioEliminar","usuarioActualizar","materiaInsertar","materiaConsultar", "materiaActualizar","materiaEliminar","crearEncuesta","eliminarEncuesta","encuestaLista" };
     conexionDB BDhelper;
 
     @Override
