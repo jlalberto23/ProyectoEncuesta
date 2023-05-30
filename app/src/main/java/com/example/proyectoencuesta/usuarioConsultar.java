@@ -53,7 +53,6 @@ public class usuarioConsultar extends Activity {
                             contrasena2.setText(user.getContrasenia());
                             userCreartxt.setText(user.getUsuario());
                             fechaReg.setText(user.getFecha_registro());
-                            carnettxt.setText(user.getCarnet());
                         }
                         break;
                     case R.id.btnCancelarC:
