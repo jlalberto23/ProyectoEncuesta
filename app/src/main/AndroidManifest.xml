@@ -18,9 +18,6 @@
             android:name=".vistaEstudiante"
             android:exported="false" />
         <activity
-            android:name=".encuestaLista"
-            android:exported="false" />
-        <activity
             android:name=".materiaActualizar"
             android:exported="false" />
         <activity
@@ -52,6 +49,15 @@
             android:exported="false" />
         <activity
             android:name=".crearEncuesta"
+            android:exported="false" />
+        <activity
+            android:name=".eliminarEncuesta"
+            android:exported="false" />
+        <activity
+            android:name=".encuestaLista"
+            android:exported="false" />
+        <activity
+            android:name=".pantallaBienvenida"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,6 +67,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+
             android:exported="false" />
     </application>
 
