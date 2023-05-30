@@ -562,6 +562,144 @@ public class conexionDB {
         }*/
     }
 
+    public String actualizar(encuesta encuesta){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(encuesta.getIdEncuesta())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_usuario", encuesta.getIdUsuario());
+        cv.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
+        cv.put("nombre_encuesta", encuesta.getNombreEncuesta());
+        cv.put("fecha_creacion", encuesta.getFechaCreacion());
+        cv.put("id_estado_encuesta", encuesta.getEstadoEncuesta());
+        cv.put("numero_preguntas", encuesta.getNumeroPreguntas());
+        cv.put("limite_intentos", encuesta.getLimiteIntentos());
+        cv.put("fecha_inicio", encuesta.getFechaInicio());
+        cv.put("fecha_fin", encuesta.getFechaFin());
+
+        db.update("encuesta", cv, "id_encuesta = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(materia materia){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {materia.getCodigoMateria()};
+        ContentValues cv = new ContentValues();
+        cv.put("nombre_materia", materia.getNombreMateria());
+        cv.put("codigo_materia", materia.getCodigoMateria());
+        cv.put("ciclo", materia.getCiclo());
+        cv.put("anio", materia.getAnio());
+
+        db.update("materia", cv, "codigo_materia = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(materiaUsuario materiaUsuario){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(materiaUsuario.getIdUsuario())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_materia", materiaUsuario.getIdMateria());
+        cv.put("id_usuario", materiaUsuario.getIdUsuario());
+
+
+        db.update("materia_usuario", cv, "id_usuario = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(opcionRespuesta opcResp){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(opcResp.getIdOpcionRespuesta())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_pregunta", opcResp.getIdPregunta());
+        cv.put("texto_respuesta", opcResp.getTextoRespuesta());
+        cv.put("es_la_correcta", opcResp.isEsLaCorrecta());
+
+        db.update("opcion_respuesta", cv, "id_opcion_respuesta = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(pregunta pregunta){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(pregunta.getIdPregunta())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_encuesta", pregunta.getIdEncuesta());
+        cv.put("id_tipo_pregunta", pregunta.getIdTpoPregunta());
+        cv.put("texto_pregunta", pregunta.getTextoPregunta());
+        cv.put("es_obligatoria", pregunta.isEsObligatoria());
+        cv.put("orden_pregunta", pregunta.getOrdenPregunta());
+
+        db.update("pregunta", cv, "id_pregunta = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(preguntaArea pregAreaEva){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(pregAreaEva.getIdPregunta())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_area_evaluativa", pregAreaEva.getIdAreaEvaluativa());
+
+        db.update("pregunta_area_evaluativa", cv, "id_pregunta = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+    public String actualizar(respuestaUsuario respUsu){
+
+        //if(verificarIntegridad(alumno, 5)){
+
+        String[] id = {String.valueOf(respUsu.getIdRespuestaUsuario())};
+        ContentValues cv = new ContentValues();
+        cv.put("id_opcion_respuesta", respUsu.getIdOpcionRespuesta());
+        cv.put("id_usuario", respUsu.getIdUsuario());
+        cv.put("numero_intento", respUsu.getNumeroIntento());
+        cv.put("fecha_respondida", respUsu.getFechaRespondido());
+        cv.put("dispositivo", respUsu.getDispositivo());
+        cv.put("es_usuario_anonimo", respUsu.isEsAnonima());
+
+        db.update("respuesta_usuarios", cv, "id_respuesta_usuarios = ?", id);
+        return "Registro Actualizado Correctamente";
+
+            /*}else{
+            return "Registro con carnet " + alumno.getCarnet() + " no existe";
+        }*/
+    }
+
+
+
     public String eliminar(usuario usuario){
 
         String regAfectados="filas afectadas= ";
