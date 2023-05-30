@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class usuarioConsultar extends Activity {
     conexionDB helper;
+    RadioGroup grupo;
     RadioButton docentebtn,estudiantebtn;
     EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt;
     Button consultar, cancelar;
@@ -20,8 +21,9 @@ public class usuarioConsultar extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultar_usuario);
         helper = new conexionDB(this);
-        docentebtn = findViewById(R.id.docentebtn);
-        estudiantebtn = findViewById(R.id.estudiantebtn);
+        grupo = findViewById(R.id.tipoUsuarioList);
+        docentebtn = findViewById(R.id.rbDocente);
+        estudiantebtn = findViewById(R.id.rbEstudiante);
         crearNomtxt = findViewById(R.id.crearNomtxt);
         contrasena2 = findViewById(R.id.contrasena2);
         userCreartxt = findViewById(R.id.userCreartxt);
@@ -31,6 +33,7 @@ public class usuarioConsultar extends Activity {
         consultar = findViewById(R.id.btnConsultar);
         consultar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
+        //estudiantebtn.checkedState = STATE_CHECKED;
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
@@ -45,10 +48,11 @@ public class usuarioConsultar extends Activity {
                         if(user == null)
                             Toast.makeText(v.getContext(), "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
                         else{
+                            grupo.clearCheck();
                             if(user.getCodigoTipoUsuario()==1)
-                                docentebtn.setSelected(true);
+                                docentebtn.setChecked(true);
                             else if (user.getCodigoTipoUsuario()==2)
-                                estudiantebtn.setSelected(true);
+                                estudiantebtn.setChecked(true);
                             crearNomtxt.setText(user.getNombreUsuario());
                             contrasena2.setText(user.getContrasenia());
                             userCreartxt.setText(user.getUsuario());
