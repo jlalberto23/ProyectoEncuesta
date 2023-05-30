@@ -3,6 +3,7 @@ package com.example.proyectoencuesta;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -11,13 +12,9 @@ import android.widget.Toast;
 
 public class usuarioConsultar extends Activity {
     conexionDB helper;
-    RadioButton docentebtn;
-    RadioButton estudiantebtn;
-    EditText crearNomtxt;
-    EditText contrasena2;
-    EditText userCreartxt;
-    EditText fechaReg;
-    EditText carnettxt;
+    RadioButton docentebtn,estudiantebtn;
+    EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt;
+    Button modificar, cancelar;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -30,31 +27,44 @@ public class usuarioConsultar extends Activity {
         userCreartxt = findViewById(R.id.userCreartxt);
         fechaReg = findViewById(R.id.fechaReg);
         carnettxt = findViewById(R.id.carnettxt);
+        cancelar = findViewById(R.id.btnCancelarC);
+        modificar = findViewById(R.id.btnConsultar);
     }
-    public void consultarUsuario(View v) {
-        helper.abrir();
-        usuario user = helper.consultarUsuario(carnettxt.getText().toString());
-        helper.cerrar();
 
-        if(user == null)
-            Toast.makeText(this, "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
-        else{
-
-            //tipoUsuarioList.setOnCheckedChangeListener();
-            crearNomtxt.setText(user.getNombreUsuario());
-            contrasena2.setText(user.getContrasenia());
-            userCreartxt.setText(user.getUsuario());
-            fechaReg.setText(user.getFecha_registro());
-            carnettxt.setText(user.getCarnet());
-
+    View.OnClickListener onclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+                switch (v.getId()){
+                    case R.id.btnConsultar:
+                        helper.abrir();
+                        usuario user = helper.consultarUsuario(carnettxt.getText().toString());
+                        helper.cerrar();
+                        if(user == null)
+                            Toast.makeText(v.getContext(), "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
+                        else{
+                            if(user.getCodigoTipoUsuario()==1)
+                                docentebtn.setChecked(true);
+                            else if (user.getCodigoTipoUsuario()==2)
+                                estudiantebtn.setChecked(true);
+                            crearNomtxt.setText(user.getNombreUsuario());
+                            contrasena2.setText(user.getContrasenia());
+                            userCreartxt.setText(user.getUsuario());
+                            fechaReg.setText(user.getFecha_registro());
+                            carnettxt.setText(user.getCarnet());
+                        }
+                        break;
+                    case R.id.btnCancelarC:
+                        limpiarTexto();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
-    }
+    };
 
-    private int obtenerPosicionEnSpinner(Spinner tipoUsuarioList, Spinner codigoTipoUsuario) {
-        return 0;
-    }
-
-    public void limpiarTexto(View v) {
+    public void limpiarTexto() {
         carnettxt.setText("");
         crearNomtxt.setText("");
         userCreartxt.setText("");
