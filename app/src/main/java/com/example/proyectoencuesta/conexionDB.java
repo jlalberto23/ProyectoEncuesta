@@ -314,6 +314,17 @@ public class conexionDB {
 
         return regInsertados;
     }
+    public String eliminar(encuesta encuesta){
+
+        String regAfectados="filas afectadas= ";
+        long contador=0;
+
+        //String where="nombre_encuesta='"+spinnerElimEncuesta.getSelectedItem().toString()+"'";
+
+        //contador+=db.delete("encuesta", where, null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
 
     public String llenarDatos(){
 
