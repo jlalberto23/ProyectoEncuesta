@@ -712,5 +712,65 @@ public class conexionDB {
         return regAfectados;
     }
 
+    public String eliminar(materia materia){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("materia", "id_materia='"+materia.getIdMateria()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
+    public String eliminar(materiaUsuario mateUsu){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("materia_usuario", "id_materia_usuario='"+mateUsu.getIdMateriaUsuario()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
+    public String eliminar(opcionRespuesta opcResp){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("opcion_respuesta", "id_opcion_respuesta='"+opcResp.getIdOpcionRespuesta()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
+    public String eliminar(pregunta pregunta){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("pregunta", "id_pregunta='"+pregunta.getIdPregunta()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
+    public String eliminar(respuestaUsuario respUsu){
+
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        /*if (verificarIntegridad(usuario,3)) {
+            contador+=db.delete("nota", "carnet='"+usuario.getCarnet()+"'", null);
+        }*/
+        contador+=db.delete("respuesta_usuarios", "id_repuesta_usuarios='"+respUsu.getIdRespuestaUsuario()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
 
 }
