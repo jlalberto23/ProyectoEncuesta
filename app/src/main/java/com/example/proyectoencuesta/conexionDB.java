@@ -599,10 +599,6 @@ public class conexionDB {
 
         db.update("materia", cv, "codigo_materia = ?", id);
         return "Registro Actualizado Correctamente";
-
-            /*}else{
-            return "Registro con carnet " + alumno.getCarnet() + " no existe";
-        }*/
     }
 
     public String actualizar(materiaUsuario materiaUsuario){
