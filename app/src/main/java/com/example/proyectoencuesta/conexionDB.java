@@ -94,9 +94,20 @@ public class conexionDB {
             //setIdTipoU(cursor.getInt(1));
             setCodigoTipoUsuario(cursor.getInt(1));
             //System.out.println(codigoTipoUsuario);
-
         }
         return resp;
+    }
+
+    public Cursor mostrarEncuestasSP(){
+        try{
+            Cursor filas = db.rawQuery("SELECT id_encuesta, nombre_encuesta FROM encuesta",null);
+            if (filas.moveToFirst())
+                return  filas;
+            else
+                return  null;
+        }catch (Exception e){
+            return null;
+        }
     }
 
 

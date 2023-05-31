@@ -16,6 +16,7 @@ public class crearEncuesta extends Activity {
     Switch estado;
     String[] tipos = {"Verdadero o Falso","Respuesta Corta"};
     conexionDB helper;
+    int ten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class crearEncuesta extends Activity {
         setContentView(R.layout.crear_encuesta);
         guardar = findViewById(R.id.btnGuardar);
         cancelar = findViewById(R.id.btnCancelar);
-        //sp = findViewById(R.id.spinner);
+        sp = findViewById(R.id.spTipoEncuesta);
         nombreE = findViewById(R.id.txtNombreEncuesta);
         fechaC = findViewById(R.id.txtFechaC);
         numP = findViewById(R.id.txtNumPre);
@@ -31,8 +32,8 @@ public class crearEncuesta extends Activity {
         fechaIn = findViewById(R.id.txtFechaIn);
         fechaFin = findViewById(R.id.txtFechaFin);
         estado = findViewById(R.id.swEstado);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
-        //sp.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
+        sp.setAdapter(adapter);
         guardar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
     }
@@ -51,8 +52,12 @@ public class crearEncuesta extends Activity {
                         enc.setLimiteIntentos(Integer.parseInt(limInt.getText().toString()));
                         enc.setFechaInicio(fechaIn.getText().toString());
                         enc.setFechaFin(fechaFin.getText().toString());
-                        //enc.setEstadoEncuesta(estado.getSwitchPadding());
-                        //enc.setTipoEncuesta(sp.getSelectedItem().toString());
+                        enc.setEstadoEncuesta(estado.isChecked());
+                        if(sp.getSelectedItem()=="Verdadero o Falso")
+                            ten = 1;
+                        else if(sp.getSelectedItem()=="Respuesta Corta")
+                            ten = 2;
+                        enc.setIdTipoEncuesta(ten);
                         helper.abrir();
                         res=helper.insertar(enc);
                         helper.cerrar();
@@ -75,7 +80,6 @@ public class crearEncuesta extends Activity {
         fechaIn.setText("");
         fechaFin.setText("");
         estado.setSwitchPadding(0);
-        //sp.setAdapter(null);
-
+        sp.setAdapter(null);
     }
 }
