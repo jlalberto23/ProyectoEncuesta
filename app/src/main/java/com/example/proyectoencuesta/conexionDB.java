@@ -14,17 +14,27 @@ public class conexionDB {
     private static final String[] camposTipoUsuario = new String[]{"id_tipo_usuario","nombre_tipo_usuario"};
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
-    private int idTipoU;
+    //private int idTipoU;
+    private int codigoTipoUsuario;
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    public int getIdTipoU() {
+    /*public int getIdTipoU() {
         return idTipoU;
     }
 
     public void setIdTipoU(int idTipoU) {
         this.idTipoU = idTipoU;
+    }*/
+    public int getCodigoTipoUsuario() {
+        return codigoTipoUsuario;
+    }
+
+    public void setCodigoTipoUsuario(int codigoTipoUsuario) {
+        this.codigoTipoUsuario = codigoTipoUsuario;
+
     }
 
     public conexionDB(Context ctx){
@@ -45,7 +55,8 @@ public class conexionDB {
         public void onCreate(SQLiteDatabase db) {
             try{
                 db.execSQL("CREATE TABLE area_evaluativa (id_area_evaluativa INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT , id_encuesta integer, nombre_area char(256), orden_numerico integer);");
-                db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer              not null, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
+                //db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer              not null, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
+                db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
                 db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
@@ -80,10 +91,19 @@ public class conexionDB {
         Cursor cursor = db.query("usuario", camposUsuario, "usuario = ? AND contrasenia = ?", id, null, null, null);
         if(cursor.moveToFirst()) {
             resp = true;
-            setIdTipoU(cursor.getInt(1));
+            //setIdTipoU(cursor.getInt(1));
+            setCodigoTipoUsuario(cursor.getInt(1));
+            //System.out.println(codigoTipoUsuario);
+
         }
         return resp;
     }
+
+
+    private SQLiteDatabase getReadableDatabase() {
+        return null;
+    }
+
     /************************/
 
 
@@ -182,12 +202,12 @@ public class conexionDB {
         else
         {*/
         ContentValues encue = new ContentValues();
-        encue.put("id_encuesta", encuesta.getIdEncuesta());
-        encue.put("id_usuario", encuesta.getIdUsuario());
-        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
+        //encue.put("id_encuesta", encuesta.getIdEncuesta());
+        //encue.put("id_usuario", encuesta.getIdUsuario());
+        //encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("nombre_encuesta", encuesta.getNombreEncuesta());
         encue.put("fecha_creacion", encuesta.getFechaCreacion());
-        encue.put("id_estado_encuesta", encuesta.getEstadoEncuesta());
+        //encue.put("id_estado_encuesta", encuesta.getEstadoEncuesta());
         encue.put("numero_preguntas", encuesta.getNumeroPreguntas());
         encue.put("limite_intentos", encuesta.getLimiteIntentos());
         encue.put("fecha_inicio", encuesta.getFechaInicio());

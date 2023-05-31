@@ -10,11 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+    private int codigoTipoUsuario;
+
+    public void setCodigoTipoUsuario(int codigoTipoUsuario) {
+        this.codigoTipoUsuario = codigoTipoUsuario;
+
+    }
     Button ingresar, cancelar;
     EditText usuario, contra;
 
     conexionDB cn;
     usuario u;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +36,23 @@ public class MainActivity extends Activity {
         contra = findViewById(R.id.txtContraseña);
         ingresar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
+        System.out.println(u.getCodigUsuario());
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
+            System.out.println(u.getCodigUsuario());
             try {
                 switch (v.getId()) {
                     case R.id.btnIngresar:
                         cn.abrir();
+                        System.out.println(u.getCodigUsuario());
                         if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
+
                             int codigoTipoUsuario = u.getCodigoTipoUsuario();
+                            System.out.println(u.getCodigUsuario());
 
                             if (codigoTipoUsuario == 0) {
                                 Intent intent = new Intent(MainActivity.this, vistaDocente.class);
@@ -52,6 +66,7 @@ public class MainActivity extends Activity {
                         } else {
                             Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                         }
+
                         break;
                     case R.id.btnCancelar:
                         usuario.setText("");

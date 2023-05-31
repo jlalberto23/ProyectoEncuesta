@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class crearEncuesta extends Activity {
     Button guardar, cancelar;
@@ -14,6 +15,7 @@ public class crearEncuesta extends Activity {
     EditText nombreE, fechaC, numP, limInt, fechaIn, fechaFin;
     Switch estado;
     String[] tipos = {"Verdadero o Falso","Respuesta Corta"};
+    conexionDB helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,10 @@ public class crearEncuesta extends Activity {
         fechaIn = findViewById(R.id.txtFechaIn);
         fechaFin = findViewById(R.id.txtFechaFin);
         estado = findViewById(R.id.swEstado);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
-        sp.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
+        //sp.setAdapter(adapter);
+        guardar.setOnClickListener(onclick);
+        cancelar.setOnClickListener(onclick);
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
@@ -39,14 +43,39 @@ public class crearEncuesta extends Activity {
             try{
                 switch (v.getId()){
                     case R.id.btnGuardar:
-                        //
+                        String res;
+                        encuesta enc = new encuesta();
+                        enc.setNombreEncuesta(nombreE.getText().toString());
+                        enc.setFechaCreacion(fechaC.getText().toString());
+                        enc.setNumeroPreguntas(Integer.parseInt(numP.getText().toString()));
+                        enc.setLimiteIntentos(Integer.parseInt(limInt.getText().toString()));
+                        enc.setFechaInicio(fechaIn.getText().toString());
+                        enc.setFechaFin(fechaFin.getText().toString());
+                        //enc.setEstadoEncuesta(estado.getSwitchPadding());
+                        //enc.setTipoEncuesta(sp.getSelectedItem().toString());
+                        helper.abrir();
+                        res=helper.insertar(enc);
+                        helper.cerrar();
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.btnCancelar:
+                        limpiar();
                         break;
                 }
             }catch (Exception e){
-
+                e.printStackTrace();
             }
         }
     };
+    public void limpiar(){
+        nombreE.setText("");
+        fechaC.setText("");
+        numP.setText("");
+        limInt.setText("");
+        fechaIn.setText("");
+        fechaFin.setText("");
+        estado.setSwitchPadding(0);
+        //sp.setAdapter(null);
+
+    }
 }

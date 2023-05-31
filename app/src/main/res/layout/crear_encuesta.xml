@@ -74,16 +74,16 @@
 
     <EditText
         android:id="@+id/txtNombreEncuesta"
-        android:layout_width="187dp"
-        android:layout_height="35dp"
+        android:layout_width="178dp"
+        android:layout_height="43dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185"
+        app:layout_constraintVertical_bias="0.181"
         tools:ignore="Autofill,LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
@@ -193,7 +193,7 @@
     <EditText
         android:id="@+id/txtFechaIn"
         android:layout_width="198dp"
-        android:layout_height="37dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -231,7 +231,7 @@
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spTipoEncuesta"
         android:layout_width="212dp"
         android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="parent"

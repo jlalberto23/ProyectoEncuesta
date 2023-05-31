@@ -1,10 +1,27 @@
 package com.example.proyectoencuesta;
 
+import android.widget.Spinner;
+
 public class encuesta {
 
     private int idEncuesta, idUsuario, idTipoEncuesta, numeroPreguntas,limiteIntentos;
     private boolean estadoEncuesta;
     private String nombreEncuesta, fechaCreacion, fechaInicio, fechaFin;
+    private Spinner tipoEncuesta;
+
+    public void setTipoEncuesta(Spinner tipoEncuesta) {
+        this.tipoEncuesta = tipoEncuesta;
+    }
+
+    public boolean isEstadoEncuesta() {
+        return estadoEncuesta;
+    }
+
+    public Spinner getTipoEncuesta() {
+        return tipoEncuesta;
+    }
+
+
 
     public encuesta(int idEncuesta, int idUsuario, int idTipoEncuesta, int numeroPreguntas, int limiteIntentos, boolean estadoEncuesta, String nombreEncuesta, String fechaCreacion, String fechaInicio, String fechaFin) {
         this.idEncuesta = idEncuesta;
@@ -17,6 +34,8 @@ public class encuesta {
         this.fechaCreacion = fechaCreacion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.tipoEncuesta= tipoEncuesta;
+
     }
 
     public encuesta() {
