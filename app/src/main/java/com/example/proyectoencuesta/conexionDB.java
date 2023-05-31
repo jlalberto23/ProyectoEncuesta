@@ -553,6 +553,7 @@ public class conexionDB {
             cv.put("usuario", usuario.getUsuario());
             cv.put("contrasenia", usuario.getContrasenia());
             cv.put("carnet", usuario.getCarnet());
+            cv.put("fecha_registro", usuario.getFecha_registro());
             db.update("usuario", cv, "usuario = ?", id);
             return "Registro Actualizado Correctamente";
 

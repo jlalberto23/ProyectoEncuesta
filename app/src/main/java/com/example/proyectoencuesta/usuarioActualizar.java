@@ -31,6 +31,8 @@ public class usuarioActualizar extends Activity{
         userCreartxt = findViewById(R.id.userCreartxt);
         fechaReg = findViewById(R.id.fechaReg);
         carnettxt = findViewById(R.id.carnettxt);
+        modificar = findViewById(R.id.btnActualizar);
+        cancelar = findViewById(R.id.btnLimpiar);
         modificar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
     }
