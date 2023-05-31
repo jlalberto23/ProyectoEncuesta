@@ -36,6 +36,7 @@ public class crearEncuesta extends Activity {
         sp.setAdapter(adapter);
         guardar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
+        helper = new conexionDB(this);
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
