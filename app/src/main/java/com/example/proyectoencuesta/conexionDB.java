@@ -55,7 +55,6 @@ public class conexionDB {
         public void onCreate(SQLiteDatabase db) {
             try{
                 db.execSQL("CREATE TABLE area_evaluativa (id_area_evaluativa INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT , id_encuesta integer, nombre_area char(256), orden_numerico integer);");
-                //db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer              not null, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
                 db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp, foreign key (id_usuario) references usuario (id_usuario), foreign key (id_tipo_encuesta) references tipo_encuesta (id_tipo_encuesta) );");
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
@@ -97,19 +96,6 @@ public class conexionDB {
         }
         return resp;
     }
-
-    public Cursor mostrarEncuestasSP(){
-        try{
-            Cursor filas = db.rawQuery("SELECT id_encuesta, nombre_encuesta FROM encuesta",null);
-            if (filas.moveToFirst())
-                return  filas;
-            else
-                return  null;
-        }catch (Exception e){
-            return null;
-        }
-    }
-
 
     private SQLiteDatabase getReadableDatabase() {
         return null;
@@ -828,5 +814,17 @@ public class conexionDB {
             resp = cursor.getInt(0)+1;
         }
         return resp;
+    }
+
+    public Cursor mostrarEncuestasSP(){
+        try{
+            Cursor filas = db.rawQuery("SELECT id_encuesta,nombre_encuesta FROM encuesta",null);
+            if (filas.moveToFirst())
+                return  filas;
+            else
+                return  null;
+        }catch (Exception e){
+            return null;
+        }
     }
 }
