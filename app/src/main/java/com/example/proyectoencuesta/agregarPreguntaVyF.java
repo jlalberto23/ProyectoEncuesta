@@ -54,7 +54,7 @@ public class agregarPreguntaVyF extends Activity {
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
                         int c = numP-1;
                         Intent i = new Intent(view.getContext(),agregarPreguntaVyF.class);
-                        finish();
+                        //finish();
                         i.putExtra("numP", Integer.valueOf(c));
                         i.putExtra("nomEn", nom);
                         startActivityForResult(i,1234);
