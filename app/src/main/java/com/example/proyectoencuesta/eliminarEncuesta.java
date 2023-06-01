@@ -26,7 +26,7 @@ public class eliminarEncuesta extends Activity {
         helper = new conexionDB(this);
         spinnerElimEncuesta = findViewById(R.id.spinnerElimEncuesta);
         List<encuesta> lista = llenarSp();
-        ArrayAdapter<encuesta> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lista);
+        ArrayAdapter<encuesta> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
         spinnerElimEncuesta.setAdapter(adapter);
     }
 
