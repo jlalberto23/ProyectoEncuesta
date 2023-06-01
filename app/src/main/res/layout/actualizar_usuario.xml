@@ -94,16 +94,16 @@
 
     <EditText
         android:id="@+id/carnettxt"
-        android:layout_width="204dp"
-        android:layout_height="37dp"
+        android:layout_width="193dp"
+        android:layout_height="49dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
+        app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474" />
+        app:layout_constraintVertical_bias="0.486" />
 
     <TextView
         android:id="@+id/nomlbl"
