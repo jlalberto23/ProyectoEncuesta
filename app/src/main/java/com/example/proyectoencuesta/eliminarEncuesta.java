@@ -25,16 +25,17 @@ public class eliminarEncuesta extends Activity {
         setContentView(R.layout.eliminar_encuesta);
         helper = new conexionDB(this);
         spinnerElimEncuesta = findViewById(R.id.spinnerElimEncuesta);
+        helper.abrir();
         List<encuesta> lista = llenarSp();
         ArrayAdapter<encuesta> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
         spinnerElimEncuesta.setAdapter(adapter);
+        helper.cerrar();
     }
 
 
     private List<encuesta> llenarSp(){
         List<encuesta> lis = new ArrayList<>();
-        conexionDB cn = new conexionDB(eliminarEncuesta.this);
-        cn.abrir();
+
         Cursor cursor = helper.mostrarEncuestasSP();
         if(cursor != null){
             if(cursor.moveToFirst()){
@@ -46,7 +47,6 @@ public class eliminarEncuesta extends Activity {
                 }while (cursor.moveToNext());
             }
         }
-        cn.cerrar();
         return lis;
     }
     public void eliminarUsuario(View v){

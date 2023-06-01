@@ -819,7 +819,7 @@ public class conexionDB {
 
     public Cursor mostrarEncuestasSP(){
         try{
-            Cursor filas = db.query("encuesta", camposEncuesta, null, null, null, null, null);
+            Cursor filas = db.rawQuery("select id_encuesta,nombre_encuesta FROM encuesta",null);
             //Cursor filas = db.rawQuery("SELECT id_encuesta,nombre_encuesta FROM encuesta",null);
             if (filas.moveToFirst())
                 return  filas;
