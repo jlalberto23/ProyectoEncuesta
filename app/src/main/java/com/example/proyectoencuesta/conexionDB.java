@@ -13,6 +13,7 @@ public class conexionDB {
 
     private static final String[] camposTipoUsuario = new String[]{"id_tipo_usuario","nombre_tipo_usuario"};
     private static final String[] camposMateria = new String[]{};
+    private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
     //private int idTipoU;
     private int codigoTipoUsuario;
@@ -818,7 +819,8 @@ public class conexionDB {
 
     public Cursor mostrarEncuestasSP(){
         try{
-            Cursor filas = db.rawQuery("SELECT id_encuesta,nombre_encuesta FROM encuesta",null);
+            Cursor filas = db.query("encuesta", camposEncuesta, null, null, null, null, null);
+            //Cursor filas = db.rawQuery("SELECT id_encuesta,nombre_encuesta FROM encuesta",null);
             if (filas.moveToFirst())
                 return  filas;
             else
