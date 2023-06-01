@@ -30,6 +30,7 @@ public class agregarPreguntaVyF extends Activity {
         numP = Integer.valueOf(extra.getString("numP"));
         nom = extra.getString("nomEn");
         nombre.setText(nom);
+        next = findViewById(R.id.btnNext);
 
         next.setOnClickListener(onclic);
     }
