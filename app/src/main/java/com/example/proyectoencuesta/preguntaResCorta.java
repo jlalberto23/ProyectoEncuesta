@@ -18,7 +18,7 @@ public class preguntaResCorta extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preguntas_res_corta);
 
-        pregunta = findViewById(R.id.txtPreguntaC);
+        pregunta = findViewById(R.id.preguntaCorta);
 
         Bundle extra = getIntent().getExtras();
         String s = extra.getString("numP");
