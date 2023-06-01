@@ -90,6 +90,7 @@ public class crearEncuesta extends Activity {
         fechaIn.setText("");
         fechaFin.setText("");
         estado.setSwitchPadding(0);
-        sp.setAdapter(null);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
+        sp.setAdapter(adapter);
     }
 }
