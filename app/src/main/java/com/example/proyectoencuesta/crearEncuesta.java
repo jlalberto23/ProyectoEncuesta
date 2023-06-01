@@ -1,5 +1,6 @@
 package com.example.proyectoencuesta;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -63,6 +64,14 @@ public class crearEncuesta extends Activity {
                         res=helper.insertar(enc);
                         helper.cerrar();
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+                        if(ten==1){
+                            Intent intent = new Intent(v.getContext(), preguntasVyF.class);
+                            intent.putExtra("numP", numP.getText().toString());
+                            startActivityForResult(intent,1234);
+                        } else if (ten==2) {
+                            Intent intent = new Intent(v.getContext(), preguntasVyF.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.btnCancelar:
                         limpiar();
