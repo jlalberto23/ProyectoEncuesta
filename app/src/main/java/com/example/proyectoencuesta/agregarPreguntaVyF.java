@@ -46,17 +46,17 @@ public class agregarPreguntaVyF extends Activity {
                         pregunta p = new pregunta();
                         p.setIdPregunta(cn.codigoPreg());
                         p.setIdEncuesta(cn.codigoEn(nom));
-                        p.setIdPregunta(1);
-                        p.setOrdenPregunta(numP);
+                        p.setIdTpoPregunta(1);
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
+                        p.setOrdenPregunta(numP);
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
                         numP-=1;
-                        Intent intent = new Intent(view.getContext(), agregarPreguntaVyF.class);
+                        /*Intent intent = new Intent(view.getContext(), agregarPreguntaVyF.class);
                         intent.putExtra("numP", numP);
                         intent.putExtra("nomEn", nom);
-                        startActivityForResult(intent,1234);
+                        startActivityForResult(intent,1234);*/
                         break;
                 }
             }catch (Exception ex){
