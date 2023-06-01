@@ -39,11 +39,11 @@ public class pantallaBienvenida extends Activity {
                         pantallaBienvenida.this.startActivity(intent);
                         break;
                     case R.id.btnCrearC:
-                        //Intent intent = new Intent(pantallaBienvenida.this,crearUsuario.class);
-                        //pantallaBienvenida.this.startActivity(intent);
+                        Intent intent3 = new Intent(pantallaBienvenida.this,usuarioInsertar.class);
+                        pantallaBienvenida.this.startActivity(intent3);
                         break;
                     case R.id.btnIngresarSC:
-                        Intent intent2 = new Intent(pantallaBienvenida.this,MainActivity.class);
+                        Intent intent2 = new Intent(pantallaBienvenida.this,encuestaLista.class);
                         pantallaBienvenida.this.startActivity(intent2);
                         break;
                 }
