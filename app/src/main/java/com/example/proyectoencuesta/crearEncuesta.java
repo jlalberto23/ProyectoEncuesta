@@ -69,7 +69,7 @@ public class crearEncuesta extends Activity {
                             intent.putExtra("numP", numP.getText().toString());
                             startActivityForResult(intent,1234);
                         } else if (ten==2) {
-                            Intent intent = new Intent(v.getContext(), preguntasVyF.class);
+                            Intent intent = new Intent(v.getContext(), preguntaResCorta.class);
                             startActivity(intent);
                         }
                         break;
@@ -92,5 +92,6 @@ public class crearEncuesta extends Activity {
         estado.setSwitchPadding(0);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
         sp.setAdapter(adapter);
+        estado.setChecked(false);
     }
 }
