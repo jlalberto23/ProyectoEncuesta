@@ -57,8 +57,15 @@
             android:name=".encuestaLista"
             android:exported="false" />
         <activity
+            android:name=".agregarPreguntaVyF"
+            android:exported="false"/>
+        <activity
+            android:name=".agregarPreguntaResCorta"
+            android:exported="false"/>
+        <activity
             android:name=".pantallaBienvenida"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

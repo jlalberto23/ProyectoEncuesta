@@ -19,8 +19,8 @@
 
     <EditText
         android:id="@+id/resCortatxt"
-        android:layout_width="314dp"
-        android:layout_height="160dp"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
