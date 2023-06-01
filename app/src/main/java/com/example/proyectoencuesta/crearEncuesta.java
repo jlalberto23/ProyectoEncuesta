@@ -65,12 +65,12 @@ public class crearEncuesta extends Activity {
                         helper.cerrar();
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
                         if(ten==1){
-                            Intent intent = new Intent(v.getContext(), preguntasVyF.class);
+                            Intent intent = new Intent(v.getContext(), agregarPreguntaVyF.class);
                             intent.putExtra("numP", numP.getText().toString());
                             intent.putExtra("nomEn", nombreE.getText().toString());
                             startActivityForResult(intent,1234);
                         } else if (ten==2) {
-                            Intent intent = new Intent(v.getContext(), preguntaResCorta.class);
+                            Intent intent = new Intent(v.getContext(), agregarPreguntaResCorta.class);
                             intent.putExtra("numP", numP.getText().toString());
                             intent.putExtra("nomEn", nombreE.getText().toString());
                             startActivityForResult(intent,1234);
