@@ -70,7 +70,8 @@ public class crearEncuesta extends Activity {
                             startActivityForResult(intent,1234);
                         } else if (ten==2) {
                             Intent intent = new Intent(v.getContext(), preguntaResCorta.class);
-                            startActivity(intent);
+                            intent.putExtra("numP", numP.getText().toString());
+                            startActivityForResult(intent,1234);
                         }
                         break;
                     case R.id.btnCancelar:
