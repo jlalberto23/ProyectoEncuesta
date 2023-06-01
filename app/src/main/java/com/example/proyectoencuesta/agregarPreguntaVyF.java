@@ -52,11 +52,12 @@ public class agregarPreguntaVyF extends Activity {
                         p.setOrdenPregunta(numP);
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
-                        numP-=1;
-                        /*Intent intent = new Intent(view.getContext(), agregarPreguntaVyF.class);
-                        intent.putExtra("numP", numP);
-                        intent.putExtra("nomEn", nom);
-                        startActivityForResult(intent,1234);*/
+                        int c = numP-1;
+                        Intent i = new Intent(view.getContext(),agregarPreguntaVyF.class);
+                        finish();
+                        i.putExtra("numP", Integer.valueOf(c));
+                        i.putExtra("nomEn", nom);
+                        startActivityForResult(i,1234);
                         break;
                 }
             }catch (Exception ex){
