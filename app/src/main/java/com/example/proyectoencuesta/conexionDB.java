@@ -817,6 +817,25 @@ public class conexionDB {
         return resp;
     }
 
+    public int codigoPreg() {
+        int resp = 0;
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM pregunta", null);
+        if(cursor.moveToFirst()){
+            resp = cursor.getInt(0)+1;
+        }
+        return resp;
+    }
+
+    public int codigoEn(String nom) {
+        String[] id = {nom};
+        int resp = 0;
+        Cursor cursor = db.rawQuery("SELECT id_encuesta FROM encuesta WHERE nombre_encuesta = ?", id);
+        if(cursor.moveToFirst()){
+            resp = cursor.getInt(0);
+        }
+        return resp;
+    }
+
     public Cursor mostrarEncuestasSP(){
         try{
             Cursor filas = db.rawQuery("select id_encuesta,nombre_encuesta FROM encuesta",null);
