@@ -72,12 +72,16 @@ public class eliminarEncuesta extends Activity {
             try{
                 switch (view.getId()){
                     case R.id.eliminarEncbtn:
+                        helper.abrir();
                         String regEliminadas;
                         encuesta enc=new encuesta();
+
                         String selectedItem = spinnerElimEncuesta.getSelectedItem().toString();
+                        //Toast.makeText(view.getContext(), selectedItem, Toast.LENGTH_SHORT).show();
+                        int idEncuesta = helper.codigoEn(selectedItem);
+                        enc.setIdEncuesta(idEncuesta);
                         enc.setNombreEncuesta(selectedItem);
 
-                        helper.abrir();
                         regEliminadas=helper.eliminar(enc);
                         helper.cerrar();
                         Toast.makeText(view.getContext(), regEliminadas, Toast.LENGTH_SHORT).show();
