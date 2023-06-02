@@ -11,9 +11,9 @@ public class agregarPreguntaResCorta  extends Activity {
     conexionDB cn;
     int numP;
     String nom;
-    TextView nombre;
+    TextView nombre, numeroPreg;
     EditText pregunta;
-    Button next;
+    Button next, volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
