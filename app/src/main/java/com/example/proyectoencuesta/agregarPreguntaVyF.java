@@ -87,7 +87,7 @@ public class agregarPreguntaVyF extends Activity {
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
                         res = cn.insertar(p);
-                        Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), res, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(view.getContext(),vistaDocente.class);
                         startActivity(in);
                         break;
