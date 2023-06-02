@@ -52,6 +52,7 @@ public class agregarPreguntaVyF extends Activity {
         }
         numeroPreg.setText("Pregunta numero " + numP + ":");
         next.setOnClickListener(onclic);
+        menu.setOnClickListener(onclic);
     }
 
     View.OnClickListener onclic = new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class agregarPreguntaVyF extends Activity {
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
                         Intent in = new Intent(view.getContext(),vistaDocente.class);
-                        startActivityForResult(in,1234);
+                        startActivity(in);
                         break;
                 }
             }catch (Exception ex){
