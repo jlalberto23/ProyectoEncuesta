@@ -334,15 +334,20 @@ public class conexionDB {
         return regInsertados;
     }
     public String eliminar(encuesta encuesta){
+        // Eliminacion en cascada, preguntas primero
+        String regAfectadosp="Preguntas eliminadas = ";
+        int contadorp=0;
 
-        String regAfectados="filas afectadas= ";
+        contadorp+=db.delete("pregunta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
+        regAfectadosp+=contadorp;
+
+        String regAfectados="Encuestas eliminadas = ";
         long contador=0;
 
-        //String where="nombre_encuesta='"+spinnerElimEncuesta.getSelectedItem().toString()+"'";
-
-        //contador+=db.delete("encuesta", where, null);
+        contador+=db.delete("encuesta", "id_encuesta='"+encuesta.getIdEncuesta(), null);
         regAfectados+=contador;
-        return regAfectados;
+        return regAfectadosp + regAfectados;
+
     }
 
     public String llenarDatos(){
