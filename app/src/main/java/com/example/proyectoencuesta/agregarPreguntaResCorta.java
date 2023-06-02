@@ -16,20 +16,20 @@ public class agregarPreguntaResCorta  extends Activity {
     String nom;
     TextView nombre, numeroPreg;
     EditText pregunta;
-    Button next, volver;
+    Button next, guardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agregar_pregunta_res_corta);
         cn = new conexionDB(this);
-        volver = findViewById(R.id.btnsave);
+        guardar = findViewById(R.id.btnsave);
         next = findViewById(R.id.sigbtn);
-        volver.setVisibility(View.INVISIBLE);
+        guardar.setVisibility(View.INVISIBLE);
         nombre = findViewById(R.id.lblNombreEnc);
         pregunta = findViewById(R.id.txtPreguntaCort);
         numeroPreg = findViewById(R.id.lblNumeroPreg);
-        try{
+       /* try{
             Bundle extra = getIntent().getExtras();
             if(extra.getString("numP")!=null || extra.getString("nomEn")!=null){
                 numP = Integer.valueOf(extra.getString("numP"));
@@ -45,6 +45,32 @@ public class agregarPreguntaResCorta  extends Activity {
                 next.setVisibility(View.INVISIBLE);
             }
         }catch (Exception e){ e.printStackTrace(); }
+    }*/
+        try{
+            Bundle extra = getIntent().getExtras();
+            if(extra.getString("numP")!=null || extra.getString("nomEn")!=null)
+            {
+                numP = Integer.valueOf(extra.getString("numP"));
+                nom = extra.getString("nomEn");
+                nombre.setText(nom);
+                next = findViewById(R.id.sigbtn);
+            }
+            else if(extra.getString("cantP")!=null || extra.getString("nom")!=null){
+                numP = Integer.valueOf(extra.getString("cantP"));
+                nom = extra.getString("nom");
+                nombre.setText(nom);
+                next = findViewById(R.id.sigbtn);
+            }
+            if (numP == 1) {
+                guardar.setVisibility(View.VISIBLE);
+                next.setVisibility(View.INVISIBLE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        numeroPreg.setText("Pregunta numero " + numP + ":");
+        next.setOnClickListener(onclic);
+        guardar.setOnClickListener(onclic);
     }
 
     View.OnClickListener onclic = new View.OnClickListener() {
@@ -54,7 +80,7 @@ public class agregarPreguntaResCorta  extends Activity {
                 String res;
                 pregunta p = new pregunta();
                 switch (view.getId()){
-                    case R.id.btnNext:
+                    case R.id.sigbtn:
                         cn.abrir();
                         p.setIdPregunta(cn.codigoPreg());
                         p.setIdEncuesta(cn.codigoEn(nom));

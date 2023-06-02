@@ -205,7 +205,7 @@ public class conexionDB {
         //encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("nombre_encuesta", encuesta.getNombreEncuesta());
         encue.put("fecha_creacion", encuesta.getFechaCreacion());
-        //encue.put("id_estado_encuesta", encuesta.getEstadoEncuesta());
+        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("numero_preguntas", encuesta.getNumeroPreguntas());
         encue.put("limite_intentos", encuesta.getLimiteIntentos());
         encue.put("fecha_inicio", encuesta.getFechaInicio());

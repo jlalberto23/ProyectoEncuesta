@@ -93,7 +93,7 @@ public class eliminarEncuesta extends Activity {
     };
 
     public void limpiarTexto() {
-        spinnerElimEncuesta.setAdapter(null);
+        finish();
 
     }
 }
