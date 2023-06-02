@@ -26,15 +26,15 @@ public class encuestaLista extends Activity {
         setContentView(R.layout.encuesta_lista);
         helper = new conexionDB(this);
         spinnerEncuesta = findViewById(R.id.spinnerEncuestas);
-        //responder = findViewById(R.id.responderbtn);
-        //cancelar = findViewById(R.id.cancelarbtn);
+        responder = findViewById(R.id.responderbtn);
+        cancelar = findViewById(R.id.cancelarbtn);
         helper.abrir();
         List<encuesta> lista = llenarSp();
         ArrayAdapter<encuesta> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
         spinnerEncuesta.setAdapter(adapter);
         helper.cerrar();
-        //responder.setOnClickListener(onclic);
-        //cancelar.setOnClickListener(onclic);
+        responder.setOnClickListener(onclic);
+        cancelar.setOnClickListener(onclic);
     }
     private List<encuesta> llenarSp(){
         List<encuesta> lis = new ArrayList<>();
@@ -52,6 +52,39 @@ public class encuestaLista extends Activity {
         }
         return lis;
     }
+    /////
+    View.OnClickListener onclic = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try{
+                switch (view.getId()){
+                    case R.id.responderbtn:
+                        helper.abrir();
+                        //String regEliminadas;
+                        encuesta enc=new encuesta();
+
+                        String selectedItem = spinnerEncuesta.getSelectedItem().toString();
+
+                        enc.setNombreEncuesta(selectedItem);
+                        System.out.println(enc.getIdTipoEncuesta());
+
+
+                        break;
+                    case R.id.cancelarbtn:
+                        limpiarTexto();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
+
+    public void limpiarTexto() {
+        finish();
+
+    }
+
 
 }
 
