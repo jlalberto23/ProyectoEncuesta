@@ -80,7 +80,7 @@ public class agregarPreguntaResCorta  extends Activity {
                         p.setOrdenPregunta(numP);
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_LONG).show();
-                        Intent in = new Intent(view.getContext(),agregarPreguntaResCorta.class);
+                        Intent in = new Intent(view.getContext(),vistaDocente.class);
                         startActivity(in);
                         break;
                 }
