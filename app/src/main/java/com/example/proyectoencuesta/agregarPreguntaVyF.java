@@ -62,7 +62,7 @@ public class agregarPreguntaVyF extends Activity {
                 pregunta p = new pregunta();
                 switch (view.getId()){
                     case R.id.btnNext:
-                        /*cn.abrir();
+                        cn.abrir();
                         p.setIdPregunta(cn.codigoPreg());
                         p.setIdEncuesta(cn.codigoEn(nom));
                         p.setIdTpoPregunta(1);
@@ -70,7 +70,7 @@ public class agregarPreguntaVyF extends Activity {
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
                         res = cn.insertar(p);
-                        Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();*/
+                        Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
                         int c = numP-1;
                         Intent i = new Intent(view.getContext(),agregarPreguntaVyF.class);
                         i.putExtra("cantP", String.valueOf(c));
