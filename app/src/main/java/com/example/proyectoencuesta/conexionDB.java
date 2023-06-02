@@ -62,7 +62,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
-                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint );");
+                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
@@ -313,11 +313,7 @@ public class conexionDB {
 
         String regInsertados="Registro Insertado #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues respUsu = new ContentValues();
         respUsu.put("id_respuesta_usuarios", respuestaUsuario.getIdRespuestaUsuario());
         respUsu.put("id_opcion_respuesta", respuestaUsuario.getIdOpcionRespuesta());
@@ -326,28 +322,12 @@ public class conexionDB {
         respUsu.put("fecha_respondida", respuestaUsuario.getFechaRespondido());
         respUsu.put("dispositivo", respuestaUsuario.getDispositivo());
         respUsu.put("es_usuario_anonimo", respuestaUsuario.isEsAnonima());
+        respUsu.put("texto_respuesta", respuestaUsuario.getTextoRespuesta());
 
         contador=db.insert("respuesta_usuarios", null, respUsu);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
-    }
-    public String eliminar(encuesta encuesta){
-        // Eliminacion en cascada, preguntas primero
-        String regAfectadosp="Preguntas eliminadas = ";
-        int contadorp=0;
-
-        contadorp+=db.delete("pregunta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
-        regAfectadosp+=contadorp;
-
-        String regAfectados="Encuestas eliminadas = ";
-        long contador=0;
-
-        contador+=db.delete("encuesta", "id_encuesta='"+encuesta.getIdEncuesta(), null);
-        regAfectados+=contador;
-        return regAfectadosp + regAfectados;
-
     }
 
     public String llenarDatos(){
@@ -415,6 +395,7 @@ public class conexionDB {
         final String[] VRespuestaUsu_fecha = {"2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10"};
         final String[] VRespuestaUsu_dispositivo = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
         final boolean[] VRespuestaUsu_isanonimo = {false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        final String[] VRespuestaUsu_texto = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
@@ -524,6 +505,7 @@ public class conexionDB {
             respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
             respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
             respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
+            respUsu.setTextoRespuesta(VRespuestaUsu_texto[i]);
             insertar(respUsu);
         }
 
@@ -790,6 +772,23 @@ public class conexionDB {
         contador+=db.delete("respuesta_usuarios", "id_repuesta_usuarios='"+respUsu.getIdRespuestaUsuario()+"'", null);
         regAfectados+=contador;
         return regAfectados;
+    }
+
+    public String eliminar(encuesta encuesta){
+        // Eliminacion en cascada, preguntas primero
+        String regAfectadosp="Preguntas eliminadas = ";
+        int contadorp=0;
+
+        contadorp+=db.delete("pregunta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
+        regAfectadosp+=contadorp;
+
+        String regAfectados="Encuestas eliminadas = ";
+        long contador=0;
+
+        contador+=db.delete("encuesta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
+        regAfectados+=contador;
+        return regAfectadosp + regAfectados;
+
     }
 
     public String insertarU(usuario usuario){
