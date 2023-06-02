@@ -291,11 +291,7 @@ public class conexionDB {
 
         String regInsertados="Registro Insertado #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues opcresp = new ContentValues();
         opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
         opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
@@ -304,7 +300,6 @@ public class conexionDB {
 
         contador=db.insert("opcion_respuesta", null, opcresp);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
     }
@@ -545,6 +540,29 @@ public class conexionDB {
         }else{
             return null;
         }
+    }
+
+    public encuesta consultarEncuesta(String nomEncuesta){
+
+        String[] id = {nomEncuesta};
+        Cursor cursor = db.query("encuesta", camposEncuesta, "nombreEncuesta = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            encuesta encu = new encuesta();
+            encu.setIdEncuesta(cursor.getInt(0));
+            encu.setNombreEncuesta(cursor.getString(3));
+            encu.setIdTipoEncuesta(cursor.getInt(2));
+            encu.setFechaCreacion(cursor.getString(4));
+            encu.setEstadoEncuesta(true);
+            encu.setNumeroPreguntas(cursor.getInt(6));
+            encu.setLimiteIntentos(cursor.getInt(7));
+            encu.setFechaInicio(cursor.getString(7));
+            encu.setFechaFin(cursor.getString(9));
+
+            return encu;
+        }else{
+            return null;
+        }
+
     }
 
     public String actualizar(usuario usuario){
@@ -851,5 +869,16 @@ public class conexionDB {
         }catch (Exception e){
             return null;
         }
+    }
+
+    public Cursor consultarPreguntas(int idEncuesta){
+
+        String[] id = {String.valueOf(idEncuesta)};
+        Cursor preguntas = db.rawQuery("select id_pregunta,id_encuesta, id_tipo_pregunta, texto_pregunta FROM pregunta WHERE id_encuesta = ?", id);
+        if (preguntas.moveToFirst())
+            return  preguntas;
+        else
+            return  null;
+
     }
 }
