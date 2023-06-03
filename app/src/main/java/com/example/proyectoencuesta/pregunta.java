@@ -16,6 +16,7 @@ public class pregunta {
     }
 
     public pregunta() {
+
     }
 
     public int getIdPregunta() {

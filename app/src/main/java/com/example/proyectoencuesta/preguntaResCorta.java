@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class preguntaResCorta extends Activity {
     String nombre;
@@ -32,6 +33,8 @@ public class preguntaResCorta extends Activity {
         pregunta = findViewById(R.id.preguntaCorta);
         nomEncue = findViewById(R.id.nomCuestilbl);
         respuesta = findViewById(R.id.resCortatxt);
+        siguiente.setOnClickListener(onclick);
+        guardar.setOnClickListener(onclick);
 
        // numeroPreg = findViewById(R.id.lblNumeroPreg);
         try{
@@ -56,12 +59,42 @@ public class preguntaResCorta extends Activity {
         }
 
         //**************************************************
-        Bundle extra = getIntent().getExtras();
-        if (extra != null) {
-            if (extra.containsKey("idEncuesta")) {
-                int idEncuesta = extra.getInt("idEncuesta");
-                // Utiliza el ID de la encuesta según tus necesidades
+        try{
+            Bundle extra = getIntent().getExtras();
+            if (extra != null) {
+                if (extra.containsKey("nombreEncuesta")) {
+                    String nombreEncuesta = extra.getString("nombreEncuesta");
+                    nomEncue.setText(nombreEncuesta);
+                }
+                if (extra.containsKey("idEncuesta")) {
+                    int idEncuesta = extra.getInt("idEncuesta");
+
+                    helper.abrir();
+                    System.out.println(idEncuesta);
+                    pregunta preg = helper.consultarPreguntas(idEncuesta);
+                    preg.getIdEncuesta();
+                    System.out.println(preg.getIdEncuesta());
+                    pregunta.setText(preg.getTextoPregunta());
+                    System.out.println(preg.getIdEncuesta());
+                    System.out.println(preg.getTextoPregunta());
+                    helper.cerrar();
+
+                    /*if (preg != null) {
+                        pregunta.setText(preg.getTextoPregunta());
+                        System.out.println(preg.getIdEncuesta());
+                        System.out.println(preg.getTextoPregunta());
+                    }*/
+                }
             }
+
+
+            //else
+            /*if (numP == 1) {
+                guardar.setVisibility(View.VISIBLE);
+                next.setVisibility(View.INVISIBLE);
+            }*/
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         //*************************************************
@@ -69,13 +102,24 @@ public class preguntaResCorta extends Activity {
 
     }
 
-    View.OnClickListener onclic = new View.OnClickListener() {
+    View.OnClickListener onclick = new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.sigbtn:
-                    // Lógica para el botón "SIGUIENTE"
-                    break;
+        public void onClick(View v) {
+            try{
+                switch (v.getId()) {
+                    case R.id.sigbtn:
+
+                        String res;
+                        respuestaUsuario resp = new respuestaUsuario();
+                        resp.setTextoRespuesta(respuesta.getText().toString());
+                        resp.getIdRespuestaUsuario(+1);
+                        helper.abrir();
+                        res = helper.insertar(resp);
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     };

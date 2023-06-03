@@ -15,7 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class preguntasVyF extends Activity {
-    String nombre;
+
+    String nombre,vf;
     TextView nomEncue;
     TextView pregunta;
     RadioGroup radioGroup;
@@ -45,8 +46,8 @@ public class preguntasVyF extends Activity {
         siguiente = findViewById(R.id.cuestionarioSiguientebtn);
         guardar = findViewById(R.id.guardarPregunta);
         guardar.setVisibility(View.INVISIBLE);
-        //siguiente.setOnClickListener(onclick);
-        //guardar.setOnClickListener(onclick);
+        siguiente.setOnClickListener(onclick);
+        guardar.setOnClickListener(onclick);
         try{
             Bundle extra = getIntent().getExtras();
             if(extra.getString("nombreEncuesta")!=null)
@@ -73,11 +74,12 @@ public class preguntasVyF extends Activity {
                 }
                 if (extra.containsKey("idEncuesta")) {
                     int idEncuesta = extra.getInt("idEncuesta");
-                    //System.out.println(idEncuesta);
-                    helper.abrir();
-                    pregunta preg = helper.consultarPreguntas(idEncuesta);
 
-                    //System.out.println(idEncuesta);
+                    helper.abrir();
+                    System.out.println(idEncuesta);
+                    pregunta preg = helper.consultarPreguntas(idEncuesta);
+                    preg.getIdEncuesta();
+                    System.out.println(preg.getIdEncuesta());
                     pregunta.setText(preg.getTextoPregunta());
                     System.out.println(preg.getIdEncuesta());
                     System.out.println(preg.getTextoPregunta());
@@ -100,12 +102,31 @@ public class preguntasVyF extends Activity {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
     }
+
+    View.OnClickListener onclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try{
+                switch (v.getId()) {
+                    case R.id.cuestionarioSiguientebtn:
+                        if (verdadero.isChecked())
+                            vf = "Verdadero";
+                        else if (falso.isChecked())
+                            vf = "Falso";
+                        String res;
+                        respuestaUsuario resp = new respuestaUsuario();
+                        resp.setTextoRespuesta(vf);
+                        helper.abrir();
+                        res = helper.insertar(resp);
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
 
 
 }

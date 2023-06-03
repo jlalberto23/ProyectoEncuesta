@@ -60,7 +60,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp );");
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
-                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
+                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
@@ -294,7 +294,7 @@ public class conexionDB {
         long contador=0;
 
         ContentValues opcresp = new ContentValues();
-        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
+        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta(+1));
         opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
         opcresp.put("texto_respuesta", opcRespuesta.getTextoRespuesta());
         opcresp.put("es_la_correcta", opcRespuesta.isEsLaCorrecta());
@@ -875,7 +875,7 @@ public class conexionDB {
         }
     }
 
-    public pregunta consultarPreguntas(int idEncuesta){
+        public pregunta consultarPreguntas(int idEncuesta){
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] id = {String.valueOf(idEncuesta)};
