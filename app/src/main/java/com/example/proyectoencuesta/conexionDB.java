@@ -64,7 +64,8 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
-                db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
+                //db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
+                db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER , nombre_tipo_encuesta char(100) );");
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
                 db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_usuario  char(256) );");
@@ -294,7 +295,7 @@ public class conexionDB {
         long contador=0;
 
         ContentValues opcresp = new ContentValues();
-        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
+       // opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
         opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
         opcresp.put("texto_respuesta", opcRespuesta.getTextoRespuesta());
         opcresp.put("es_la_correcta", opcRespuesta.isEsLaCorrecta());
@@ -567,6 +568,22 @@ public class conexionDB {
             return null;
         }
     }
+    public int consultarNumeroPreguntas(String nomEncuesta) {
+        if (nomEncuesta != null) {
+            String[] id = {nomEncuesta};
+            Cursor cursor = db.query("encuesta", camposEncuesta, "nombre_encuesta = ?", id, null, null, null);
+            if (cursor.moveToFirst()) {
+                encuesta encu = new encuesta();
+                encu.setNumeroPreguntas(cursor.getInt(6));
+                return encu.getNumeroPreguntas();
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
 
 
     public String actualizar(usuario usuario){

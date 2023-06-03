@@ -49,6 +49,7 @@ public class preguntaResCorta extends Activity {
                 nombre = extra.getString("nombreEncuesta");
                 nomEncue.setText(nombre);
                 //next = findViewById(R.id.sigbtn);
+
             }
             /*if (numP == 1) {
                 guardar.setVisibility(View.VISIBLE);
@@ -112,7 +113,6 @@ public class preguntaResCorta extends Activity {
                         String res;
                         respuestaUsuario resp = new respuestaUsuario();
                         resp.setTextoRespuesta(respuesta.getText().toString());
-                        
                         helper.abrir();
                         res = helper.insertar(resp);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
