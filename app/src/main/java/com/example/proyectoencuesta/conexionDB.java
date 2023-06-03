@@ -15,6 +15,7 @@ public class conexionDB {
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
+    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_encuesta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
     //private int idTipoU;
     private int codigoTipoUsuario;
 
@@ -98,7 +99,7 @@ public class conexionDB {
         return resp;
     }
 
-    private SQLiteDatabase getReadableDatabase() {
+    public SQLiteDatabase getReadableDatabase() {
         return null;
     }
 
@@ -543,27 +544,30 @@ public class conexionDB {
     }
 
     public encuesta consultarEncuesta(String nomEncuesta){
+        if (nomEncuesta != null) {
+            String[] id = {nomEncuesta};
+            Cursor cursor = db.query("encuesta", camposEncuesta, "nombre_encuesta = ?", id, null, null, null);
+            if(cursor.moveToFirst()){
+                encuesta encu = new encuesta();
+                encu.setIdEncuesta(cursor.getInt(0));
+                encu.setIdTipoEncuesta(cursor.getInt(2));
+                encu.setNombreEncuesta(cursor.getString(3));
+                encu.setFechaCreacion(cursor.getString(4));
+                encu.setEstadoEncuesta(true);
+                encu.setNumeroPreguntas(cursor.getInt(6));
+                encu.setLimiteIntentos(cursor.getInt(7));
+                encu.setFechaInicio(cursor.getString(8));
+                encu.setFechaFin(cursor.getString(9));
 
-        String[] id = {nomEncuesta};
-        Cursor cursor = db.query("encuesta", camposEncuesta, "nombreEncuesta = ?", id, null, null, null);
-        if(cursor.moveToFirst()){
-            encuesta encu = new encuesta();
-            encu.setIdEncuesta(cursor.getInt(0));
-            encu.setNombreEncuesta(cursor.getString(3));
-            encu.setIdTipoEncuesta(cursor.getInt(2));
-            encu.setFechaCreacion(cursor.getString(4));
-            encu.setEstadoEncuesta(true);
-            encu.setNumeroPreguntas(cursor.getInt(6));
-            encu.setLimiteIntentos(cursor.getInt(7));
-            encu.setFechaInicio(cursor.getString(7));
-            encu.setFechaFin(cursor.getString(9));
-
-            return encu;
-        }else{
+                return encu;
+            } else {
+                return null;
+            }
+        } else {
             return null;
         }
-
     }
+
 
     public String actualizar(usuario usuario){
 
@@ -871,14 +875,24 @@ public class conexionDB {
         }
     }
 
-    public Cursor consultarPreguntas(int idEncuesta){
+    public pregunta consultarPreguntas(int idEncuesta){
 
+        SQLiteDatabase db = this.getReadableDatabase();
         String[] id = {String.valueOf(idEncuesta)};
-        Cursor preguntas = db.rawQuery("select id_pregunta,id_encuesta, id_tipo_pregunta, texto_pregunta FROM pregunta WHERE id_encuesta = ?", id);
-        if (preguntas.moveToFirst())
-            return  preguntas;
-        else
-            return  null;
+        Cursor cursor = db.query("pregunta", camposPregunta, "id_encuesta = ?",id,null, null, null);
+        if (cursor.moveToFirst()){
+            pregunta pre = new pregunta();
+            pre.setIdPregunta(cursor.getInt(0));
+            pre.setIdEncuesta(cursor.getInt(1));
+            pre.setIdTpoPregunta(cursor.getInt(2));
+            pre.setTextoPregunta(cursor.getString(3));
+            //pre.setEsObligatoria(preguntas.(4));
+            pre.setOrdenPregunta(cursor.getInt(5));
 
+            return pre;
+        } else {
+            return null;
+        }
     }
+
 }
