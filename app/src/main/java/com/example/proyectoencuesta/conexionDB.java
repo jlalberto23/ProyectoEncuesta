@@ -294,7 +294,7 @@ public class conexionDB {
         long contador=0;
 
         ContentValues opcresp = new ContentValues();
-        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta(+1));
+        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
         opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
         opcresp.put("texto_respuesta", opcRespuesta.getTextoRespuesta());
         opcresp.put("es_la_correcta", opcRespuesta.isEsLaCorrecta());

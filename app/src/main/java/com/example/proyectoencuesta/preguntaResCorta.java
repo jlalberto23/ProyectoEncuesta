@@ -112,7 +112,7 @@ public class preguntaResCorta extends Activity {
                         String res;
                         respuestaUsuario resp = new respuestaUsuario();
                         resp.setTextoRespuesta(respuesta.getText().toString());
-                        resp.getIdRespuestaUsuario(+1);
+                        
                         helper.abrir();
                         res = helper.insertar(resp);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
