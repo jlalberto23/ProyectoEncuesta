@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
 
         android:text="Proyecto encuesta: \nJose Luis Alberto - AA17025 \nHeinrich Sanchez - SA04005"
