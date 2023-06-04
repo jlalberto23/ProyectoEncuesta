@@ -15,6 +15,7 @@ public class conexionDB {
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
+    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_encuesta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
     //private int idTipoU;
     private int codigoTipoUsuario;
 
@@ -59,10 +60,11 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE encuesta (id_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_usuario  integer, id_tipo_encuesta     integer, nombre_encuesta      char(256), fecha_creacion       timestamp, id_estado_encuesta   integer, numero_preguntas     integer, limite_intentos      integer, fecha_inicio         timestamp, fecha_fin            timestamp );");
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
-                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
+                db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
-                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint );");
+                //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
+                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
@@ -98,7 +100,7 @@ public class conexionDB {
         return resp;
     }
 
-    private SQLiteDatabase getReadableDatabase() {
+    public SQLiteDatabase getReadableDatabase() {
         return null;
     }
 
@@ -205,7 +207,7 @@ public class conexionDB {
         //encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("nombre_encuesta", encuesta.getNombreEncuesta());
         encue.put("fecha_creacion", encuesta.getFechaCreacion());
-        //encue.put("id_estado_encuesta", encuesta.getEstadoEncuesta());
+        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("numero_preguntas", encuesta.getNumeroPreguntas());
         encue.put("limite_intentos", encuesta.getLimiteIntentos());
         encue.put("fecha_inicio", encuesta.getFechaInicio());
@@ -291,20 +293,15 @@ public class conexionDB {
 
         String regInsertados="Registro Insertado #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues opcresp = new ContentValues();
-        opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
+       // opcresp.put("id_opcion_respuesta", opcRespuesta.getIdOpcionRespuesta());
         opcresp.put("id_pregunta", opcRespuesta.getIdPregunta());
         opcresp.put("texto_respuesta", opcRespuesta.getTextoRespuesta());
         opcresp.put("es_la_correcta", opcRespuesta.isEsLaCorrecta());
 
         contador=db.insert("opcion_respuesta", null, opcresp);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
     }
@@ -313,11 +310,7 @@ public class conexionDB {
 
         String regInsertados="Registro Insertado #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues respUsu = new ContentValues();
         respUsu.put("id_respuesta_usuarios", respuestaUsuario.getIdRespuestaUsuario());
         respUsu.put("id_opcion_respuesta", respuestaUsuario.getIdOpcionRespuesta());
@@ -326,23 +319,12 @@ public class conexionDB {
         respUsu.put("fecha_respondida", respuestaUsuario.getFechaRespondido());
         respUsu.put("dispositivo", respuestaUsuario.getDispositivo());
         respUsu.put("es_usuario_anonimo", respuestaUsuario.isEsAnonima());
+        respUsu.put("texto_respuesta", respuestaUsuario.getTextoRespuesta());
 
         contador=db.insert("respuesta_usuarios", null, respUsu);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
-    }
-    public String eliminar(encuesta encuesta){
-
-        String regAfectados="filas afectadas= ";
-        long contador=0;
-
-        //String where="nombre_encuesta='"+spinnerElimEncuesta.getSelectedItem().toString()+"'";
-
-        //contador+=db.delete("encuesta", where, null);
-        regAfectados+=contador;
-        return regAfectados;
     }
 
     public String llenarDatos(){
@@ -410,6 +392,7 @@ public class conexionDB {
         final String[] VRespuestaUsu_fecha = {"2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10"};
         final String[] VRespuestaUsu_dispositivo = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
         final boolean[] VRespuestaUsu_isanonimo = {false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        final String[] VRespuestaUsu_texto = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
 
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
@@ -519,6 +502,7 @@ public class conexionDB {
             respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
             respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
             respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
+            respUsu.setTextoRespuesta(VRespuestaUsu_texto[i]);
             insertar(respUsu);
         }
 
@@ -559,6 +543,48 @@ public class conexionDB {
             return null;
         }
     }
+
+    public encuesta consultarEncuesta(String nomEncuesta){
+        if (nomEncuesta != null) {
+            String[] id = {nomEncuesta};
+            Cursor cursor = db.query("encuesta", camposEncuesta, "nombre_encuesta = ?", id, null, null, null);
+            if(cursor.moveToFirst()){
+                encuesta encu = new encuesta();
+                encu.setIdEncuesta(cursor.getInt(0));
+                encu.setIdTipoEncuesta(cursor.getInt(2));
+                encu.setNombreEncuesta(cursor.getString(3));
+                encu.setFechaCreacion(cursor.getString(4));
+                encu.setEstadoEncuesta(true);
+                encu.setNumeroPreguntas(cursor.getInt(6));
+                encu.setLimiteIntentos(cursor.getInt(7));
+                encu.setFechaInicio(cursor.getString(8));
+                encu.setFechaFin(cursor.getString(9));
+
+                return encu;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+    public int consultarNumeroPreguntas(String nomEncuesta) {
+        if (nomEncuesta != null) {
+            String[] id = {nomEncuesta};
+            Cursor cursor = db.query("encuesta", camposEncuesta, "nombre_encuesta = ?", id, null, null, null);
+            if (cursor.moveToFirst()) {
+                encuesta encu = new encuesta();
+                encu.setNumeroPreguntas(cursor.getInt(6));
+                return encu.getNumeroPreguntas();
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+
 
     public String actualizar(usuario usuario){
 
@@ -787,6 +813,23 @@ public class conexionDB {
         return regAfectados;
     }
 
+    public String eliminar(encuesta encuesta){
+        // Eliminacion en cascada, preguntas primero
+        String regAfectadosp="Preguntas eliminadas = ";
+        int contadorp=0;
+
+        contadorp+=db.delete("pregunta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
+        regAfectadosp+=contadorp;
+
+        String regAfectados="Encuestas eliminadas = ";
+        long contador=0;
+
+        contador+=db.delete("encuesta", "id_encuesta='"+encuesta.getIdEncuesta()+"'", null);
+        regAfectados+=contador;
+        return regAfectadosp + regAfectados;
+
+    }
+
     public String insertarU(usuario usuario){
 
         String regInsertados="Registro Insertado #= ";
@@ -848,4 +891,25 @@ public class conexionDB {
             return null;
         }
     }
+
+        public pregunta consultarPreguntas(int idEncuesta){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] id = {String.valueOf(idEncuesta)};
+        Cursor cursor = db.query("pregunta", camposPregunta, "id_encuesta = ?",id,null, null, null);
+        if (cursor.moveToFirst()){
+            pregunta pre = new pregunta();
+            pre.setIdPregunta(cursor.getInt(0));
+            pre.setIdEncuesta(cursor.getInt(1));
+            pre.setIdTpoPregunta(cursor.getInt(2));
+            pre.setTextoPregunta(cursor.getString(3));
+            //pre.setEsObligatoria(preguntas.(4));
+            pre.setOrdenPregunta(cursor.getInt(5));
+
+            return pre;
+        } else {
+            return null;
+        }
+    }
+
 }

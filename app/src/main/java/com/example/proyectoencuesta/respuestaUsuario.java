@@ -3,10 +3,18 @@ package com.example.proyectoencuesta;
 public class respuestaUsuario {
 
     private int idRespuestaUsuario, idOpcionRespuesta, idUsuario, numeroIntento;
-    private String fechaRespondido, dispositivo;
+    private String fechaRespondido, dispositivo, textoRespuesta;
     private boolean esAnonima;
 
-    public respuestaUsuario(int idRespuestaUsuario, int idOpcionRespuesta, int idUsuario, int numeroIntento, String fechaRespondido, String dispositivo, boolean esAnonima) {
+    public String getTextoRespuesta() {
+        return textoRespuesta;
+    }
+
+    public void setTextoRespuesta(String textoRespuesta) {
+        this.textoRespuesta = textoRespuesta;
+    }
+
+    public respuestaUsuario(int idRespuestaUsuario, int idOpcionRespuesta, int idUsuario, int numeroIntento, String fechaRespondido, String dispositivo, boolean esAnonima, String textoRespuesta) {
         this.idRespuestaUsuario = idRespuestaUsuario;
         this.idOpcionRespuesta = idOpcionRespuesta;
         this.idUsuario = idUsuario;
@@ -14,6 +22,7 @@ public class respuestaUsuario {
         this.fechaRespondido = fechaRespondido;
         this.dispositivo = dispositivo;
         this.esAnonima = esAnonima;
+        this.textoRespuesta = textoRespuesta;
     }
 
     public respuestaUsuario() {

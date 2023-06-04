@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/nomCuestilbl"
+        android:id="@+id/lblNombreEnc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="nombre del cuestionario"
@@ -18,17 +18,16 @@
         app:layout_constraintVertical_bias="0.04" />
 
     <EditText
-        android:id="@+id/resCortatxt"
+        android:id="@+id/txtPreguntaCort"
         android:layout_width="301dp"
         android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.304" />
 
     <TextView
         android:id="@+id/resCortalbl"
@@ -37,10 +36,10 @@
         android:text="Escribe una pregunta:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.224" />
 
     <Button
         android:id="@+id/sigbtn"
@@ -55,7 +54,7 @@
         app:layout_constraintVertical_bias="0.717" />
 
     <Button
-        android:id="@+id/guardarPreguntas"
+        android:id="@+id/btnsave"
         android:layout_width="111dp"
         android:layout_height="47dp"
         android:background="@color/naranja"
@@ -66,4 +65,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.828" />
+
+    <TextView
+        android:id="@+id/lblNumeroPreg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.153" />
 </androidx.constraintlayout.widget.ConstraintLayout>

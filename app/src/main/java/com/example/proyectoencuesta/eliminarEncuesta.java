@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,16 @@ public class eliminarEncuesta extends Activity {
         setContentView(R.layout.eliminar_encuesta);
         helper = new conexionDB(this);
         spinnerElimEncuesta = findViewById(R.id.spinnerElimEncuesta);
+        eliminar = findViewById(R.id.eliminarEncbtn);
+        limpiar = findViewById(R.id.limpiarbtn3);
         helper.abrir();
         List<encuesta> lista = llenarSp();
         ArrayAdapter<encuesta> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
         spinnerElimEncuesta.setAdapter(adapter);
         helper.cerrar();
+        eliminar.setOnClickListener(onclic);
+        limpiar.setOnClickListener(onclic);
+
     }
 
 
@@ -49,7 +55,7 @@ public class eliminarEncuesta extends Activity {
         }
         return lis;
     }
-    public void eliminarUsuario(View v){
+    /*public void eliminarUsuario(View v){
         String regEliminadas;
         encuesta enc=new encuesta();
         String selectedItem = spinnerElimEncuesta.getSelectedItem().toString();
@@ -59,10 +65,40 @@ public class eliminarEncuesta extends Activity {
         regEliminadas=helper.eliminar(enc);
         helper.cerrar();
         Toast.makeText(this, regEliminadas, Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
-    public void limpiarTexto(View v) {
-        //spinnerElimEncuesta.setAdapter("");
+    View.OnClickListener onclic = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try{
+                switch (view.getId()){
+                    case R.id.eliminarEncbtn:
+                        helper.abrir();
+                        String regEliminadas;
+                        encuesta enc=new encuesta();
+
+                        String selectedItem = spinnerElimEncuesta.getSelectedItem().toString();
+                        //Toast.makeText(view.getContext(), selectedItem, Toast.LENGTH_SHORT).show();
+                        int idEncuesta = helper.codigoEn(selectedItem);
+                        enc.setIdEncuesta(idEncuesta);
+                        enc.setNombreEncuesta(selectedItem);
+
+                        regEliminadas=helper.eliminar(enc);
+                        helper.cerrar();
+                        Toast.makeText(view.getContext(), regEliminadas, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.limpiarbtn3:
+                        limpiarTexto();
+                        break;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
+
+    public void limpiarTexto() {
+        finish();
 
     }
 }
