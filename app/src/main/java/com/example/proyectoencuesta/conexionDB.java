@@ -376,7 +376,7 @@ public class conexionDB {
         final String[] VEncuesta_nombre = {"Evaluacion PDM115", "Encuesta Estructura de Datos", "Encuesta Historia de El Salvador y CA"};
         final String[] VEncuesta_fecha =  {"2023-05-15 20:00:10", "2023-05-15 20:00:10", "2023-05-15 20:00:10"};
         final boolean[] VEncuesta_estado = {true, true, false};
-        final int[] VEncuesta_numpreg = {10, 5, 3};
+        final int[] VEncuesta_numpreg = {5, 5, 5};
         final int[] VEncuesta_limite =    {1, 1, 2};
         final String[] VEncuesta_fechaini = {"2023-05-15 20:00:10", "2023-05-15 20:00:10", "2023-05-15 20:00:10"};
         final String[] VEncuesta_fechafin = {"2023-06-30 20:00:10", "2023-05-31 20:00:10", "2023-06-08 20:00:10"};
