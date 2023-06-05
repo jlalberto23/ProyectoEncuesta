@@ -34,7 +34,7 @@
         android:id="@+id/preguntaCorta"
         android:layout_width="325dp"
         android:layout_height="152dp"
-        android:text="TextView"
+        android:text="texto de pregunta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.616"
@@ -56,8 +56,8 @@
 
     <Button
         android:id="@+id/sigbtn"
-        android:layout_width="203dp"
-        android:layout_height="50dp"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:background="@color/naranja"
         android:text="SIGUIENTE"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,8 +69,8 @@
 
     <Button
         android:id="@+id/resAudiobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="48dp"
         android:background="@color/naranja"
         android:text="RESPONDER CON AUDIO"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,8 +82,8 @@
 
     <Button
         android:id="@+id/resSpeechbtn"
-        android:layout_width="208dp"
-        android:layout_height="49dp"
+        android:layout_width="227dp"
+        android:layout_height="46dp"
         android:background="@color/naranja"
         android:text="DICTAR RESPUESTA"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,11 +94,11 @@
         app:layout_constraintVertical_bias="0.659" />
 
     <Button
-        android:id="@+id/resFotobtn"
+        android:id="@+id/resImagenbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/naranja"
-        android:text="RESPONDER CON FOTO"
+        android:text="RESPONDER CON IMAGEN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,8 +107,8 @@
 
     <Button
         android:id="@+id/guardarPreguntas"
-        android:layout_width="201dp"
-        android:layout_height="50dp"
+        android:layout_width="217dp"
+        android:layout_height="43dp"
         android:background="@color/naranja"
         android:text="@string/guardar"
         app:layout_constraintBottom_toBottomOf="parent"

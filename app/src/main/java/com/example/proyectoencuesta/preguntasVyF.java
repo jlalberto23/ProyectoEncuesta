@@ -1,10 +1,12 @@
 package com.example.proyectoencuesta;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class preguntasVyF extends Activity {
 
@@ -21,7 +24,8 @@ public class preguntasVyF extends Activity {
     TextView pregunta;
     RadioGroup radioGroup;
     RadioButton verdadero, falso;
-    Button siguiente, guardar;
+    Button siguiente, guardar, escuchar;
+    TextToSpeech tts;
     conexionDB helper;
     private int idEncuesta;
     private String textoPregunta;
@@ -38,6 +42,9 @@ public class preguntasVyF extends Activity {
 
         setContentView(R.layout.preguntas_vyf);
         helper.cerrar();
+        escuchar = findViewById(R.id.escucharbtn2);
+        escuchar.setOnClickListener(onClick);
+        tts = new TextToSpeech(this,OnInit);
 
         nomEncue = findViewById(R.id.nomCuestionario);
         pregunta = findViewById(R.id.preguntaVyF);
@@ -103,6 +110,31 @@ public class preguntasVyF extends Activity {
             e.printStackTrace();
         }
     }
+
+    TextToSpeech.OnInitListener OnInit = new TextToSpeech.OnInitListener() {
+
+        @Override
+        public void onInit(int status) {
+            // TODO Auto-generated method stub
+            if (TextToSpeech.SUCCESS==status){
+                tts.setLanguage(new Locale("spa","ESP"));
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "TTS no disponible",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+    View.OnClickListener onClick=new View.OnClickListener() {
+        @SuppressLint("SdCardPath")
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            if (v.getId()==R.id.escucharbtn2){
+                tts.speak(pregunta.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+            }
+        }
+    };
 
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override

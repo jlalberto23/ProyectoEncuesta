@@ -1,23 +1,31 @@
 package com.example.proyectoencuesta;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 public class preguntaResCorta extends Activity {
     String nombre;
-    Button siguiente, guardar;
+    Button siguiente, guardar, escucharbtn, resAudiobtn, resSpeechbtn, resImagenbtn;
+    TextToSpeech tts;
     TextView pregunta, nomEncue;
     EditText respuesta;
     conexionDB helper;
     int numP;
     String nom,preg;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,17 @@ public class preguntaResCorta extends Activity {
         helper.llenarDatos();
         setContentView(R.layout.preguntas_res_corta);
         helper.cerrar();
+
+        escucharbtn = findViewById(R.id.escucharbtn);
+        resAudiobtn = findViewById(R.id.resAudiobtn);
+        resSpeechbtn = findViewById(R.id.resSpeechbtn);
+        resImagenbtn = findViewById(R.id.resImagenbtn);
+        escucharbtn.setOnClickListener(onClick);
+        resAudiobtn.setOnClickListener(onclick);
+        resSpeechbtn.setOnClickListener(onclick);
+        resImagenbtn.setOnClickListener(onclick);
+
+        tts = new TextToSpeech(this,OnInit);
 
         guardar = findViewById(R.id.guardarPreguntas);
         siguiente = findViewById(R.id.sigbtn);
@@ -36,7 +55,6 @@ public class preguntaResCorta extends Activity {
         siguiente.setOnClickListener(onclick);
         guardar.setOnClickListener(onclick);
 
-       // numeroPreg = findViewById(R.id.lblNumeroPreg);
         try{
             Bundle extra = getIntent().getExtras();
             if(extra.getString("nombreEncuesta")!=null)
@@ -102,6 +120,30 @@ public class preguntaResCorta extends Activity {
 
 
     }
+    TextToSpeech.OnInitListener OnInit = new TextToSpeech.OnInitListener() {
+
+        @Override
+        public void onInit(int status) {
+            // TODO Auto-generated method stub
+            if (TextToSpeech.SUCCESS==status){
+                tts.setLanguage(new Locale("spa","ESP"));
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "TTS no disponible",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+    View.OnClickListener onClick=new View.OnClickListener() {
+        @SuppressLint("SdCardPath")
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            if (v.getId()==R.id.escucharbtn){
+                tts.speak(pregunta.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+            }
+        }
+    };
 
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
