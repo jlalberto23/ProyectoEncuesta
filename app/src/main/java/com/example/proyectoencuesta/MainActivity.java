@@ -43,18 +43,16 @@ public class MainActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            System.out.println(u.getCodigUsuario());
+
             try {
                 switch (v.getId()) {
                     case R.id.btnIngresar:
                         cn.abrir();
-                        System.out.println(u.getCodigUsuario());
                         if (cn.login(usuario.getText().toString(), contra.getText().toString())) {
 
-                            int codigoTipoUsuario = u.getCodigoTipoUsuario();
-                            System.out.println(u.getCodigUsuario());
+                            int codigoTipoUsuario = cn.getCodigoTipoUsuario();
 
-                            if (codigoTipoUsuario == 0) {
+                            if (codigoTipoUsuario == 1) {
                                 Intent intent = new Intent(MainActivity.this, vistaDocente.class);
                                 startActivity(intent);
                             } else if (codigoTipoUsuario == 2) {

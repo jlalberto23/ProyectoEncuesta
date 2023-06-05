@@ -92,9 +92,10 @@ public class conexionDB {
         String[] id = {u, c};
         Cursor cursor = db.query("usuario", camposUsuario, "usuario = ? AND contrasenia = ?", id, null, null, null);
         if(cursor.moveToFirst()) {
+            setCodigoTipoUsuario(cursor.getInt(1));
             resp = true;
             //setIdTipoU(cursor.getInt(1));
-            setCodigoTipoUsuario(cursor.getInt(1));
+
             //System.out.println(codigoTipoUsuario);
         }
         return resp;
