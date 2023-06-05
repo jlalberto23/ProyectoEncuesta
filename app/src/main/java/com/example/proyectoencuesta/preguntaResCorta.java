@@ -2,6 +2,7 @@ package com.example.proyectoencuesta;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class preguntaResCorta extends Activity {
+    protected static final  int RESULT_SPEECH = 1;
     static final int check=1111;
     String nombre;
     Button siguiente, guardar, escucharbtn, resAudiobtn, resSpeechbtn, resImagenbtn;
@@ -47,9 +49,24 @@ public class preguntaResCorta extends Activity {
         resImagenbtn = findViewById(R.id.resImagenbtn);
         escucharbtn.setOnClickListener(onClick);
         resAudiobtn.setOnClickListener(onclick);
-        resSpeechbtn.setOnClickListener(onClick);
+        //resSpeechbtn.setOnClickListener(onClick);
         resImagenbtn.setOnClickListener(onclick);
-        //resSpeechbtn.setOnClickListener((View.OnClickListener) this);
+        resSpeechbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"es-ESP");
+                try{
+                    startActivityForResult(intent, RESULT_SPEECH);
+                    respuesta.setText("");
+                } catch (ActivityNotFoundException e){
+                    Toast.makeText(getApplicationContext(),"Tu dispositivo no soporta speech to text",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
         tts = new TextToSpeech(this,OnInit);
 
@@ -128,33 +145,18 @@ public class preguntaResCorta extends Activity {
 
     }
     //Implementacion de voz a texto
-    public void onClick(View v) {
-        // TODO Auto-generated method stub
-        if (v.getId() == R.id.resSpeechbtn) {
-            System.out.println("si entro al bucle");
-            // Si entramos a dar clic en el boton
-            Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hable ahora ");
-            startActivityForResult(i, check);
-        }
-    }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        if (requestCode==check && resultCode==RESULT_OK){
-            ArrayList<String> results =
-                    data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            //respuesta.setText(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,results));
-            if (!results.isEmpty()) {
-                respuesta.setText(results.get(0));
-            }
 
-        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-    }
-    public void onDestroy(){
-        super.onDestroy();
+        switch (requestCode){
+            case RESULT_SPEECH:
+                if(resultCode==RESULT_OK && data != null){
+                    ArrayList<String> text=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    respuesta.setText(text.get(0));
+                }
+                break;
+        }
     }
 
     //Implementacion de librerias de texto a voz
