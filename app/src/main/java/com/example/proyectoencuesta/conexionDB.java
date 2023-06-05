@@ -109,7 +109,7 @@ public class conexionDB {
 
     public String insertar(tipoEncuesta tipoEncuesta){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Encuesta registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -129,7 +129,7 @@ public class conexionDB {
 
     public String insertar(tipoPregunta tipoPregunta){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Pregunta registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -149,7 +149,7 @@ public class conexionDB {
 
     public String insertar(tipoUsuario tipoUsuario){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Tipo registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -169,7 +169,7 @@ public class conexionDB {
 
     public String insertar(usuario usuario){
 
-            String regInsertados="Registro Insertado #= ";
+            String regInsertados="Usuario registrado exitosamente #= ";
             long contador=0;
             /*if (verificarIntegridad(alumno,5)) {
                 regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -194,7 +194,7 @@ public class conexionDB {
 
     public String insertar(encuesta encuesta){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Encuesta registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -220,9 +220,32 @@ public class conexionDB {
         return regInsertados;
     }
 
-    public String insertar(pregunta pregunta){
+    public String insertarEncuestaInicial(encuesta encuesta){
 
         String regInsertados="Registro Insertado #= ";
+        long contador=0;
+
+        ContentValues encue = new ContentValues();
+        encue.put("id_encuesta", encuesta.getIdEncuesta());
+        encue.put("id_usuario", encuesta.getIdUsuario());
+        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
+        encue.put("nombre_encuesta", encuesta.getNombreEncuesta());
+        encue.put("fecha_creacion", encuesta.getFechaCreacion());
+        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
+        encue.put("numero_preguntas", encuesta.getNumeroPreguntas());
+        encue.put("limite_intentos", encuesta.getLimiteIntentos());
+        encue.put("fecha_inicio", encuesta.getFechaInicio());
+        encue.put("fecha_fin", encuesta.getFechaFin());
+
+        contador=db.insert("encuesta", null, encue);
+        regInsertados=regInsertados+contador;
+
+        return regInsertados;
+    }
+
+    public String insertar(pregunta pregunta){
+
+        String regInsertados="Pregunta registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -247,7 +270,7 @@ public class conexionDB {
 
     public String insertar(materiaUsuario materiaUsuario){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Materia registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -268,7 +291,7 @@ public class conexionDB {
 
     public String insertar(materia materia){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Materia registrada exitosamente #= ";
         long contador=0;
         /*if (verificarIntegridad(alumno,5)) {
             regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
@@ -291,7 +314,7 @@ public class conexionDB {
 
     public String insertar(opcionRespuesta opcRespuesta){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Opcion ingresada exitosamente #= ";
         long contador=0;
 
         ContentValues opcresp = new ContentValues();
@@ -308,7 +331,7 @@ public class conexionDB {
 
     public String insertar(respuestaUsuario respuestaUsuario){
 
-        String regInsertados="Registro Insertado #= ";
+        String regInsertados="Respuesta ingresada con exito #= ";
         long contador=0;
 
         ContentValues respUsu = new ContentValues();
@@ -339,12 +362,12 @@ public class conexionDB {
         final String[] VTipoUsuario_nombre = {"Docente","Estudiante","Anonimo"};
 
         final int[] VUsuario_id =      {1, 2, 3, 4};
-        final int[] VUsuario_tipo =      {1, 1, 2, 2};
+        final int[] VUsuario_tipo =      {1, 2, 3, 4};
         final String[] VUsuario_nombre = {"Jose Alberto","Carlos Orellana","Heinrich Sanchez","Mario Rodriguez"};
-        final String[] VUsuario_usuario = {"jalberto","corellana","hsanchez","mrodriguez"};
-        final String[] VUsuario_contra = {"12345","12345","12345","12345"};
-        final String[] VUsuario_carnet = {"AA17025","OM17034","SA04005","RR10056",""};
-        final String[] VUsuario_fecha = {"2023-05-28 10:30:00","2023-05-29 12:30:05","2023-05-30 13:30:50","2023-05-31 15:30:24",""};
+        final String[] VUsuario_usuario = {"jalberto","hsanchez","mrodriguez"};
+        final String[] VUsuario_contra = {"12345","12345","12345"};
+        final String[] VUsuario_carnet = {"AA17025","SA04005","RR10056",""};
+        final String[] VUsuario_fecha = {"2023-05-28 10:30:00","2023-05-30 13:30:50","2023-05-31 15:30:24",""};
 
         final int[] VEncuesta_id =      {1, 2, 3};
         final int[] VEncuesta_usuario = {1, 2, 1};
@@ -357,18 +380,31 @@ public class conexionDB {
         final String[] VEncuesta_fechaini = {"2023-05-15 20:00:10", "2023-05-15 20:00:10", "2023-05-15 20:00:10"};
         final String[] VEncuesta_fechafin = {"2023-06-30 20:00:10", "2023-05-31 20:00:10", "2023-06-08 20:00:10"};
 
-        final int[] VPregunta_id =      {1, 2, 3, 4, 5};
-        final int[] VPregunta_encu =    {2,1,3,2,1};
-        final int[] VPregunta_tipo =    {1,1,2,3,5};
-        final String[] VPregunta_texto = {"El ciclo de vida de una aplicacion para dispositivos moviles incluye etapas como la creacion, el inicio, la pausa y la destruccion.",
-                                      "Las bases de datos no relacionales son ampliamente utilizadas en el desarrollo de aplicaciones para dispositivos moviles debido a su flexibilidad y escalabilidad.",
-                                      "¿Cual es el objetivo principal de una base de datos no relacional?",
-                                      "Menciona dos componentes comunes en el desarrollo de apps moviles.",
-                                      "Ordena los siguientes componentes de una aplicacion movil segun su jerarquia visual, de arriba hacia abajo:"
+        final int[] VPregunta_id =      {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        final int[] VPregunta_encu =    {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3};
+        final int[] VPregunta_tipo =    {2,2,2,2,2,1,1,1,1,1,2,2,2,2,2};
+        final String[] VPregunta_texto = {
+            "El ciclo de vida de una aplicacion para dispositivos moviles incluye etapas como la creacion, el inicio, la pausa y la destruccion. \n F o V?",
+            "Las bases de datos no relacionales son ampliamente utilizadas en el desarrollo de aplicaciones para dispositivos moviles debido a su flexibilidad y escalabilidad. \n F o V?",
+            "¿Cual es el objetivo principal de una base de datos no relacional?",
+            "Menciona dos componentes comunes en el desarrollo de apps moviles: ",
+            "Cual es la ultima version de Android Desarrollada?",
 
-                                    };
-        final boolean[] VPregunta_es_obligatoria = {true,true,true,true,false};
-        final int[] VPregunta_orden_preg = {1,2,3,4,5};
+            "Las Pilas es un tipo abstracto de datos. \n F o V?",
+            "Las siglas FIFO, significa: First-Input, First-Output. \n F o V?",
+            "Las estructura de datos Cola se define como un Array de datos. \n F o V? ",
+            "Un arbol binario es una estructura de datos. \n F o V? ",
+            "Un arbol AVL es un arbol binario perfectamente equilibrado. \n F o V?",
+
+            "El pais mas pequeño de Centro America es?",
+            "Cuantos municipios tiene El Salvador?",
+            "La cabecera departamental de San Salvador es? ",
+            "En que año empezo a gobernar Maximiliano Hernandez Martinez? ",
+            "La guerra de la Cien Horas se peleo con?"
+
+        };
+        final boolean[] VPregunta_es_obligatoria = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+        final int[] VPregunta_orden_preg = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5};
 
         final int[] VMateria_id =    {1, 2, 3};
         final String[] VMateria_nom = {"Programacion para Dispositios Moviles", "Sistemas Operativos", "Microprogramacion"};
@@ -400,8 +436,8 @@ public class conexionDB {
         db.execSQL("DELETE FROM tipo_respuesta");
         db.execSQL("DELETE FROM tipo_usuario");
         db.execSQL("DELETE FROM usuario");
-        db.execSQL("DELETE FROM encuesta");
         db.execSQL("DELETE FROM pregunta");
+        db.execSQL("DELETE FROM encuesta");
         db.execSQL("DELETE FROM materia");
         db.execSQL("DELETE FROM materia_usuario");
         db.execSQL("DELETE FROM opcion_respuesta");
@@ -429,7 +465,7 @@ public class conexionDB {
         }
 
         usuario usuario = new usuario();
-        for(int i=0;i<4;i++){
+        for(int i=0;i<3;i++){
             usuario.setCodigUsuario(VUsuario_id[i]);
             usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
             usuario.setNombreUsuario(VUsuario_nombre[i]);
@@ -452,11 +488,11 @@ public class conexionDB {
             encu.setLimiteIntentos(VEncuesta_limite[i]);
             encu.setFechaInicio(VEncuesta_fechaini[i]);
             encu.setFechaFin(VEncuesta_fechafin[i]);
-            insertar(encu);
+            insertarEncuestaInicial(encu);
         }
 
         pregunta pregu = new pregunta();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<15;i++){
             pregu.setIdPregunta(VPregunta_id[i]);
             pregu.setIdEncuesta(VPregunta_encu[i]);
             pregu.setIdTpoPregunta(VPregunta_tipo[i]);
@@ -932,6 +968,19 @@ public class conexionDB {
 
             return pre;
         } else {
+            return null;
+        }
+    }
+
+    public Cursor obtenerPreguntas(int idEncuesta){
+        try{
+            String[] id = {String.valueOf(idEncuesta)};
+            Cursor filas = db.rawQuery("select * FROM pregunta where id_encuesta = ?",id);
+            if (filas.moveToFirst())
+                return  filas;
+            else
+                return  null;
+        }catch (Exception e){
             return null;
         }
     }

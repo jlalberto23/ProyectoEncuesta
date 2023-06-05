@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class preguntaResCorta extends Activity {
@@ -29,7 +30,9 @@ public class preguntaResCorta extends Activity {
     TextView pregunta, nomEncue;
     EditText respuesta;
     conexionDB helper;
-    int numP;
+    int numP, cantidadPreguntas;
+    boolean primerIteracion = true;
+    int idEncuesta;
     String nom,preg;
 
     @SuppressLint("MissingInflatedId")
@@ -38,10 +41,9 @@ public class preguntaResCorta extends Activity {
         super.onCreate(savedInstanceState);
 
         helper = new conexionDB(this);
-        helper.llenarDatos();
+        helper.abrir();
         setContentView(R.layout.preguntas_res_corta);
         helper.cerrar();
-
 
         escucharbtn = findViewById(R.id.escucharbtn);
         resAudiobtn = findViewById(R.id.resAudiobtn);
@@ -93,10 +95,6 @@ public class preguntaResCorta extends Activity {
                 //next = findViewById(R.id.sigbtn);
 
             }
-            /*if (numP == 1) {
-                guardar.setVisibility(View.VISIBLE);
-                next.setVisibility(View.INVISIBLE);
-            }*/
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -109,33 +107,52 @@ public class preguntaResCorta extends Activity {
                     String nombreEncuesta = extra.getString("nombreEncuesta");
                     nomEncue.setText(nombreEncuesta);
                 }
+
+                if(extra.containsKey("primerIteracion")){
+                    primerIteracion = extra.getBoolean("primerIteracion");
+                }
+
+                if(extra.containsKey("primerIteracion")){
+                    numP = extra.getInt("numP");
+                }
+
                 if (extra.containsKey("idEncuesta")) {
-                    int idEncuesta = extra.getInt("idEncuesta");
+                    idEncuesta = extra.getInt("idEncuesta");
 
                     helper.abrir();
-                    System.out.println(idEncuesta);
-                    pregunta preg = helper.consultarPreguntas(idEncuesta);
-                    preg.getIdEncuesta();
-                    System.out.println(preg.getIdEncuesta());
-                    pregunta.setText(preg.getTextoPregunta());
-                    System.out.println(preg.getIdEncuesta());
-                    System.out.println(preg.getTextoPregunta());
-                    helper.cerrar();
 
-                    /*if (preg != null) {
-                        pregunta.setText(preg.getTextoPregunta());
-                        System.out.println(preg.getIdEncuesta());
-                        System.out.println(preg.getTextoPregunta());
-                    }*/
+                    if (primerIteracion) {
+
+                        numP = 0;
+                        List<pregunta> lista = obtenerPreguntas(idEncuesta);
+                        pregunta preg = lista.get(0);
+                        preg.getIdEncuesta();
+                        cantidadPreguntas = lista.size();
+                        System.out.println("Cantidad de preguntas " + cantidadPreguntas);
+                        System.out.println("PRIMER ITERACION");
+                        System.out.println("Numero de Pregunta " + numP);
+
+                        pregunta.setText((numP+1) + " - " + preg.getTextoPregunta());
+
+                    } else{
+                        List<pregunta> lista = obtenerPreguntas(idEncuesta);
+                        pregunta preg = lista.get(numP);
+                        cantidadPreguntas = lista.size();
+                        System.out.println("Cantidad de preguntas " + cantidadPreguntas);
+                        System.out.println("Numero de Pregunta " + numP);
+
+                        pregunta.setText((numP+1) + " - " +  preg.getTextoPregunta());
+
+                    }
+
+                    if (numP == (cantidadPreguntas-1)) {
+                        guardar.setVisibility(View.VISIBLE);
+                        siguiente.setVisibility(View.INVISIBLE);
+                    }
+
                 }
             }
 
-
-            //else
-            /*if (numP == 1) {
-                guardar.setVisibility(View.VISIBLE);
-                next.setVisibility(View.INVISIBLE);
-            }*/
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -198,6 +215,30 @@ public class preguntaResCorta extends Activity {
                         helper.abrir();
                         res = helper.insertar(resp);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+
+                        numP++;
+
+
+                        Intent i = new Intent(v.getContext(),preguntaResCorta.class);
+                        i.putExtra("nombreEncuesta", nomEncue.getText().toString());
+                        i.putExtra("idEncuesta", idEncuesta);
+                        i.putExtra("primerIteracion", false);
+                        i.putExtra("numP", numP);
+                        //i.putExtra("nom", nombre.getText().toString());
+                        startActivityForResult(i,1234);
+                        break;
+
+                    case R.id.guardarPreguntas:
+
+                        String res2;
+                        respuestaUsuario resp2 = new respuestaUsuario();
+                        resp2.setTextoRespuesta(respuesta.getText().toString());
+                        helper.abrir();
+                        res = helper.insertar(resp2);
+                        Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
+
+                        Intent in = new Intent(v.getContext(),encuestaLista.class);
+                        startActivity(in);
                         break;
                 }
             }catch (Exception e){
@@ -205,4 +246,25 @@ public class preguntaResCorta extends Activity {
             }
         }
     };
+
+    private List<pregunta> obtenerPreguntas(int idEncuesta){
+        List<pregunta> lis = new ArrayList<>();
+
+        Cursor cursor = helper.obtenerPreguntas(idEncuesta);
+        if(cursor != null){
+            if(cursor.moveToFirst()){
+                do{
+                    pregunta pre = new pregunta();
+                    pre.setIdPregunta(cursor.getInt(0));
+                    pre.setIdEncuesta(cursor.getInt(1));
+                    pre.setIdTpoPregunta(cursor.getInt(2));
+                    pre.setTextoPregunta(cursor.getString(3));
+                    //pre.setEsObligatoria(preguntas.(4));
+                    pre.setOrdenPregunta(cursor.getInt(5));
+                    lis.add(pre);
+                }while (cursor.moveToNext());
+            }
+        }
+        return lis;
+    }
 }
