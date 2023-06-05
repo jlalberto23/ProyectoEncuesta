@@ -2,20 +2,25 @@ package com.example.proyectoencuesta;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
 public class preguntaResCorta extends Activity {
+    static final int check=1111;
     String nombre;
     Button siguiente, guardar, escucharbtn, resAudiobtn, resSpeechbtn, resImagenbtn;
     TextToSpeech tts;
@@ -35,14 +40,16 @@ public class preguntaResCorta extends Activity {
         setContentView(R.layout.preguntas_res_corta);
         helper.cerrar();
 
+
         escucharbtn = findViewById(R.id.escucharbtn);
         resAudiobtn = findViewById(R.id.resAudiobtn);
         resSpeechbtn = findViewById(R.id.resSpeechbtn);
         resImagenbtn = findViewById(R.id.resImagenbtn);
         escucharbtn.setOnClickListener(onClick);
         resAudiobtn.setOnClickListener(onclick);
-        resSpeechbtn.setOnClickListener(onclick);
+        resSpeechbtn.setOnClickListener(onClick);
         resImagenbtn.setOnClickListener(onclick);
+        //resSpeechbtn.setOnClickListener((View.OnClickListener) this);
 
         tts = new TextToSpeech(this,OnInit);
 
@@ -120,6 +127,37 @@ public class preguntaResCorta extends Activity {
 
 
     }
+    //Implementacion de voz a texto
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+        if (v.getId() == R.id.resSpeechbtn) {
+            System.out.println("si entro al bucle");
+            // Si entramos a dar clic en el boton
+            Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hable ahora ");
+            startActivityForResult(i, check);
+        }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        if (requestCode==check && resultCode==RESULT_OK){
+            ArrayList<String> results =
+                    data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            //respuesta.setText(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,results));
+            if (!results.isEmpty()) {
+                respuesta.setText(results.get(0));
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void onDestroy(){
+        super.onDestroy();
+    }
+
+    //Implementacion de librerias de texto a voz
     TextToSpeech.OnInitListener OnInit = new TextToSpeech.OnInitListener() {
 
         @Override

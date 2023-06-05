@@ -15,7 +15,7 @@ public class conexionDB {
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
-    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_encuesta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
+    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
     //private int idTipoU;
     private int codigoTipoUsuario;
 
@@ -61,7 +61,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
                 db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
-                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta     integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
+                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
@@ -358,7 +358,7 @@ public class conexionDB {
         final String[] VEncuesta_fechafin = {"2023-06-30 20:00:10", "2023-05-31 20:00:10", "2023-06-08 20:00:10"};
 
         final int[] VPregunta_id =      {1, 2, 3, 4, 5};
-        final int[] VPregunta_encu =    {1,1,1,1,1};
+        final int[] VPregunta_encu =    {2,1,3,2,1};
         final int[] VPregunta_tipo =    {1,1,2,3,5};
         final String[] VPregunta_texto = {"El ciclo de vida de una aplicacion para dispositivos moviles incluye etapas como la creacion, el inicio, la pausa y la destruccion.",
                                       "Las bases de datos no relacionales son ampliamente utilizadas en el desarrollo de aplicaciones para dispositivos moviles debido a su flexibilidad y escalabilidad.",
@@ -918,7 +918,7 @@ public class conexionDB {
 
     public pregunta consultarPreguntas(int idEncuesta){
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        //SQLiteDatabase db = this.getReadableDatabase();
         String[] id = {String.valueOf(idEncuesta)};
         Cursor cursor = db.query("pregunta", camposPregunta, "id_encuesta = ?",id,null, null, null);
         if (cursor.moveToFirst()){
