@@ -1,14 +1,20 @@
 package com.example.proyectoencuesta;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class usuarioConsultar extends Activity {
     conexionDB helper;
@@ -16,7 +22,9 @@ public class usuarioConsultar extends Activity {
     RadioButton docentebtn,estudiantebtn;
     EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt;
     Button consultar, cancelar;
+    AutoCompleteTextView listaUsuario;
 
+    @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultar_usuario);
@@ -33,20 +41,47 @@ public class usuarioConsultar extends Activity {
         consultar = findViewById(R.id.btnConsultar);
         consultar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
-        //estudiantebtn.checkedState = STATE_CHECKED;
+        listaUsuario = findViewById(R.id.usuarioAuto);
+
+        List<String> lista = listaUsuarios();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
+        listaUsuario.setAdapter(adapter);
     }
 
-    View.OnClickListener onclick = new View.OnClickListener() {
+    private List<String> listaUsuarios(){
+        List<String> lista = new ArrayList<>();
+        helper.abrir();
+        Cursor cursor = helper.mostrarUsuarios();
+        helper.cerrar();
+        if(cursor != null && cursor.moveToFirst()){
+            do{
+                String usuario = cursor.getString(cursor.getColumnIndexOrThrow("carnet"));
+                lista.add(usuario);
+            } while (cursor.moveToNext());
+        } else {
+            Log.d("usuarioConsultar", "El cursor está vacío");
+        }
+
+
+        if(cursor != null){
+            cursor.close();
+        }
+
+        return lista;
+
+    }
+
+    private View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             try{
                 switch (v.getId()){
                     case R.id.btnConsultar:
                         helper.abrir();
-                        usuario user = helper.consultarUsuario(carnettxt.getText().toString());
+                        usuario user = helper.consultarUsuario(listaUsuario.getText().toString());
                         helper.cerrar();
                         if(user == null)
-                            Toast.makeText(v.getContext(), "Usuario con carnet " + carnettxt.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(v.getContext(), "Usuario con carnet " + listaUsuario.getText().toString() + " no encontrado", Toast.LENGTH_LONG).show();
                         else{
                             grupo.clearCheck();
                             if(user.getCodigoTipoUsuario()==1)
@@ -57,13 +92,14 @@ public class usuarioConsultar extends Activity {
                             contrasena2.setText(user.getContrasenia());
                             userCreartxt.setText(user.getUsuario());
                             fechaReg.setText(user.getFecha_registro());
+                            carnettxt.setText(user.getCarnet());
                         }
                         break;
                     case R.id.btnCancelarC:
                         limpiarTexto();
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
@@ -75,7 +111,6 @@ public class usuarioConsultar extends Activity {
         userCreartxt.setText("");
         contrasena2.setText("");
         fechaReg.setText("");
-
+        listaUsuario.setText("");
     }
-
 }

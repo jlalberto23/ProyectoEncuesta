@@ -36,6 +36,9 @@ public class usuario {
         this.codigoTipoUsuario = codigoTipoUsuario;
 
     }
+    public String toString() {
+        return nombreUsuario;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;

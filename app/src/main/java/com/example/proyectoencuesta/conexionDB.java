@@ -515,7 +515,7 @@ public class conexionDB {
         Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             usuario user = new usuario();
-            //user.setCarnet(cursor.getString(0));
+            user.setCarnet(cursor.getString(5));
             user.setNombreUsuario(cursor.getString(2));
             user.setUsuario(cursor.getString(3));
             user.setContrasenia(cursor.getString(4));
@@ -533,7 +533,7 @@ public class conexionDB {
         Cursor cursor = db.query("materia", camposMateria, "codigo_materia = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             materia mate = new materia();
-            //mate.setCodigoMateria(cursor.getString(0));
+            mate.setCodigoMateria(cursor.getString(2));
             mate.setNombreMateria(cursor.getString(1));
             mate.setAnio(cursor.getString(4));
             mate.setCiclo(cursor.getString(3));
@@ -891,8 +891,32 @@ public class conexionDB {
             return null;
         }
     }
+    public Cursor mostrarUsuarios(){
+        try{
+            Cursor filas = db.rawQuery("select carnet FROM usuario",null);
+            if (filas.moveToFirst())
+                return  filas;
+            else
+                return  null;
+        }catch (Exception e){
+            return null;
+        }
+    }
 
-        public pregunta consultarPreguntas(int idEncuesta){
+    public Cursor mostrarMaterias(){
+        try{
+            Cursor filas = db.rawQuery("select codigo_materia FROM materia",null);
+            if (filas.moveToFirst())
+                return  filas;
+            else
+                return  null;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
+    public pregunta consultarPreguntas(int idEncuesta){
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] id = {String.valueOf(idEncuesta)};
