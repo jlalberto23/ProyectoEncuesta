@@ -5,7 +5,21 @@ import android.widget.Spinner;
 public class usuario {
 
     private int codigUsuario, codigoTipoUsuario;
-    private String nombreUsuario,contrasenia, usuario, fecha_registro, carnet;
+    private String nombreUsuario;
+    private String contrasenia;
+    private String usuario;
+    private String fecha_registro;
+    private String carnet;
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    private String correo;
 
     public usuario(int codigUsuario, int codigoTipoUsuario, String nombreUsuario, String contrasenia, String usuario, String fecha_registro, String carnet) {
         this.codigUsuario = codigUsuario;
@@ -15,6 +29,7 @@ public class usuario {
         this.usuario = usuario;
         this.fecha_registro = fecha_registro;
         this.carnet = carnet;
+        this.correo = correo;
     }
 
     public usuario() {

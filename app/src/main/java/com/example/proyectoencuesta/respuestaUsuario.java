@@ -2,7 +2,7 @@ package com.example.proyectoencuesta;
 
 public class respuestaUsuario {
 
-    private int idRespuestaUsuario, idOpcionRespuesta, idUsuario, numeroIntento;
+    private int idRespuestaUsuario, idEncuesta, idPregunta, idUsuario, numeroIntento;
     private String fechaRespondido, dispositivo, textoRespuesta;
     private boolean esAnonima;
 
@@ -14,9 +14,26 @@ public class respuestaUsuario {
         this.textoRespuesta = textoRespuesta;
     }
 
-    public respuestaUsuario(int idRespuestaUsuario, int idOpcionRespuesta, int idUsuario, int numeroIntento, String fechaRespondido, String dispositivo, boolean esAnonima, String textoRespuesta) {
+    public int getIdEncuesta() {
+        return idEncuesta;
+    }
+
+    public void setIdEncuesta(int idEncuesta) {
+        this.idEncuesta = idEncuesta;
+    }
+
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
+    }
+
+    public respuestaUsuario(int idRespuestaUsuario, int idEncuesta, int idPregunta, int idUsuario, int numeroIntento, String fechaRespondido, String dispositivo, boolean esAnonima, String textoRespuesta) {
         this.idRespuestaUsuario = idRespuestaUsuario;
-        this.idOpcionRespuesta = idOpcionRespuesta;
+        this.idEncuesta = idEncuesta;
+        this.idPregunta = idPregunta;
         this.idUsuario = idUsuario;
         this.numeroIntento = numeroIntento;
         this.fechaRespondido = fechaRespondido;
@@ -34,14 +51,6 @@ public class respuestaUsuario {
 
     public void setIdRespuestaUsuario(int idRespuestaUsuario) {
         this.idRespuestaUsuario = idRespuestaUsuario;
-    }
-
-    public int getIdOpcionRespuesta() {
-        return idOpcionRespuesta;
-    }
-
-    public void setIdOpcionRespuesta(int idOpcionRespuesta) {
-        this.idOpcionRespuesta = idOpcionRespuesta;
     }
 
     public int getIdUsuario() {

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.content.SharedPreferences;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class conexionDB {
     private static final String[] camposTipoUsuario = new String[]{"id_tipo_usuario","nombre_tipo_usuario"};
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
-    private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro"};
+    private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro", "correo"};
     public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
     //private int idTipoU;
     private int codigoTipoUsuario;
@@ -23,13 +24,8 @@ public class conexionDB {
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    /*public int getIdTipoU() {
-        return idTipoU;
-    }
+    public static SharedPreferences prefs;
 
-    public void setIdTipoU(int idTipoU) {
-        this.idTipoU = idTipoU;
-    }*/
     public int getCodigoTipoUsuario() {
         return codigoTipoUsuario;
     }
@@ -64,12 +60,12 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
-                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
+                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER, id_encuesta integer, id_pregunta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
                 db.execSQL("CREATE TABLE tipo_usuario (id_tipo_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_usuario  char(256) );");
-                db.execSQL("CREATE TABLE usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
+                db.execSQL("CREATE TABLE usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_tipo_usuario integer, nombre_usuario char(100), usuario char(100), contrasenia char(100), carnet char(100), fecha_registro TIMESTAMP, correo char(100), foreign key (id_tipo_usuario) references tipo_usuario (id_tipo_usuario) );");
             }catch(SQLException e){ e.printStackTrace(); }
         }
         @Override
@@ -94,9 +90,18 @@ public class conexionDB {
         if(cursor.moveToFirst()) {
             setCodigoTipoUsuario(cursor.getInt(1));
             resp = true;
-            //setIdTipoU(cursor.getInt(1));
 
-            //System.out.println(codigoTipoUsuario);
+            // Guardamos los datos de usuario en session en "SharedPreferenceUsuario" in private mode
+            prefs = this.context.getSharedPreferences("SharedPreferenceUsuario", Context.MODE_PRIVATE);
+            SharedPreferences.Editor usuarioEdit = prefs.edit();
+
+            // write all the data entered by the user in SharedPreference and apply
+            usuarioEdit.putString("id_usuario", String.valueOf(cursor.getInt(0)) );
+            usuarioEdit.putInt("id_tipo_usuario", cursor.getInt(1) );
+            usuarioEdit.putInt("correo_usuario", cursor.getInt(1) );
+            usuarioEdit.apply();
+
+            System.out.println("ID_USUARIO DE SESSION " + prefs.getString("id_usuario", ""));
         }
         return resp;
     }
@@ -185,6 +190,7 @@ public class conexionDB {
             usuA.put("contrasenia", usuario.getContrasenia());
             usuA.put("carnet", usuario.getCarnet());
             usuA.put("fecha_registro", usuario.getFecha_registro());
+            usuA.put("correo", usuario.getCorreo());
 
             contador=db.insert("usuario", null, usuA);
             regInsertados=regInsertados+contador;
@@ -332,12 +338,13 @@ public class conexionDB {
 
     public String insertar(respuestaUsuario respuestaUsuario){
 
-        String regInsertados="Respuesta ingresada con exito #= ";
+        String regInsertados="Respuesta ingresada OK #= ";
         long contador=0;
 
         ContentValues respUsu = new ContentValues();
         respUsu.put("id_respuesta_usuarios", respuestaUsuario.getIdRespuestaUsuario());
-        respUsu.put("id_opcion_respuesta", respuestaUsuario.getIdOpcionRespuesta());
+        respUsu.put("id_encuesta", respuestaUsuario.getIdEncuesta());
+        respUsu.put("id_pregunta", respuestaUsuario.getIdPregunta());
         respUsu.put("id_usuario", respuestaUsuario.getIdUsuario());
         respUsu.put("numero_intento", respuestaUsuario.getNumeroIntento());
         respUsu.put("fecha_respondida", respuestaUsuario.getFechaRespondido());
@@ -364,15 +371,16 @@ public class conexionDB {
 
         final int[] VUsuario_id =      {1, 2, 3, 4};
         final int[] VUsuario_tipo =      {1, 2, 3, 4};
-        final String[] VUsuario_nombre = {"Jose Alberto","Carlos Orellana","Heinrich Sanchez","Mario Rodriguez"};
+        final String[] VUsuario_nombre = {"Jose Alberto","Heinrich Sanchez","Mario Rodriguez"};
         final String[] VUsuario_usuario = {"jalberto","hsanchez","mrodriguez"};
         final String[] VUsuario_contra = {"12345","12345","12345"};
         final String[] VUsuario_carnet = {"AA17025","SA04005","RR10056",""};
         final String[] VUsuario_fecha = {"2023-05-28 10:30:00","2023-05-30 13:30:50","2023-05-31 15:30:24",""};
+        final String[] VUsuario_correo = {"aa17025@ues.edu.sv","hsanchez.sv@gmail.com","sa04005@ues.edu.sv",""};
 
         final int[] VEncuesta_id =      {1, 2, 3};
         final int[] VEncuesta_usuario = {1, 2, 1};
-        final int[] VEncuesta_tipo =    {2, 2, 1};
+        final int[] VEncuesta_tipo =    {2, 1, 2};
         final String[] VEncuesta_nombre = {"Evaluacion PDM115", "Encuesta Estructura de Datos", "Encuesta Historia de El Salvador y CA"};
         final String[] VEncuesta_fecha =  {"2023-05-15 20:00:10", "2023-05-15 20:00:10", "2023-05-15 20:00:10"};
         final boolean[] VEncuesta_estado = {true, true, false};
@@ -422,14 +430,15 @@ public class conexionDB {
         final boolean[] VOpcionResp_escorrecta = {true, false, false, true, false, false, true, false, true, false, false, false};
         final String[] VOpcionResp_texto = {"Falso", "Verdadero", "Falso", "Verdadero", "Almacenar datos en tablas y relaciones.", "Proporcionar una estructura flexible para almacenar datos.", "Garantizar la integridad y consistencia de los datos.", "Permitir consultas complejas mediante el lenguaje SQL.", "Botones, campos de texto.", "Actividad principal", "Fragmento", "Vista"};
 
-        final int[] VRespuestaUsu_id = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
-        final int[] VRespuestaUsu_opcresp = {1, 2, 5, 9, 10, 11, 12, 2, 1, 6, 9, 12, 11, 10};
-        final int[] VRespuestaUsu_usuario = {2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3};
-        final int[] VRespuestaUsu_intento = {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2};
-        final String[] VRespuestaUsu_fecha = {"2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10"};
-        final String[] VRespuestaUsu_dispositivo = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
-        final boolean[] VRespuestaUsu_isanonimo = {false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-        final String[] VRespuestaUsu_texto = {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+        final int[] VRespuestaUsu_id = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        final int[] VRespuestaUsu_encuesta = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3};
+        final int[] VRespuestaUsu_pregunta = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        final int[] VRespuestaUsu_usuario = {2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1};
+        final int[] VRespuestaUsu_intento = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        final String[] VRespuestaUsu_fecha = {"2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10", "2023-06-30 20:00:10"};
+        final String[] VRespuestaUsu_dispositivo = {"", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
+        final boolean[] VRespuestaUsu_isanonimo = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        final String[] VRespuestaUsu_texto = {"F", "V", "Integridad Referencial", "Activity, Database", "14", "V", "V", "V", "V", "V", "El Salvador", "262", "San Salvador", "1931", "Honduras"};
 
         abrir();
         db.execSQL("DELETE FROM tipo_encuesta");
@@ -474,6 +483,7 @@ public class conexionDB {
             usuario.setContrasenia(VUsuario_contra[i]);
             usuario.setCarnet(VUsuario_carnet[i]);
             usuario.setFecha_registro(VUsuario_fecha[i]);
+            usuario.setCorreo(VUsuario_correo[i]);
             insertar(usuario);
         }
 
@@ -531,9 +541,10 @@ public class conexionDB {
         }
 
         respuestaUsuario respUsu = new respuestaUsuario();
-        for(int i=0;i<14;i++){
+        for(int i=0;i<15;i++){
             respUsu.setIdRespuestaUsuario(VRespuestaUsu_id[i]);
-            respUsu.setIdOpcionRespuesta(VRespuestaUsu_opcresp[i]);
+            respUsu.setIdEncuesta(VRespuestaUsu_encuesta[i]);
+            respUsu.setIdPregunta(VRespuestaUsu_pregunta[i]);
             respUsu.setIdUsuario(VRespuestaUsu_usuario[i]);
             respUsu.setNumeroIntento(VRespuestaUsu_intento[i]);
             respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
@@ -552,7 +563,8 @@ public class conexionDB {
         Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             usuario user = new usuario();
-            user.setCarnet(cursor.getString(5));
+            user.setCarnet(cursor.getString(7));
+            user.setCorreo(cursor.getString(5));
             user.setNombreUsuario(cursor.getString(2));
             user.setUsuario(cursor.getString(3));
             user.setContrasenia(cursor.getString(4));
@@ -760,7 +772,8 @@ public class conexionDB {
 
         String[] id = {String.valueOf(respUsu.getIdRespuestaUsuario())};
         ContentValues cv = new ContentValues();
-        cv.put("id_opcion_respuesta", respUsu.getIdOpcionRespuesta());
+        cv.put("id_encuesta", respUsu.getIdEncuesta());
+        cv.put("id_pregunta", respUsu.getIdPregunta());
         cv.put("id_usuario", respUsu.getIdUsuario());
         cv.put("numero_intento", respUsu.getNumeroIntento());
         cv.put("fecha_respondida", respUsu.getFechaRespondido());
@@ -880,10 +893,10 @@ public class conexionDB {
         usuA.put("contrasenia", usuario.getContrasenia());
         usuA.put("carnet", usuario.getCarnet());
         usuA.put("fecha_registro", usuario.getFecha_registro());
+        usuA.put("correo", usuario.getCorreo());
 
         contador=db.insert("usuario", null, usuA);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
     }

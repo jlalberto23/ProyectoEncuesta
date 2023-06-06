@@ -20,7 +20,7 @@ public class usuarioConsultar extends Activity {
     conexionDB helper;
     RadioGroup grupo;
     RadioButton docentebtn,estudiantebtn;
-    EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt;
+    EditText crearNomtxt,contrasena2,userCreartxt,fechaReg,carnettxt, correotxt;
     Button consultar, cancelar;
     AutoCompleteTextView listaUsuario;
 
@@ -37,6 +37,7 @@ public class usuarioConsultar extends Activity {
         userCreartxt = findViewById(R.id.userCreartxt);
         fechaReg = findViewById(R.id.fechaReg);
         carnettxt = findViewById(R.id.carnettxt);
+        correotxt = findViewById(R.id.correotxt2);
         cancelar = findViewById(R.id.btnCancelarC);
         consultar = findViewById(R.id.btnConsultar);
         consultar.setOnClickListener(onclick);
@@ -93,6 +94,7 @@ public class usuarioConsultar extends Activity {
                             userCreartxt.setText(user.getUsuario());
                             fechaReg.setText(user.getFecha_registro());
                             carnettxt.setText(user.getCarnet());
+                            correotxt.setText(user.getCorreo());
                         }
                         break;
                     case R.id.btnCancelarC:
@@ -107,6 +109,7 @@ public class usuarioConsultar extends Activity {
 
     public void limpiarTexto() {
         carnettxt.setText("");
+        correotxt.setText("");
         crearNomtxt.setText("");
         userCreartxt.setText("");
         contrasena2.setText("");

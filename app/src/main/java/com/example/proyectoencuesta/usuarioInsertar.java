@@ -11,7 +11,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class usuarioInsertar extends Activity{
     conexionDB helper;
@@ -19,7 +23,7 @@ public class usuarioInsertar extends Activity{
     int tp = 0;
     RadioGroup tipoUsuarioList;
     RadioButton docentebtn, estudiantebtn;
-    EditText crearNomtxt, contrasena2, userCreartxt, fechaReg, carnettxt;
+    EditText crearNomtxt, contrasena2, userCreartxt, fechaReg, carnettxt, correotxt;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -36,10 +40,13 @@ public class usuarioInsertar extends Activity{
         userCreartxt =  findViewById(R.id.userCreartxt);
         fechaReg = findViewById(R.id.fechaReg);
         carnettxt = findViewById(R.id.carnettxt);
+        correotxt = findViewById(R.id.correotxt);
         crear = findViewById(R.id.crearCuentabtn);
         limpiar = findViewById(R.id.limpiarbtn);
         crear.setOnClickListener(onclick);
         limpiar.setOnClickListener(onclick);
+
+        fechaReg.setText( getDatePhone());
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
@@ -59,6 +66,7 @@ public class usuarioInsertar extends Activity{
                         us.setNombreUsuario(crearNomtxt.getText().toString());
                         us.setContrasenia(contrasena2.getText().toString());
                         us.setCarnet(carnettxt.getText().toString());
+                        us.setCorreo(correotxt.getText().toString());
                         us.setFecha_registro(fechaReg.getText().toString());
                         helper.abrir();
                         res = helper.insertarU(us);
@@ -81,5 +89,22 @@ public class usuarioInsertar extends Activity{
         userCreartxt.setText("");
         fechaReg.setText("");
         carnettxt.setText("");
+        correotxt.setText("");
+    }
+
+    private String getDatePhone()
+
+    {
+
+        Calendar cal = new GregorianCalendar();
+
+        Date date = cal.getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+
+        String formatteDate = df.format(date);
+
+        return formatteDate;
+
     }
 }

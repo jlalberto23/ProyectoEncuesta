@@ -126,32 +126,10 @@ public class preguntasVyF extends Activity {
                         siguiente.setVisibility(View.INVISIBLE);
                     }
 
-                   /* helper.abrir();
-                    System.out.println(idEncuesta);
-                    pregunta preg = helper.consultarPreguntas(idEncuesta);
-                    preg.getIdEncuesta();
-                    System.out.println(preg.getIdEncuesta());
-                    pregunta.setText(preg.getTextoPregunta());
-                    System.out.println(preg.getIdEncuesta());
-                    System.out.println(preg.getTextoPregunta());
-                    helper.cerrar();
-
-                    /*if (preg != null) {
-                        pregunta.setText(preg.getTextoPregunta());
-                        System.out.println(preg.getIdEncuesta());
-                        System.out.println(preg.getTextoPregunta());
-                    }*/
-
-                    //************
                 }
             }
 
 
-            //else
-            /*if (numP == 1) {
-                guardar.setVisibility(View.VISIBLE);
-                next.setVisibility(View.INVISIBLE);
-            }*/
         }catch (Exception e){
             e.printStackTrace();
         }
