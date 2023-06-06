@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import android.content.SharedPreferences;
 
 public class preguntasVyF extends Activity {
 
@@ -28,7 +29,7 @@ public class preguntasVyF extends Activity {
     Button siguiente, guardar, escuchar;
     TextToSpeech tts;
     conexionDB helper;
-    int idEncuesta;
+    int idEncuesta, idPregunta;
     private String textoPregunta;
     int numP, cantidadPreguntas;
     boolean primerIteracion = true;
@@ -103,6 +104,7 @@ public class preguntasVyF extends Activity {
                         List<pregunta> lista = obtenerPreguntas(idEncuesta);
                         pregunta preg = lista.get(0);
                         preg.getIdEncuesta();
+                        idPregunta = preg.getIdPregunta();
                         cantidadPreguntas = lista.size();
                         System.out.println("Cantidad de preguntas " + cantidadPreguntas);
                         System.out.println("PRIMER ITERACION");
@@ -113,6 +115,7 @@ public class preguntasVyF extends Activity {
                     } else{
                         List<pregunta> lista = obtenerPreguntas(idEncuesta);
                         pregunta preg = lista.get(numP);
+                        idPregunta = preg.getIdPregunta();
                         cantidadPreguntas = lista.size();
                         System.out.println("Cantidad de preguntas " + cantidadPreguntas);
                         System.out.println("Numero de Pregunta " + numP);
@@ -163,6 +166,11 @@ public class preguntasVyF extends Activity {
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            // Fetching the stored data from the SharedPreference
+            SharedPreferences sh = getSharedPreferences("SharedPreferenceUsuario", MODE_PRIVATE);
+            String id_usuario = sh.getString("id_usuario", "");
+
             try{
                 switch (v.getId()) {
                     case R.id.cuestionarioSiguientebtn:
@@ -179,7 +187,13 @@ public class preguntasVyF extends Activity {
                             vf = "Verdadero";
                         else if (falso.isChecked())
                             vf = "Falso";
-                        resp.setTextoRespuesta(vf.getBytes().toString());
+                        resp.setTextoRespuesta(vf);
+                        resp.setIdEncuesta(idEncuesta);
+                        resp.setIdPregunta(idPregunta);
+                        resp.setIdUsuario(Integer.valueOf(id_usuario));
+                        resp.setNumeroIntento(1);
+                        resp.setFechaRespondido(helper.getDatePhone());
+
                         helper.abrir();
                         res = helper.insertar(resp);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
@@ -204,7 +218,13 @@ public class preguntasVyF extends Activity {
                             vf = "Verdadero";
                         else if (falso.isChecked())
                             vf = "Falso";
-                        resp2.setTextoRespuesta(vf.getBytes().toString());
+                        resp2.setTextoRespuesta(vf);
+                        resp2.setIdEncuesta(idEncuesta);
+                        resp2.setIdPregunta(idPregunta);
+                        resp2.setIdUsuario(Integer.valueOf(id_usuario));
+                        resp2.setNumeroIntento(1);
+                        resp2.setFechaRespondido(helper.getDatePhone());
+
                         helper.abrir();
                         res = helper.insertar(resp2);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();

@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.SharedPreferences;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class conexionDB {
 
@@ -60,7 +64,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
-                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER, id_encuesta integer, id_pregunta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
+                db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER PRIMARY KEY AUTOINCREMENT, id_encuesta integer, id_pregunta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE tipo_encuesta (id_tipo_encuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_encuesta char(100) );");
                 db.execSQL("CREATE TABLE tipo_pregunta (id_tipo_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_pregunta char(100) );");
                 db.execSQL("CREATE TABLE tipo_respuesta (id_tipo_respuesta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_tipo_respuesta char(256) );");
@@ -203,18 +207,13 @@ public class conexionDB {
 
         String regInsertados="Encuesta registrada exitosamente #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues encue = new ContentValues();
         //encue.put("id_encuesta", encuesta.getIdEncuesta());
-        //encue.put("id_usuario", encuesta.getIdUsuario());
-        //encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
+        encue.put("id_usuario", encuesta.getIdUsuario());
+        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("nombre_encuesta", encuesta.getNombreEncuesta());
         encue.put("fecha_creacion", encuesta.getFechaCreacion());
-        encue.put("id_tipo_encuesta", encuesta.getIdTipoEncuesta());
         encue.put("numero_preguntas", encuesta.getNumeroPreguntas());
         encue.put("limite_intentos", encuesta.getLimiteIntentos());
         encue.put("fecha_inicio", encuesta.getFechaInicio());
@@ -222,7 +221,6 @@ public class conexionDB {
 
         contador=db.insert("encuesta", null, encue);
         regInsertados=regInsertados+contador;
-        //}
 
         return regInsertados;
     }
@@ -337,6 +335,28 @@ public class conexionDB {
     }
 
     public String insertar(respuestaUsuario respuestaUsuario){
+
+        String regInsertados="Respuesta ingresada OK #= ";
+        long contador=0;
+
+        ContentValues respUsu = new ContentValues();
+        //respUsu.put("id_respuesta_usuarios", respuestaUsuario.getIdRespuestaUsuario());
+        respUsu.put("id_encuesta", respuestaUsuario.getIdEncuesta());
+        respUsu.put("id_pregunta", respuestaUsuario.getIdPregunta());
+        respUsu.put("id_usuario", respuestaUsuario.getIdUsuario());
+        respUsu.put("numero_intento", respuestaUsuario.getNumeroIntento());
+        respUsu.put("fecha_respondida", respuestaUsuario.getFechaRespondido());
+        respUsu.put("dispositivo", respuestaUsuario.getDispositivo());
+        respUsu.put("es_usuario_anonimo", respuestaUsuario.isEsAnonima());
+        respUsu.put("texto_respuesta", respuestaUsuario.getTextoRespuesta());
+
+        contador=db.insert("respuesta_usuarios", null, respUsu);
+        regInsertados=regInsertados+contador;
+
+        return regInsertados;
+    }
+
+    public String insertarInicial(respuestaUsuario respuestaUsuario){
 
         String regInsertados="Respuesta ingresada OK #= ";
         long contador=0;
@@ -551,7 +571,7 @@ public class conexionDB {
             respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
             respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
             respUsu.setTextoRespuesta(VRespuestaUsu_texto[i]);
-            insertar(respUsu);
+            insertarInicial(respUsu);
         }
 
         cerrar();
@@ -1000,4 +1020,14 @@ public class conexionDB {
         }
     }
 
+    public String getDatePhone()
+
+    {
+
+        Calendar cal = new GregorianCalendar();
+        Date date = cal.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+        String formatteDate = df.format(date);
+        return formatteDate;
+    }
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import android.content.SharedPreferences;
 
 public class preguntaResCorta extends Activity {
     protected static final  int RESULT_SPEECH = 1;
@@ -32,7 +33,7 @@ public class preguntaResCorta extends Activity {
     conexionDB helper;
     int numP, cantidadPreguntas;
     boolean primerIteracion = true;
-    int idEncuesta;
+    int idEncuesta, idPregunta;
     String nom,preg;
 
     @SuppressLint("MissingInflatedId")
@@ -127,6 +128,7 @@ public class preguntaResCorta extends Activity {
                         List<pregunta> lista = obtenerPreguntas(idEncuesta);
                         pregunta preg = lista.get(0);
                         preg.getIdEncuesta();
+                        idPregunta = preg.getIdPregunta();
                         cantidadPreguntas = lista.size();
                         System.out.println("Cantidad de preguntas " + cantidadPreguntas);
                         System.out.println("PRIMER ITERACION");
@@ -138,6 +140,7 @@ public class preguntaResCorta extends Activity {
                         List<pregunta> lista = obtenerPreguntas(idEncuesta);
                         pregunta preg = lista.get(numP);
                         cantidadPreguntas = lista.size();
+                        idPregunta = preg.getIdPregunta();
                         System.out.println("Cantidad de preguntas " + cantidadPreguntas);
                         System.out.println("Numero de Pregunta " + numP);
 
@@ -205,6 +208,11 @@ public class preguntaResCorta extends Activity {
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            // Fetching the stored data from the SharedPreference
+            SharedPreferences sh = getSharedPreferences("SharedPreferenceUsuario", MODE_PRIVATE);
+            String id_usuario = sh.getString("id_usuario", "");
+
             try{
                 switch (v.getId()) {
                     case R.id.sigbtn:
@@ -212,6 +220,12 @@ public class preguntaResCorta extends Activity {
                         String res;
                         respuestaUsuario resp = new respuestaUsuario();
                         resp.setTextoRespuesta(respuesta.getText().toString());
+                        resp.setIdEncuesta(idEncuesta);
+                        resp.setIdPregunta(idPregunta);
+                        resp.setIdUsuario(Integer.valueOf(id_usuario));
+                        resp.setNumeroIntento(1);
+                        resp.setFechaRespondido(helper.getDatePhone());
+
                         helper.abrir();
                         res = helper.insertar(resp);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();
@@ -233,6 +247,12 @@ public class preguntaResCorta extends Activity {
                         String res2;
                         respuestaUsuario resp2 = new respuestaUsuario();
                         resp2.setTextoRespuesta(respuesta.getText().toString());
+                        resp2.setIdEncuesta(idEncuesta);
+                        resp2.setIdPregunta(idPregunta);
+                        resp2.setIdUsuario(Integer.valueOf(id_usuario));
+                        resp2.setNumeroIntento(1);
+                        resp2.setFechaRespondido(helper.getDatePhone());
+
                         helper.abrir();
                         res = helper.insertar(resp2);
                         Toast.makeText(v.getContext(), res, Toast.LENGTH_SHORT).show();

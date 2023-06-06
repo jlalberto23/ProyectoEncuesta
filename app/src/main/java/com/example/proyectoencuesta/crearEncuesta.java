@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 public class crearEncuesta extends Activity {
     Button guardar, cancelar;
@@ -43,11 +44,17 @@ public class crearEncuesta extends Activity {
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            // Fetching the stored data from the SharedPreference
+            SharedPreferences sh = getSharedPreferences("SharedPreferenceUsuario", MODE_PRIVATE);
+            String id_usuario = sh.getString("id_usuario", "");
+
             try{
                 switch (v.getId()){
                     case R.id.btnGuardar:
                         String res;
                         encuesta enc = new encuesta();
+                        enc.setIdUsuario(Integer.valueOf(id_usuario));
                         enc.setNombreEncuesta(nombreE.getText().toString());
                         enc.setFechaCreacion(fechaC.getText().toString());
                         enc.setNumeroPreguntas(Integer.parseInt(numP.getText().toString()));
