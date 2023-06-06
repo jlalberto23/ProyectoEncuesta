@@ -563,12 +563,13 @@ public class conexionDB {
         Cursor cursor = db.query("usuario", camposUsuario, "carnet = ?", id, null, null, null);
         if(cursor.moveToFirst()){
             usuario user = new usuario();
-            user.setCarnet(cursor.getString(7));
-            user.setCorreo(cursor.getString(5));
+            user.setCarnet(cursor.getString(5));
+            user.setCorreo(cursor.getString(7));
             user.setNombreUsuario(cursor.getString(2));
             user.setUsuario(cursor.getString(3));
             user.setContrasenia(cursor.getString(4));
             user.setFecha_registro(cursor.getString(6));
+            user.setCodigoTipoUsuario(cursor.getInt(1));
 
             return user;
         }else{
