@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class vistaDocente extends ListActivity {
 
     String[] menu={"Crear usuario","Consultar Usuarios","Eliminar Usuario","Actualizar usuario","Crear Materias","Consultar Materias","Actualizar Materias","Eliminar Materias","Crear Encuestas", "Eliminar Encuestas","Responder Encuesta", "Grabar audio"};
-    String[] activities={"usuarioInsertar","usuarioConsultar", "usuarioEliminar","usuarioActualizar","materiaInsertar","materiaConsultar", "materiaActualizar","materiaEliminar","crearEncuesta","eliminarEncuesta","encuestaLista", "preguntaAudio" };
+    String[] activities={"usuarioInsertar","usuarioConsultar", "usuarioEliminar","usuarioActualizar","materiaInsertar","materiaConsultar", "materiaActualizar","materiaEliminar","crearEncuesta","eliminarEncuesta","encuestaLista", "AgregarAudioPregunta" };
     conexionDB BDhelper;
 
     @Override
@@ -30,7 +30,7 @@ public class vistaDocente extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
 
-        if(position!=11){
+        if(position!=12){
             String nombreValue=activities[position];
             try{
                 Class<?>
