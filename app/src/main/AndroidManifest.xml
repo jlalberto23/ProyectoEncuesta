@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -69,6 +70,10 @@
         <activity
             android:name=".agregarPreguntaMultimedia"
             android:exported="false" />
+        <activity
+            android:name=".preguntaAudio"
+            android:exported="false" />
+
         <activity
             android:name=".pantallaBienvenida"
             android:exported="false">
