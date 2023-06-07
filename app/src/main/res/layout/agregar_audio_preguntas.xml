@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/encnombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="AGREGAR AUDIO-PREGUNTAS"
@@ -22,7 +22,6 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:background="@drawable/rec_blanco"
-        android:onClick="Recorder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.204"
@@ -35,7 +34,6 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:background="@drawable/play_negro"
-        android:onClick="reproducir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.819"
@@ -70,27 +68,38 @@
         app:layout_constraintVertical_bias="0.77" />
 
     <EditText
-        android:id="@+id/cantidadPregtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/Pregtxt"
+        android:layout_width="316dp"
+        android:layout_height="48dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.641" />
+        app:layout_constraintVertical_bias="0.638" />
 
     <TextView
         android:id="@+id/cantidadPreguntas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cuantas preguntas deseas agregar?"
+        android:text="Escriba una pregunta:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintVertical_bias="0.544" />
+
+    <TextView
+        android:id="@+id/pregnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

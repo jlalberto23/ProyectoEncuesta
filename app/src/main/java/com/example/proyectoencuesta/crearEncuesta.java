@@ -16,7 +16,7 @@ public class crearEncuesta extends Activity {
     Spinner sp;
     EditText nombreE, fechaC, numP, limInt, fechaIn, fechaFin;
     Switch estado;
-    String[] tipos = {"Verdadero o Falso","Respuesta Corta", "Multimedia"};
+    String[] tipos = {"Verdadero o Falso","Respuesta Corta", "Multimedia", "Audio"};
     conexionDB helper;
     int ten;
 
@@ -68,6 +68,8 @@ public class crearEncuesta extends Activity {
                             ten = 2;
                         else if(sp.getSelectedItem()=="Multimedia")
                             ten = 3;
+                        else if(sp.getSelectedItem()=="Audio")
+                            ten = 4;
                         enc.setIdTipoEncuesta(ten);
                         helper.abrir();
                         res=helper.insertar(enc);
@@ -85,6 +87,12 @@ public class crearEncuesta extends Activity {
                             startActivityForResult(intent,1234);
                         } else if (ten==3) {
                             Intent intent = new Intent(v.getContext(), agregarPreguntaMultimedia.class);
+                            intent.putExtra("numP", numP.getText().toString());
+                            intent.putExtra("nomEn", nombreE.getText().toString());
+                            startActivityForResult(intent,1234);
+                        }
+                        else if (ten==4) {
+                            Intent intent = new Intent(v.getContext(), AgregarAudioPregunta.class);
                             intent.putExtra("numP", numP.getText().toString());
                             intent.putExtra("nomEn", nombreE.getText().toString());
                             startActivityForResult(intent,1234);
