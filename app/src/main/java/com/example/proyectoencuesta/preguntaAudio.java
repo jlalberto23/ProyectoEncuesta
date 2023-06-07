@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,6 +189,32 @@ public class preguntaAudio extends Activity {
 
                         Intent in = new Intent(v.getContext(),encuestaLista.class);
                         startActivity(in);
+                        break;
+                    case R.id.reprobtn:
+                        // Obtener la pregunta de la base de datos
+                        helper.abrir();
+                        pregunta pre = helper.consultarPreguntas(idPregunta);
+                        if (pre != null) {
+                            // Obtener el archivo de audio como un arreglo de bytes
+                            byte[] audioData = pre.getArchivoMultimedia();
+                            if (audioData != null) {
+                                try {
+                                    // Crear un archivo temporal para almacenar los datos del audio
+                                    File tempAudioFile = File.createTempFile("audio", ".mp3", getCacheDir());
+                                    FileOutputStream fos = new FileOutputStream(tempAudioFile);
+                                    fos.write(audioData);
+                                    fos.close();
+
+                                    // Crear un objeto MediaPlayer y configurarlo para reproducir el archivo de audio
+                                    MediaPlayer mediaPlayer = new MediaPlayer();
+                                    mediaPlayer.setDataSource(tempAudioFile.getAbsolutePath());
+                                    mediaPlayer.prepare();
+                                    mediaPlayer.start();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                         break;
                 }
             }catch (Exception e){
