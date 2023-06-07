@@ -74,7 +74,7 @@
             android:name=".agregarPreguntaMultimedia"
             android:exported="false" />
         <activity
-            android:name=".preguntaAudio"
+            android:name=".AgregarAudioPregunta"
             android:exported="false" />
 
         <activity
