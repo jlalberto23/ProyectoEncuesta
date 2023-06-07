@@ -106,6 +106,12 @@
                                 intent.putExtra("idEncuesta", encue.getIdEncuesta());
                                 startActivityForResult(intent, 1234);
                             }
+                            else if (encue.getIdTipoEncuesta() == 4) {
+                                Intent intent = new Intent(view.getContext(), preguntaAudio.class);
+                                intent.putExtra("nombreEncuesta", nombreEncuesta);
+                                intent.putExtra("idEncuesta", encue.getIdEncuesta());
+                                startActivityForResult(intent, 1234);
+                            }
                             break;
                         case R.id.cancelarbtn:
                             limpiarTexto();
