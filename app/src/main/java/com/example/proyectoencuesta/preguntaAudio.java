@@ -135,7 +135,7 @@ public class preguntaAudio extends Activity {
 
             try{
                 switch (v.getId()) {
-                    case R.id.cuestionarioSiguientebtn:
+                    case R.id.nextbtn:
 
                         /*String res;
                         respuestaUsuario resp = new respuestaUsuario();
@@ -159,7 +159,7 @@ public class preguntaAudio extends Activity {
                         numP++;
 
 
-                        Intent i = new Intent(v.getContext(),preguntasVyF.class);
+                        Intent i = new Intent(v.getContext(),preguntaAudio.class);
                         i.putExtra("nombreEncuesta", nomEncue.getText().toString());
                         i.putExtra("idEncuesta", idEncuesta);
                         i.putExtra("primerIteracion", false);
@@ -168,7 +168,7 @@ public class preguntaAudio extends Activity {
                         startActivityForResult(i,1234);
                         break;
 
-                    case R.id.guardarPregunta:
+                    case R.id.guardbtn:
 
                         String res2;
                         respuestaUsuario resp2 = new respuestaUsuario();
