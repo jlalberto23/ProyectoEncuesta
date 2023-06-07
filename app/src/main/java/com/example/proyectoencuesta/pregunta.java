@@ -5,19 +5,19 @@ public class pregunta {
     private int idPregunta, idEncuesta, idTpoPregunta, ordenPregunta;
     private String textoPregunta;
 
-    public String getArchivoMultimedia() {
+    public byte[] getArchivoMultimedia() {
         return archivoMultimedia;
     }
 
-    public void setArchivoMultimedia(String archivoMultimedia) {
+    public void setArchivoMultimedia(byte[] archivoMultimedia) {
         this.archivoMultimedia = archivoMultimedia;
     }
 
-    private String archivoMultimedia;
+    private byte[] archivoMultimedia;
     private boolean esObligatoria;
 
 
-    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, String archivoMultimedia ) {
+    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, byte[] archivoMultimedia ) {
         this.idPregunta = idPregunta;
         this.idEncuesta = idEncuesta;
         this.idTpoPregunta = idTpoPregunta;

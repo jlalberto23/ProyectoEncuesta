@@ -110,7 +110,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
-                        p.setArchivoMultimedia(multimediaURI);
+                        //p.setArchivoMultimedia(multimediaURI);
 
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
@@ -128,7 +128,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
-                        p.setArchivoMultimedia(multimediaURI);
+                        //p.setArchivoMultimedia(multimediaURI);
 
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_LONG).show();
