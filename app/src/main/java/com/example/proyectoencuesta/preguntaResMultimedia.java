@@ -198,7 +198,7 @@ public class preguntaResMultimedia extends Activity {
         if (preg.getTipoArchivo() == 1) {
             System.out.println("IMAGEEN");
             // Get the url of the image from data
-            Uri selectedImageUri = Uri.parse(preg.getArchivoMultimedia());
+            Uri selectedImageUri = Uri.parse(preg.getRutaArchivo());
             if (null != selectedImageUri) {
                 // update the preview image in the layout
                 IVPreviewImage.setImageURI(selectedImageUri);
@@ -212,7 +212,7 @@ public class preguntaResMultimedia extends Activity {
         if (preg.getTipoArchivo() == 2) {
             System.out.println("VIDEEO");
             // Get the url of the video from data
-            Uri selectedImageUri = Uri.parse(preg.getArchivoMultimedia());
+            Uri selectedImageUri = Uri.parse(preg.getRutaArchivo());
 
             if (null != selectedImageUri) {
 
@@ -334,8 +334,9 @@ public class preguntaResMultimedia extends Activity {
                     pre.setTextoPregunta(cursor.getString(3));
                     //pre.setEsObligatoria(preguntas.(4));
                     pre.setOrdenPregunta(cursor.getInt(5));
-                    pre.setArchivoMultimedia(cursor.getString(6));
+                    //pre.setArchivoMultimedia(cursor.getString(6));
                     pre.setTipoArchivo(cursor.getInt(7));
+                    pre.setRutaArchivo(cursor.getString(8));
                     lis.add(pre);
                 }while (cursor.moveToNext());
             }
