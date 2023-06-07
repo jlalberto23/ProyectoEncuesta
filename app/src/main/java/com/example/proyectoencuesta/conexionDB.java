@@ -463,123 +463,131 @@ public class conexionDB {
         final String[] VRespuestaUsu_texto = {"F", "V", "Integridad Referencial", "Activity, Database", "14", "V", "V", "V", "V", "V", "El Salvador", "262", "San Salvador", "1931", "Honduras"};
 
         abrir();
-        db.execSQL("DELETE FROM tipo_encuesta");
-        db.execSQL("DELETE FROM tipo_pregunta");
-        db.execSQL("DELETE FROM tipo_respuesta");
-        db.execSQL("DELETE FROM tipo_usuario");
-        db.execSQL("DELETE FROM usuario");
-        db.execSQL("DELETE FROM pregunta");
-        db.execSQL("DELETE FROM encuesta");
-        db.execSQL("DELETE FROM materia");
-        db.execSQL("DELETE FROM materia_usuario");
-        db.execSQL("DELETE FROM opcion_respuesta");
-        db.execSQL("DELETE FROM respuesta_usuarios");
 
-        tipoEncuesta tipoEnc = new tipoEncuesta();
-        for(int i=0;i<2;i++){
-            tipoEnc.setIdTipoEncuesta(VTipoEncuesta_id[i]);
-            tipoEnc.setNombreTipoEncuesta(VTipoEncuesta_nombre[i]);
-            insertar(tipoEnc);
+        Cursor cursor = db.rawQuery("SELECT * FROM usuario", null);
+        if(cursor.moveToFirst()){
+            cerrar();
+            return "Warning: La base ya esta poblada";
+
+        } else{
+            db.execSQL("DELETE FROM tipo_encuesta");
+            db.execSQL("DELETE FROM tipo_pregunta");
+            db.execSQL("DELETE FROM tipo_respuesta");
+            db.execSQL("DELETE FROM tipo_usuario");
+            db.execSQL("DELETE FROM usuario");
+            db.execSQL("DELETE FROM pregunta");
+            db.execSQL("DELETE FROM encuesta");
+            db.execSQL("DELETE FROM materia");
+            db.execSQL("DELETE FROM materia_usuario");
+            db.execSQL("DELETE FROM opcion_respuesta");
+            db.execSQL("DELETE FROM respuesta_usuarios");
+
+            tipoEncuesta tipoEnc = new tipoEncuesta();
+            for(int i=0;i<2;i++){
+                tipoEnc.setIdTipoEncuesta(VTipoEncuesta_id[i]);
+                tipoEnc.setNombreTipoEncuesta(VTipoEncuesta_nombre[i]);
+                insertar(tipoEnc);
+            }
+
+            tipoPregunta tipoPre = new tipoPregunta();
+            for(int i=0;i<5;i++){
+                tipoPre.setIdTipoPregunta(VTipoPregunta_id[i]);
+                tipoPre.setNombreTipoPregunta(VTipoPregunta_nombre[i]);
+                insertar(tipoPre);
+            }
+
+            tipoUsuario tipoUsu = new tipoUsuario();
+            for(int i=0;i<3;i++){
+                tipoUsu.setCodigoTipoUsuario(VTipoUsuario_id[i]);
+                tipoUsu.setNombreTipoUsuario(VTipoUsuario_nombre[i]);
+                insertar(tipoUsu);
+            }
+
+            usuario usuario = new usuario();
+            for(int i=0;i<3;i++){
+                usuario.setCodigUsuario(VUsuario_id[i]);
+                usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
+                usuario.setNombreUsuario(VUsuario_nombre[i]);
+                usuario.setUsuario(VUsuario_usuario[i]);
+                usuario.setContrasenia(VUsuario_contra[i]);
+                usuario.setCarnet(VUsuario_carnet[i]);
+                usuario.setFecha_registro(VUsuario_fecha[i]);
+                usuario.setCorreo(VUsuario_correo[i]);
+                insertar(usuario);
+            }
+
+            encuesta encu = new encuesta();
+            for(int i=0;i<3;i++){
+                encu.setIdEncuesta(VEncuesta_id[i]);
+                encu.setIdUsuario(VEncuesta_usuario[i]);
+                encu.setIdTipoEncuesta(VEncuesta_tipo[i]);
+                encu.setNombreEncuesta(VEncuesta_nombre[i]);
+                encu.setFechaCreacion(VEncuesta_fecha[i]);
+                encu.setEstadoEncuesta(VEncuesta_estado[i]);
+                encu.setNumeroPreguntas(VEncuesta_numpreg[i]);
+                encu.setLimiteIntentos(VEncuesta_limite[i]);
+                encu.setFechaInicio(VEncuesta_fechaini[i]);
+                encu.setFechaFin(VEncuesta_fechafin[i]);
+                insertarEncuestaInicial(encu);
+            }
+
+            pregunta pregu = new pregunta();
+            for(int i=0;i<15;i++){
+                pregu.setIdPregunta(VPregunta_id[i]);
+                pregu.setIdEncuesta(VPregunta_encu[i]);
+                pregu.setIdTpoPregunta(VPregunta_tipo[i]);
+                pregu.setTextoPregunta(VPregunta_texto[i]);
+                pregu.setEsObligatoria(VPregunta_es_obligatoria[i]);
+                pregu.setOrdenPregunta(VPregunta_orden_preg[i]);
+                pregu.setArchivoMultimedia(new byte[]{VPregunta_blob[i]});
+                pregu.setTipoArchivo(VPregunta_tipo_archivo[i]);
+                insertar(pregu);
+            }
+
+            materia mate = new materia();
+            for(int i=0;i<3;i++){
+                mate.setIdMateria(VMateria_id[i]);
+                mate.setNombreMateria(VMateria_nom[i]);
+                mate.setCodigoMateria(VMateria_cod[i]);
+                mate.setCiclo(VMateria_cic[i]);
+                mate.setAnio(VMateria_ani[i]);
+                insertar(mate);
+            }
+
+            materiaUsuario mateUsu = new materiaUsuario();
+            for(int i=0;i<5;i++){
+                mateUsu.setIdMateriaUsuario(VMateUsuario_id[i]);
+                mateUsu.setIdMateria(VMateUsuario_mate[i]);
+                mateUsu.setIdUsuario(VMateUsuario_usua[i]);
+                insertar(mateUsu);
+            }
+
+            opcionRespuesta opcResp = new opcionRespuesta();
+            for(int i=0;i<12;i++){
+                opcResp.setIdOpcionRespuesta(VOpcionResp_id[i]);
+                opcResp.setIdPregunta(VOpcionResp_pregunta[i]);
+                opcResp.setTextoRespuesta(VOpcionResp_texto[i]);
+                opcResp.setEsLaCorrecta(VOpcionResp_escorrecta[i]);
+                insertar(opcResp);
+            }
+
+            respuestaUsuario respUsu = new respuestaUsuario();
+            for(int i=0;i<15;i++){
+                respUsu.setIdRespuestaUsuario(VRespuestaUsu_id[i]);
+                respUsu.setIdEncuesta(VRespuestaUsu_encuesta[i]);
+                respUsu.setIdPregunta(VRespuestaUsu_pregunta[i]);
+                respUsu.setIdUsuario(VRespuestaUsu_usuario[i]);
+                respUsu.setNumeroIntento(VRespuestaUsu_intento[i]);
+                respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
+                respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
+                respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
+                respUsu.setTextoRespuesta(VRespuestaUsu_texto[i]);
+                insertarInicial(respUsu);
+            }
+
+            cerrar();
+            return "Base de datos poblada OK";
         }
-
-        tipoPregunta tipoPre = new tipoPregunta();
-        for(int i=0;i<5;i++){
-            tipoPre.setIdTipoPregunta(VTipoPregunta_id[i]);
-            tipoPre.setNombreTipoPregunta(VTipoPregunta_nombre[i]);
-            insertar(tipoPre);
-        }
-
-        tipoUsuario tipoUsu = new tipoUsuario();
-        for(int i=0;i<3;i++){
-            tipoUsu.setCodigoTipoUsuario(VTipoUsuario_id[i]);
-            tipoUsu.setNombreTipoUsuario(VTipoUsuario_nombre[i]);
-            insertar(tipoUsu);
-        }
-
-        usuario usuario = new usuario();
-        for(int i=0;i<3;i++){
-            usuario.setCodigUsuario(VUsuario_id[i]);
-            usuario.setCodigoTipoUsuario(VUsuario_tipo[i]);
-            usuario.setNombreUsuario(VUsuario_nombre[i]);
-            usuario.setUsuario(VUsuario_usuario[i]);
-            usuario.setContrasenia(VUsuario_contra[i]);
-            usuario.setCarnet(VUsuario_carnet[i]);
-            usuario.setFecha_registro(VUsuario_fecha[i]);
-            usuario.setCorreo(VUsuario_correo[i]);
-            insertar(usuario);
-        }
-
-        encuesta encu = new encuesta();
-        for(int i=0;i<3;i++){
-            encu.setIdEncuesta(VEncuesta_id[i]);
-            encu.setIdUsuario(VEncuesta_usuario[i]);
-            encu.setIdTipoEncuesta(VEncuesta_tipo[i]);
-            encu.setNombreEncuesta(VEncuesta_nombre[i]);
-            encu.setFechaCreacion(VEncuesta_fecha[i]);
-            encu.setEstadoEncuesta(VEncuesta_estado[i]);
-            encu.setNumeroPreguntas(VEncuesta_numpreg[i]);
-            encu.setLimiteIntentos(VEncuesta_limite[i]);
-            encu.setFechaInicio(VEncuesta_fechaini[i]);
-            encu.setFechaFin(VEncuesta_fechafin[i]);
-            insertarEncuestaInicial(encu);
-        }
-
-        pregunta pregu = new pregunta();
-        for(int i=0;i<15;i++){
-            pregu.setIdPregunta(VPregunta_id[i]);
-            pregu.setIdEncuesta(VPregunta_encu[i]);
-            pregu.setIdTpoPregunta(VPregunta_tipo[i]);
-            pregu.setTextoPregunta(VPregunta_texto[i]);
-            pregu.setEsObligatoria(VPregunta_es_obligatoria[i]);
-            pregu.setOrdenPregunta(VPregunta_orden_preg[i]);
-            pregu.setArchivoMultimedia(new byte[]{VPregunta_blob[i]});
-            pregu.setTipoArchivo(VPregunta_tipo_archivo[i]);
-            insertar(pregu);
-        }
-
-        materia mate = new materia();
-        for(int i=0;i<3;i++){
-            mate.setIdMateria(VMateria_id[i]);
-            mate.setNombreMateria(VMateria_nom[i]);
-            mate.setCodigoMateria(VMateria_cod[i]);
-            mate.setCiclo(VMateria_cic[i]);
-            mate.setAnio(VMateria_ani[i]);
-            insertar(mate);
-        }
-
-        materiaUsuario mateUsu = new materiaUsuario();
-        for(int i=0;i<5;i++){
-            mateUsu.setIdMateriaUsuario(VMateUsuario_id[i]);
-            mateUsu.setIdMateria(VMateUsuario_mate[i]);
-            mateUsu.setIdUsuario(VMateUsuario_usua[i]);
-            insertar(mateUsu);
-        }
-
-        opcionRespuesta opcResp = new opcionRespuesta();
-        for(int i=0;i<12;i++){
-            opcResp.setIdOpcionRespuesta(VOpcionResp_id[i]);
-            opcResp.setIdPregunta(VOpcionResp_pregunta[i]);
-            opcResp.setTextoRespuesta(VOpcionResp_texto[i]);
-            opcResp.setEsLaCorrecta(VOpcionResp_escorrecta[i]);
-            insertar(opcResp);
-        }
-
-        respuestaUsuario respUsu = new respuestaUsuario();
-        for(int i=0;i<15;i++){
-            respUsu.setIdRespuestaUsuario(VRespuestaUsu_id[i]);
-            respUsu.setIdEncuesta(VRespuestaUsu_encuesta[i]);
-            respUsu.setIdPregunta(VRespuestaUsu_pregunta[i]);
-            respUsu.setIdUsuario(VRespuestaUsu_usuario[i]);
-            respUsu.setNumeroIntento(VRespuestaUsu_intento[i]);
-            respUsu.setFechaRespondido(VRespuestaUsu_fecha[i]);
-            respUsu.setDispositivo(VRespuestaUsu_dispositivo[i]);
-            respUsu.setEsAnonima(VRespuestaUsu_isanonimo[i]);
-            respUsu.setTextoRespuesta(VRespuestaUsu_texto[i]);
-            insertarInicial(respUsu);
-        }
-
-        cerrar();
-        return "Guardo Correctamente";
     }
 
      public usuario consultarUsuario(String carnet) {
