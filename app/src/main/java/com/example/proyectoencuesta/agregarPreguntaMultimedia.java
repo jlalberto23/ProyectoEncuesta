@@ -35,7 +35,7 @@ public class agregarPreguntaMultimedia  extends Activity {
     VideoView IVPreviewVideo;
 
     String multimediaURI;
-
+    int tipoArchivo;
     // constant to compare
     // the activity result code
     int SELECT_PICTURE = 200;
@@ -110,7 +110,9 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
-                        //p.setArchivoMultimedia(multimediaURI);
+                       // p.setArchivoMultimedia(multimediaURI);
+                        p.setTipoArchivo(tipoArchivo);
+
 
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
@@ -128,7 +130,9 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
-                        //p.setArchivoMultimedia(multimediaURI);
+                       // p.setArchivoMultimedia(multimediaURI);
+                        p.setTipoArchivo(tipoArchivo);
+
 
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_LONG).show();
@@ -179,6 +183,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                     IVPreviewImage.setImageURI(selectedImageUri);
                     System.out.println("IMAGE-URI" + selectedImageUri);
                     this.multimediaURI = selectedImageUri.toString();
+                    this.tipoArchivo = 1;
                 }
 
                 IVPreviewImage.setVisibility(VISIBLE);
@@ -193,6 +198,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                     IVPreviewVideo.setVideoURI(video);
                     System.out.println("VIDEO-URI" + selectedImageUri);
                     this.multimediaURI = selectedImageUri.toString();
+                    this.tipoArchivo = 2;
 
                     MediaController mediaController = new MediaController(this);
                     mediaController.setAnchorView(IVPreviewVideo);

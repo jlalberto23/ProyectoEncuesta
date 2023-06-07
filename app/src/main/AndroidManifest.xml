@@ -76,7 +76,9 @@
         <activity
             android:name=".AgregarAudioPregunta"
             android:exported="false" />
-
+        <activity
+            android:name=".preguntaResMultimedia"
+            android:exported="false" />
         <activity
             android:name=".pantallaBienvenida"
             android:exported="false">

@@ -100,6 +100,11 @@
                                 intent.putExtra("nombreEncuesta", nombreEncuesta);
                                 intent.putExtra("idEncuesta", encue.getIdEncuesta());
                                 startActivityForResult(intent, 1234);
+                            } else if (encue.getIdTipoEncuesta() == 3) {
+                                Intent intent = new Intent(view.getContext(), preguntaResMultimedia.class);
+                                intent.putExtra("nombreEncuesta", nombreEncuesta);
+                                intent.putExtra("idEncuesta", encue.getIdEncuesta());
+                                startActivityForResult(intent, 1234);
                             }
                             break;
                         case R.id.cancelarbtn:
