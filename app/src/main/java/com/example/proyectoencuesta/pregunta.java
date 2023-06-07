@@ -2,22 +2,13 @@ package com.example.proyectoencuesta;
 
 public class pregunta {
 
-    private int idPregunta, idEncuesta, idTpoPregunta, ordenPregunta;
+    private int idPregunta, idEncuesta, idTpoPregunta, ordenPregunta, tipoArchivo;
     private String textoPregunta;
-
-    public String getArchivoMultimedia() {
-        return archivoMultimedia;
-    }
-
-    public void setArchivoMultimedia(String archivoMultimedia) {
-        this.archivoMultimedia = archivoMultimedia;
-    }
-
     private String archivoMultimedia;
     private boolean esObligatoria;
 
 
-    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, String archivoMultimedia ) {
+    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, String archivoMultimedia, int tipoArchivo ) {
         this.idPregunta = idPregunta;
         this.idEncuesta = idEncuesta;
         this.idTpoPregunta = idTpoPregunta;
@@ -25,6 +16,7 @@ public class pregunta {
         this.textoPregunta = textoPregunta;
         this.esObligatoria = esObligatoria;
         this.archivoMultimedia = archivoMultimedia;
+        this.tipoArchivo = tipoArchivo;
     }
 
     public pregunta() {
@@ -77,5 +69,19 @@ public class pregunta {
 
     public void setEsObligatoria(boolean esObligatoria) {
         this.esObligatoria = esObligatoria;
+    }
+
+    public String getArchivoMultimedia() {
+        return archivoMultimedia;
+    }
+
+    public void setArchivoMultimedia(String archivoMultimedia) {
+        this.archivoMultimedia = archivoMultimedia;
+    }
+    public int getTipoArchivo() {
+        return tipoArchivo;
+    }
+    public void setTipoArchivo(int tipoArchivo) {
+        this.tipoArchivo = tipoArchivo;
     }
 }
