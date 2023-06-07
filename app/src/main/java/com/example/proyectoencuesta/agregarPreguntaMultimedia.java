@@ -112,6 +112,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setOrdenPregunta(numP);
                        // p.setArchivoMultimedia(multimediaURI);
                         p.setTipoArchivo(tipoArchivo);
+                        p.setRutaArchivo(multimediaURI);
 
 
                         res = cn.insertar(p);
@@ -132,6 +133,7 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setOrdenPregunta(numP);
                        // p.setArchivoMultimedia(multimediaURI);
                         p.setTipoArchivo(tipoArchivo);
+                        p.setRutaArchivo(multimediaURI);
 
 
                         res = cn.insertar(p);

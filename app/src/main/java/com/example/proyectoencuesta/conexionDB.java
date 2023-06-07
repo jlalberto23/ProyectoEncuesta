@@ -20,7 +20,7 @@ public class conexionDB {
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro", "correo"};
-    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta", "archivo_multimedia", "tipo_archivo"};
+    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta", "archivo_multimedia", "tipo_archivo", "ruta_archivo"};
     //private int idTipoU;
     private int codigoTipoUsuario;
 
@@ -61,7 +61,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
                 db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
-                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer, archivo_multimedia byte,tipo_archivo  integer);");
+                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer, archivo_multimedia byte,tipo_archivo  integer, ruta_archivo     char(256) DEFAULT NULL);");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER PRIMARY KEY AUTOINCREMENT, id_encuesta integer, id_pregunta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
@@ -252,11 +252,7 @@ public class conexionDB {
 
         String regInsertados="Pregunta registrada exitosamente #= ";
         long contador=0;
-        /*if (verificarIntegridad(alumno,5)) {
-            regInsertados= "Error al Insertar el registro, Registro Duplicado(PK). Verificar inserción";
-        }
-        else
-        {*/
+
         ContentValues preg = new ContentValues();
         preg.put("id_pregunta", pregunta.getIdPregunta());
         preg.put("id_encuesta", pregunta.getIdEncuesta());
@@ -266,6 +262,7 @@ public class conexionDB {
         preg.put("orden_pregunta", pregunta.getOrdenPregunta());
         preg.put("archivo_multimedia", pregunta.getArchivoMultimedia());
         preg.put("tipo_archivo", pregunta.getTipoArchivo());
+        preg.put("ruta_archivo", pregunta.getRutaArchivo());
 
 
         contador=db.insert("pregunta", null, preg);
@@ -1009,6 +1006,7 @@ public class conexionDB {
             pre.setOrdenPregunta(cursor.getInt(5));
             pre.setArchivoMultimedia(cursor.getBlob(6));
             pre.setTipoArchivo(cursor.getInt(7));
+            pre.setRutaArchivo(cursor.getString(8));
 
 
             return pre;

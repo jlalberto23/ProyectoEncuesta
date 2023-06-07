@@ -3,7 +3,7 @@ package com.example.proyectoencuesta;
 public class pregunta {
 
     private int idPregunta, idEncuesta, idTpoPregunta, ordenPregunta, tipoArchivo;
-    private String textoPregunta;
+    private String textoPregunta, rutaArchivo;
 
     public byte[] getArchivoMultimedia() {
         return archivoMultimedia;
@@ -17,7 +17,9 @@ public class pregunta {
     private boolean esObligatoria;
 
 
-    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, byte[] archivoMultimedia, int tipoArchivo ) {
+
+
+    public pregunta(int idPregunta, int idEncuesta, int idTpoPregunta, int ordenPregunta, String textoPregunta, boolean esObligatoria, byte[] archivoMultimedia, int tipoArchivo , String ruta_archivo) {
 
         this.idPregunta = idPregunta;
         this.idEncuesta = idEncuesta;
@@ -27,6 +29,7 @@ public class pregunta {
         this.esObligatoria = esObligatoria;
         this.archivoMultimedia = archivoMultimedia;
         this.tipoArchivo = tipoArchivo;
+        this.rutaArchivo = rutaArchivo;
     }
 
     public pregunta() {
@@ -86,5 +89,13 @@ public class pregunta {
     }
     public void setTipoArchivo(int tipoArchivo) {
         this.tipoArchivo = tipoArchivo;
+    }
+
+    public String getRutaArchivo() {
+        return rutaArchivo;
+    }
+
+    public void setRutaArchivo(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
     }
 }
