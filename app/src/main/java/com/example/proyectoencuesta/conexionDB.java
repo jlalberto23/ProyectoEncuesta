@@ -20,7 +20,7 @@ public class conexionDB {
     private static final String[] camposMateria = new String[]{};
     private static final String[] camposEncuesta = new String[]{"id_encuesta","id_usuario","id_tipo_encuesta","nombre_encuesta","fecha_creacion","id_estado_encuesta","numero_preguntas","limite_intentos","fecha_inicio","fecha_fin"};
     private static final String[] camposUsuario = new String [] {"id_usuario","id_tipo_usuario","nombre_usuario","usuario","contrasenia","carnet","fecha_registro", "correo"};
-    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta"};
+    public static final String[] camposPregunta = new String[] {"id_pregunta", "id_encuesta", "id_tipo_pregunta", "texto_pregunta", "es_obligatoria", "orden_pregunta", "archivo_multimedia"};
     //private int idTipoU;
     private int codigoTipoUsuario;
 
@@ -61,7 +61,7 @@ public class conexionDB {
                 db.execSQL("CREATE TABLE materia (id_materia INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre_materia  char(50), codigo_materia       char(20), ciclo                char(20), anio                 char(4) );");
                 db.execSQL("CREATE TABLE materia_usuario (id_materia_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, [id_materia] INTEGER  NOT NULL, [id_usuario] INTEGER  NOT NULL );");
                 db.execSQL("CREATE TABLE opcion_respuesta (id_opcion_respuesta INTEGER, id_pregunta integer, texto_respuesta char(256), es_la_correcta smallint);");
-                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer  );");
+                db.execSQL("CREATE TABLE pregunta (id_pregunta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_encuesta  integer, id_tipo_pregunta integer, texto_pregunta       char(256), es_obligatoria       smallint, orden_pregunta       integer, [archivo_multimedia] BLOB);");
                 db.execSQL("CREATE TABLE pregunta_area_evaluativa (id_pregunta integer not null, id_area_evaluativa integer not null, primary key (id_pregunta, id_area_evaluativa) );");
                 //db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, id_opcion_respuesta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
                 db.execSQL("CREATE TABLE respuesta_usuarios (id_respuesta_usuarios INTEGER PRIMARY KEY AUTOINCREMENT, id_encuesta integer, id_pregunta  integer, id_usuario           integer, numero_intento       integer, fecha_respondida     date, dispositivo          char(256), es_usuario_anonimo   smallint, texto_respuesta char(150) );");
@@ -264,6 +264,7 @@ public class conexionDB {
         preg.put("texto_pregunta", pregunta.getTextoPregunta());
         preg.put("es_obligatoria", pregunta.isEsObligatoria());
         preg.put("orden_pregunta", pregunta.getOrdenPregunta());
+        preg.put("archivo_multimedia", pregunta.getArchivoMultimedia());
 
 
         contador=db.insert("pregunta", null, preg);
@@ -434,6 +435,7 @@ public class conexionDB {
         };
         final boolean[] VPregunta_es_obligatoria = {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
         final int[] VPregunta_orden_preg = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5};
+        final String[] VPregunta_blob = {"","","","","","","","","","","","","","",""};
 
         final int[] VMateria_id =    {1, 2, 3};
         final String[] VMateria_nom = {"Programacion para Dispositios Moviles", "Sistemas Operativos", "Microprogramacion"};
@@ -530,6 +532,7 @@ public class conexionDB {
             pregu.setTextoPregunta(VPregunta_texto[i]);
             pregu.setEsObligatoria(VPregunta_es_obligatoria[i]);
             pregu.setOrdenPregunta(VPregunta_orden_preg[i]);
+            pregu.setArchivoMultimedia(VPregunta_blob[i]);
             insertar(pregu);
         }
 
@@ -1000,6 +1003,7 @@ public class conexionDB {
             pre.setTextoPregunta(cursor.getString(3));
             //pre.setEsObligatoria(preguntas.(4));
             pre.setOrdenPregunta(cursor.getInt(5));
+            pre.setArchivoMultimedia(cursor.getString(6));
 
             return pre;
         } else {
