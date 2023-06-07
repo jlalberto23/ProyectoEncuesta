@@ -7,12 +7,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+import android.widget.VideoView;
+import android.widget.MediaController;
 
 public class agregarPreguntaMultimedia  extends Activity {
 
@@ -25,13 +28,18 @@ public class agregarPreguntaMultimedia  extends Activity {
 
     // One Button
     Button BSelectImage;
+    Button BSelectVideo;
 
     // One Preview Image
     ImageView IVPreviewImage;
+    VideoView IVPreviewVideo;
+
+    String multimediaURI;
 
     // constant to compare
     // the activity result code
     int SELECT_PICTURE = 200;
+    int SELECT_VIDEO = 400;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,9 +58,13 @@ public class agregarPreguntaMultimedia  extends Activity {
         BSelectImage = findViewById(R.id.BSelectImage);
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
 
+        BSelectVideo = findViewById(R.id.BSelectVideo);
+        IVPreviewVideo = findViewById(R.id.IVPreviewVideo);
+
         // handle the Choose Image button to trigger
         // the image chooser function
         BSelectImage.setOnClickListener(onclic);
+        BSelectVideo.setOnClickListener(onclic);
 
         try{
             Bundle extra = getIntent().getExtras();
@@ -98,6 +110,8 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
+                        p.setArchivoMultimedia(multimediaURI);
+
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_SHORT).show();
                         int c = numP-1;
@@ -114,6 +128,8 @@ public class agregarPreguntaMultimedia  extends Activity {
                         p.setTextoPregunta(pregunta.getText().toString());
                         p.setEsObligatoria(false);
                         p.setOrdenPregunta(numP);
+                        p.setArchivoMultimedia(multimediaURI);
+
                         res = cn.insertar(p);
                         Toast.makeText(view.getContext(), res, Toast.LENGTH_LONG).show();
                         Intent in = new Intent(view.getContext(),vistaDocente.class);
@@ -121,6 +137,11 @@ public class agregarPreguntaMultimedia  extends Activity {
                         break;
                     case R.id.BSelectImage:
                         imageChooser();
+                        break;
+                    case R.id.BSelectVideo:
+                        Intent iV = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(iV, SELECT_VIDEO);
+                        break;
                 }
             }catch (Exception e){ e.printStackTrace(); }
         }
@@ -138,7 +159,7 @@ public class agregarPreguntaMultimedia  extends Activity {
 
         // pass the constant to compare it
         // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        startActivityForResult(Intent.createChooser(i, "Imagen"), SELECT_PICTURE);
     }
 
     // this function is triggered when user
@@ -157,7 +178,31 @@ public class agregarPreguntaMultimedia  extends Activity {
                     // update the preview image in the layout
                     IVPreviewImage.setImageURI(selectedImageUri);
                     System.out.println("IMAGE-URI" + selectedImageUri);
+                    this.multimediaURI = selectedImageUri.toString();
                 }
+
+                IVPreviewImage.setVisibility(VISIBLE);
+                IVPreviewVideo.setVisibility(INVISIBLE);
+            }
+            if (requestCode == SELECT_VIDEO) {
+                // Get the url of the video from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview video in the layout
+                    Uri video = data.getData();
+                    IVPreviewVideo.setVideoURI(video);
+                    System.out.println("VIDEO-URI" + selectedImageUri);
+                    this.multimediaURI = selectedImageUri.toString();
+
+                    MediaController mediaController = new MediaController(this);
+                    mediaController.setAnchorView(IVPreviewVideo);
+                    mediaController.setMediaPlayer(IVPreviewVideo);
+
+                    IVPreviewVideo.setMediaController(mediaController);
+                    IVPreviewVideo.start();
+                }
+                IVPreviewVideo.setVisibility(VISIBLE);
+                IVPreviewImage.setVisibility(INVISIBLE);
             }
         }
     }
