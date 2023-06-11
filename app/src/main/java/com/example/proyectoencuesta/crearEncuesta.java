@@ -1,15 +1,22 @@
 package com.example.proyectoencuesta;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.content.SharedPreferences;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class crearEncuesta extends Activity {
     Button guardar, cancelar;
@@ -35,10 +42,54 @@ public class crearEncuesta extends Activity {
         fechaFin = findViewById(R.id.txtFechaFin);
         estado = findViewById(R.id.swEstado);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
         guardar.setOnClickListener(onclick);
         cancelar.setOnClickListener(onclick);
         helper = new conexionDB(this);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        fechaC.setText(dateFormat.format(new Date()));
+
+        // Calendar para campo fecha Inicio y Fin
+        fechaIn.setOnClickListener(v -> {
+
+            final Calendar c = Calendar.getInstance();
+
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    crearEncuesta.this,
+                    (view, year1, monthOfYear, dayOfMonth) -> {
+                        fechaIn.setText(year1 + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+
+                    },
+                    year, month, day);
+
+            datePickerDialog.show();
+        });
+
+        fechaFin.setOnClickListener(v -> {
+
+            final Calendar c = Calendar.getInstance();
+
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+
+                    crearEncuesta.this,
+                    (view, year1, monthOfYear, dayOfMonth) -> {
+                        fechaFin.setText(year1 + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                    },
+                    year, month, day);
+            datePickerDialog.show();
+        });
+
+        numP.setFilters(new InputFilter[]{ new MinMaxFilter("1", "20")});
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
@@ -99,7 +150,7 @@ public class crearEncuesta extends Activity {
                         }
                         break;
                     case R.id.btnCancelar:
-                        limpiar();
+                        limpiar(v);
                         break;
                 }
             }catch (Exception e){
@@ -107,7 +158,7 @@ public class crearEncuesta extends Activity {
             }
         }
     };
-    public void limpiar(){
+    public void limpiar(View v){
         nombreE.setText("");
         fechaC.setText("");
         numP.setText("");
@@ -118,5 +169,7 @@ public class crearEncuesta extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,tipos);
         sp.setAdapter(adapter);
         estado.setChecked(false);
+        Intent in = new Intent(v.getContext(),vistaDocente.class);
+        startActivity(in);
     }
 }

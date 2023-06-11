@@ -412,9 +412,9 @@ public class conexionDB {
         final int[] VPregunta_encu =    {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3};
         final int[] VPregunta_tipo =    {2,2,2,2,2,1,1,1,1,1,2,2,2,2,2};
         final String[] VPregunta_texto = {
-            "El ciclo de vida de una aplicacion para dispositivos moviles incluye etapas como la creacion, el inicio, la pausa y la destruccion. \n F o V?",
-            "Las bases de datos no relacionales son ampliamente utilizadas en el desarrollo de aplicaciones para dispositivos moviles debido a su flexibilidad y escalabilidad. \n F o V?",
-            "¿Cual es el objetivo principal de una base de datos no relacional?",
+            "Cual es el entorno de desarrollo para Aplicaciones Moviles en Android?.",
+            "Mencione el nombre de uno de los motores de Base de datos para dispositivos moviles? \n",
+            "Es una clase especial de procedimiento almacenado que se ejecuta automaticamente cuando se produce un evento en una tabla de la base de datos? ",
             "Menciona dos componentes comunes en el desarrollo de apps moviles: ",
             "Cual es la ultima version de Android Desarrollada?",
 
