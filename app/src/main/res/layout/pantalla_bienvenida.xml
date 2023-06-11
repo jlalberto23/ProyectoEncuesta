@@ -73,7 +73,7 @@
     <Button
         android:id="@+id/btnLlenarDB"
         android:layout_width="203dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:background="@color/colorPrimary"
         android:text="Poblar DB Inicial"
         app:layout_constraintBottom_toBottomOf="parent"

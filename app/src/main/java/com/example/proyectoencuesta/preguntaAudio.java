@@ -165,7 +165,7 @@ public class preguntaAudio extends Activity {
                         break;
 
                     case R.id.reprobtn:
-                        System.out.println(audio);
+
                         if (audio != null) {
                             // Obtener el archivo multimedia de la pregunta actual
                             byte[] archivoMultimedia =audio;
@@ -173,13 +173,16 @@ public class preguntaAudio extends Activity {
                             // Crear un archivo temporal para almacenar el blob de audio
                             File tempFile;
                             try {
+
                                 tempFile = File.createTempFile("temp_audio", ".mp3", getCacheDir());
                                 FileOutputStream fos = new FileOutputStream(tempFile);
                                 fos.write(archivoMultimedia);
                                 fos.close();
+                                play.setBackgroundResource(R.drawable.play_negro);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 return;
+
                             }
 
                             // Reproducir el archivo de audio
@@ -188,12 +191,14 @@ public class preguntaAudio extends Activity {
                                 mediaPlayer.setDataSource(tempFile.getPath());
                                 mediaPlayer.prepare();
                                 mediaPlayer.start();
+                                play.setBackgroundResource(R.drawable.play_rojo);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
 
                             // Eliminar el archivo temporal después de reproducirlo
                             tempFile.delete();
+
                         }
                         break;
                 }
