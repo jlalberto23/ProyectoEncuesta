@@ -56,9 +56,9 @@ public class preguntaResMultimedia extends Activity {
         helper.cerrar();
 
         escucharbtn = findViewById(R.id.escucharbtn);
-        resAudiobtn = findViewById(R.id.resAudiobtn);
+
         resSpeechbtn = findViewById(R.id.resSpeechbtn);
-        resImagenbtn = findViewById(R.id.resImagenbtn);
+
         // register the UI widgets with their appropriate IDs
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
         IVPreviewVideo = findViewById(R.id.IVPreviewVideo);

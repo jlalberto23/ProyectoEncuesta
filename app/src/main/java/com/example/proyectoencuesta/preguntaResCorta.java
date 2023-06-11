@@ -47,13 +47,11 @@ public class preguntaResCorta extends Activity {
         helper.cerrar();
 
         escucharbtn = findViewById(R.id.escucharbtn);
-        resAudiobtn = findViewById(R.id.resAudiobtn);
+
         resSpeechbtn = findViewById(R.id.resSpeechbtn);
-        resImagenbtn = findViewById(R.id.resImagenbtn);
+
         escucharbtn.setOnClickListener(onClick);
-        resAudiobtn.setOnClickListener(onclick);
-        //resSpeechbtn.setOnClickListener(onClick);
-        resImagenbtn.setOnClickListener(onclick);
+
         resSpeechbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){

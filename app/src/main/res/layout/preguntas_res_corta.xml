@@ -68,19 +68,6 @@
         app:layout_constraintVertical_bias="0.85" />
 
     <Button
-        android:id="@+id/resAudiobtn"
-        android:layout_width="229dp"
-        android:layout_height="48dp"
-        android:background="@color/naranja"
-        android:text="RESPONDER CON AUDIO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571" />
-
-    <Button
         android:id="@+id/resSpeechbtn"
         android:layout_width="227dp"
         android:layout_height="46dp"
@@ -88,22 +75,10 @@
         android:text="DICTAR RESPUESTA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
-
-    <Button
-        android:id="@+id/resImagenbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/naranja"
-        android:text="RESPONDER CON IMAGEN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.756" />
+        app:layout_constraintVertical_bias="0.602" />
 
     <Button
         android:id="@+id/guardarPreguntas"
