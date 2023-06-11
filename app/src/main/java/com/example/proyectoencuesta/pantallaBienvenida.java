@@ -85,10 +85,7 @@ public class pantallaBienvenida extends AppCompatActivity {
             }
 
         } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-            /*ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
-                    STORAGE_PERMISSION_CODE);*/
-            //requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE /*REQUEST_CODE*/);
+
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
         }
