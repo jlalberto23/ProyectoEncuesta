@@ -28,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class pantallaBienvenida extends AppCompatActivity {
+
     Button ingresar, crear, sincuenta, llenarDBBtn;
     conexionDB cn;
     int REQUEST_CODE = 200;
